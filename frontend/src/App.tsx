@@ -10,6 +10,7 @@ import { DashboardPage } from './pages/DashboardPage';
 import { QRGeneratorPage } from './pages/QRGeneratorPage';
 import { PaymentHistoryPage } from './pages/PaymentHistoryPage';
 import { PaymentConfirmationPage } from './pages/PaymentConfirmationPage';
+import { AnalyticsPage } from './pages/AnalyticsPage';
 import './index.css';
 
 // Protected Route Component
@@ -44,6 +45,10 @@ function App() {
         <Route
           path="/history"
           element={<ProtectedRoute element={<PaymentHistoryPage />} />}
+        />
+        <Route
+          path="/analytics"
+          element={<ProtectedRoute element={<AnalyticsPage />} />}
         />
         <Route
           path="/confirmation"

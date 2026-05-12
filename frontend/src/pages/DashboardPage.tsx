@@ -114,7 +114,11 @@ export const DashboardPage: React.FC = () => {
                 >
                   📋 Historique
                 </Button>
-                <Button variant="secondary" className="w-full text-sm">
+                <Button 
+                  variant="secondary" 
+                  className="w-full text-sm"
+                  onClick={() => navigate('/analytics')}
+                >
                   📊 Analytics
                 </Button>
                 <Button variant="secondary" className="w-full text-sm">
