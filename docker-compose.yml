@@ -1,6 +1,24 @@
 version: '3.8'
 
 services:
+  # PostgreSQL Database
+  postgres:
+    image: postgres:15-alpine
+    container_name: qrpipay-db
+    environment:
+      POSTGRES_USER: qrpipay
+      POSTGRES_PASSWORD: dev_password
+      POSTGRES_DB: qrpipay
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U qrpipay"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   # Frontend
   frontend:
     build:
@@ -27,21 +45,13 @@ services:
       - PORT=3001
       - NODE_ENV=development
       - FRONTEND_URL=http://localhost:3000
+      - DATABASE_URL=postgresql://qrpipay:dev_password@postgres:5432/qrpipay
+    depends_on:
+      postgres:
+        condition: service_healthy
     volumes:
       - ./backend/src:/app/src
     command: npm run dev
 
-  # PostgreSQL (will add later)
-  # postgres:
-  #   image: postgres:15-alpine
-  #   environment:
-  #     POSTGRES_USER: qrpipay
-  #     POSTGRES_PASSWORD: dev_password
-  #     POSTGRES_DB: qrpipay
-  #   ports:
-  #     - "5432:5432"
-  #   volumes:
-  #     - postgres_data:/var/lib/postgresql/data
-
-# volumes:
-#   postgres_data:
+volumes:
+  postgres_data:

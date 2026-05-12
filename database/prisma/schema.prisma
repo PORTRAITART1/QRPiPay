@@ -1,0 +1,168 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// Users (Commerçants)
+model User {
+  id                String      @id @default(cuid())
+  piUid             String      @unique // Pi Network UID
+  username          String      @unique
+  email             String?
+  businessName      String?
+  businessCategory  String?     // Restaurant, Boutique, etc.
+  
+  // Business Info
+  profileImage      String?
+  description       String?
+  website           String?
+  
+  // Verification
+  isKycVerified     Boolean     @default(false)
+  kycVerifiedAt     DateTime?
+  
+  // Settings
+  notificationsEnabled Boolean @default(true)
+  theme             String      @default("dark") // dark, light
+  currency          String      @default("Pi")
+  
+  // Relations
+  qrCodes           QRCode[]
+  payments          Payment[]
+  analytics         Analytics[]
+  
+  // Metadata
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  lastLoginAt       DateTime?
+  
+  @@index([piUid])
+  @@index([email])
+}
+
+// QR Codes
+model QRCode {
+  id                String      @id @default(cuid())
+  user              User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId            String
+  
+  // QR Data
+  amount            Decimal     @db.Numeric(18, 7) // Pi amount
+  description       String      @db.VarChar(200)
+  qrData            String      @db.Text // JSON encoded QR data
+  
+  // Status
+  status            QRStatus    @default(PENDING) // PENDING, SCANNED, COMPLETED, EXPIRED
+  
+  // Tracking
+  scanCount         Int         @default(0)
+  completedPaymentId String?
+  
+  // Expiration
+  expiresAt         DateTime?
+  
+  // Relations
+  payments          Payment[]
+  
+  // Metadata
+  createdAt         DateTime    @default(now())
+  updatedAt         DateTime    @updatedAt
+  
+  @@index([userId])
+  @@index([status])
+  @@index([expiresAt])
+}
+
+// Payments
+model Payment {
+  id                String      @id @default(cuid())
+  
+  // Relations
+  user              User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId            String
+  qrCode            QRCode?     @relation(fields: [qrCodeId], references: [id], onDelete: SetNull)
+  qrCodeId          String?
+  
+  // Payment Details
+  piPaymentId       String      @unique // Pi Network payment ID
+  amount            Decimal     @db.Numeric(18, 7)
+  memo              String      @db.VarChar(200)
+  
+  // Status
+  status            PaymentStatus @default(PENDING)
+  
+  // Transaction
+  txid              String?     // Blockchain transaction ID
+  
+  // Buyer Info
+  buyerPiUid        String?
+  buyerUsername     String?
+  
+  // Metadata
+  metadata          Json?       // Custom data
+  
+  // Timestamps
+  createdAt         DateTime    @default(now())
+  approvedAt        DateTime?
+  completedAt       DateTime?
+  failedAt          DateTime?
+  
+  @@index([userId])
+  @@index([status])
+  @@index([piPaymentId])
+  @@index([createdAt])
+}
+
+// Analytics
+model Analytics {
+  id                String      @id @default(cuid())
+  
+  user              User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId            String
+  
+  // Date (daily aggregation)
+  date              DateTime    @db.Date
+  
+  // Metrics
+  totalPayments     Int         @default(0) // Number of payments
+  totalAmount       Decimal     @default(0) @db.Numeric(18, 7) // Sum of amounts
+  uniqueCustomers   Int         @default(0) // Unique buyers
+  
+  // QR Codes
+  qrCodesGenerated  Int         @default(0)
+  qrCodesScanned    Int         @default(0)
+  
+  // Success Rate
+  successRate       Float       @default(0) // 0-100
+  
+  // Revenue (with fee calculation - future)
+  estimatedFee      Decimal     @default(0) @db.Numeric(18, 7)
+  
+  @@unique([userId, date])
+  @@index([userId])
+  @@index([date])
+}
+
+// Enums
+enum QRStatus {
+  PENDING
+  SCANNED
+  COMPLETED
+  EXPIRED
+  CANCELLED
+}
+
+enum PaymentStatus {
+  PENDING
+  APPROVED
+  COMPLETED
+  FAILED
+  CANCELLED
+}
