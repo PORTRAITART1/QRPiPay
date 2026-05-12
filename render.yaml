@@ -3,8 +3,6 @@ services:
   - type: web
     name: qrpipay-backend
     env: node
-    plan: free
-    region: oregon
     buildCommand: cd backend && npm install && npm run build
     startCommand: cd backend && npm start
     envVars:
@@ -23,11 +21,10 @@ services:
       - key: LOG_LEVEL
         value: info
 
-  # Frontend Service (SANS REGION)
+  # Frontend Service (STATIC SITE)
   - type: web
     name: qrpipay-frontend
     env: static
-    plan: free
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/dist
     envVars:
@@ -41,5 +38,3 @@ databases:
   - name: qrpipay-db
     databaseName: qrpipay
     user: qrpipay
-    plan: free
-    region: oregon
