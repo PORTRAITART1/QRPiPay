@@ -7,6 +7,9 @@ import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-d
 import { useAuthStore } from './store/authStore';
 import { LoginPage } from './pages/LoginPage';
 import { DashboardPage } from './pages/DashboardPage';
+import { QRGeneratorPage } from './pages/QRGeneratorPage';
+import { PaymentHistoryPage } from './pages/PaymentHistoryPage';
+import { PaymentConfirmationPage } from './pages/PaymentConfirmationPage';
 import './index.css';
 
 // Protected Route Component
@@ -33,6 +36,18 @@ function App() {
         <Route
           path="/dashboard"
           element={<ProtectedRoute element={<DashboardPage />} />}
+        />
+        <Route
+          path="/qr-generator"
+          element={<ProtectedRoute element={<QRGeneratorPage />} />}
+        />
+        <Route
+          path="/history"
+          element={<ProtectedRoute element={<PaymentHistoryPage />} />}
+        />
+        <Route
+          path="/confirmation"
+          element={<ProtectedRoute element={<PaymentConfirmationPage />} />}
         />
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>

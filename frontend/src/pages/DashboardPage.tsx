@@ -3,6 +3,7 @@
  */
 
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuthStore } from '../store/authStore';
 import { usePaymentStore } from '../store/paymentStore';
@@ -10,6 +11,7 @@ import { Button } from '../components/Button';
 import { Card } from '../components/Card';
 
 export const DashboardPage: React.FC = () => {
+  const navigate = useNavigate();
   const { user, logout } = useAuthStore();
   const { payments } = usePaymentStore();
   const [totalToday, setTotalToday] = useState('0.00');
@@ -98,10 +100,18 @@ export const DashboardPage: React.FC = () => {
             <div className="space-y-6">
               <h2 className="text-xl font-bold text-white">💎 Actions Rapides</h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                <Button variant="primary" className="w-full text-sm">
+                <Button 
+                  variant="primary" 
+                  className="w-full text-sm"
+                  onClick={() => navigate('/qr-generator')}
+                >
                   🔲 Nouveau QR
                 </Button>
-                <Button variant="secondary" className="w-full text-sm">
+                <Button 
+                  variant="secondary" 
+                  className="w-full text-sm"
+                  onClick={() => navigate('/history')}
+                >
                   📋 Historique
                 </Button>
                 <Button variant="secondary" className="w-full text-sm">
@@ -169,7 +179,11 @@ export const DashboardPage: React.FC = () => {
               )}
 
               {payments.length > 5 && (
-                <Button variant="ghost" className="w-full justify-center">
+                <Button 
+                  variant="ghost" 
+                  className="w-full justify-center"
+                  onClick={() => navigate('/history')}
+                >
                   Voir tous les paiements →
                 </Button>
               )}

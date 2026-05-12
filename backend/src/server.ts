@@ -7,6 +7,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import { RateLimiterMemory } from 'rate-limiter-flexible';
 import dotenv from 'dotenv';
+import paymentsRouter from './routes/payments';
 
 dotenv.config();
 
@@ -37,12 +38,18 @@ app.use(async (req: Request, res: Response, next: NextFunction) => {
   }
 });
 
+// Logging middleware
+app.use((req: Request, res: Response, next: NextFunction) => {
+  console.log(`[${new Date().toISOString()}] ${req.method} ${req.path}`);
+  next();
+});
+
 // Health check
 app.get('/health', (req: Request, res: Response) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
 });
 
-// API routes
+// API status
 app.get('/api/status', (req: Request, res: Response) => {
   res.json({
     app: 'QRPiPay Backend',
@@ -52,7 +59,16 @@ app.get('/api/status', (req: Request, res: Response) => {
   });
 });
 
-// TODO: Add payment routes
+// Routes
+app.use('/api/payments', paymentsRouter);
+
+// 404 handler
+app.use((req: Request, res: Response) => {
+  res.status(404).json({
+    error: 'Route not found',
+    path: req.path,
+  });
+});
 
 // Error handling
 app.use((err: any, req: Request, res: Response, next: NextFunction) => {
@@ -67,4 +83,6 @@ app.use((err: any, req: Request, res: Response, next: NextFunction) => {
 app.listen(port, () => {
   console.log(`🚀 QRPiPay Backend running on port ${port}`);
   console.log(`📊 Health check: http://localhost:${port}/health`);
+  console.log(`📋 API Status: http://localhost:${port}/api/status`);
+  console.log(`💳 Payments API: http://localhost:${port}/api/payments`);
 });
