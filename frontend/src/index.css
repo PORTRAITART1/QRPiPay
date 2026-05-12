@@ -1,0 +1,65 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  @apply transition-colors duration-200;
+}
+
+/* Glassmorphism */
+.glass {
+  @apply bg-white/5 backdrop-blur-xl border border-white/10 shadow-[0_8px_32px_rgba(0,0,0,0.2)];
+}
+
+.glass:hover {
+  @apply bg-white/10;
+}
+
+/* Buttons */
+.btn-primary {
+  @apply px-8 py-3.5 bg-gradient-to-r from-pi-purple-600 to-pi-purple-500 text-white font-semibold rounded-lg shadow-[0_0_20px_rgba(107,15,185,0.3)] hover:shadow-[0_0_40px_rgba(107,15,185,0.5)] hover:scale-105 active:scale-95 transition-all duration-300;
+}
+
+.btn-secondary {
+  @apply px-8 py-3.5 bg-transparent text-pi-purple-600 font-semibold rounded-lg border-2 border-pi-purple-600 hover:bg-pi-purple-600 hover:text-white transition-all duration-300;
+}
+
+.btn-ghost {
+  @apply px-6 py-2.5 bg-transparent text-pi-gray-700 dark:text-pi-gray-300 font-medium rounded-lg hover:bg-pi-gray-100 dark:hover:bg-pi-gray-800 transition-all duration-200;
+}
+
+/* Cards */
+.card-premium {
+  @apply p-8 rounded-3xl bg-white dark:bg-pi-gray-800 shadow-[0_4px_16px_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_rgba(0,0,0,0.3)] hover:shadow-[0_8px_32px_rgba(0,0,0,0.15)] dark:hover:shadow-[0_16px_48px_rgba(0,0,0,0.4)] transition-shadow duration-300;
+}
+
+/* Input Fields */
+.input-premium {
+  @apply w-full px-6 py-4 bg-pi-gray-100 dark:bg-pi-gray-800 border-2 border-transparent rounded-2xl text-lg font-medium placeholder:text-pi-gray-400 focus:border-pi-purple-500 focus:bg-white dark:focus:bg-pi-gray-900 focus:shadow-[0_0_20px_rgba(107,15,185,0.3)] transition-all duration-300 outline-none;
+}
+
+/* Animations */
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+
+.animate-shimmer {
+  animation: shimmer 2s infinite;
+}
+
+/* Gradients */
+.gradient-primary {
+  @apply bg-gradient-to-br from-pi-purple-600 to-pi-purple-500;
+}
+
+.gradient-accent {
+  @apply bg-gradient-to-br from-pi-orange-500 to-pi-orange-400;
+}
+
+/* Dark mode */
+@media (prefers-color-scheme: dark) {
+  body {
+    @apply bg-pi-gray-900 text-pi-gray-100;
+  }
+}
