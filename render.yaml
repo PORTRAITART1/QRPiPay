@@ -23,12 +23,11 @@ services:
       - key: LOG_LEVEL
         value: info
 
-  # Frontend Service (CORRIGÉ)
+  # Frontend Service (SANS REGION)
   - type: web
     name: qrpipay-frontend
     env: static
     plan: free
-    region: oregon
     buildCommand: cd frontend && npm install && npm run build
     staticPublishPath: frontend/dist
     envVars:
