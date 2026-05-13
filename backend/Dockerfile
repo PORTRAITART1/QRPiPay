@@ -1,19 +1,19 @@
 # Backend Dockerfile - Multi-stage build
+# CORRECTED VERSION - Handles prisma path correctly
+
 # Stage 1: Build
 FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-# Copy package files
+# Copy everything needed for build
 COPY package*.json ./
-
-# Install dependencies (including devDependencies for build)
-RUN npm ci && npm cache clean --force
-
-# Copy source code
 COPY tsconfig.json ./
 COPY src ./src
-COPY prisma ./prisma
+COPY database/prisma ./prisma
+
+# Install all dependencies (including devDependencies for TypeScript)
+RUN npm ci && npm cache clean --force
 
 # Build TypeScript
 RUN npm run build
@@ -29,17 +29,17 @@ RUN apk add --no-cache dumb-init
 # Copy package files
 COPY package*.json ./
 
-# Install runtime dependencies only (production)
+# Install runtime dependencies only
 RUN npm ci --only=production && npm cache clean --force
 
-# Remove dev tools not needed in production
-RUN npm remove --save-dev typescript tsx prisma @typescript-eslint/eslint-plugin @typescript-eslint/parser eslint 2>/dev/null || true
-
-# Copy built code from builder
+# Copy built application from builder
 COPY --from=builder /app/dist ./dist
 
 # Copy Prisma schema and generated client
 COPY --from=builder /app/prisma ./prisma
+
+# Generate Prisma Client at runtime (safety measure)
+RUN npx prisma generate || true
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
@@ -48,7 +48,7 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 # Expose port
 EXPOSE 3001
 
-# Use dumb-init to handle signals
+# Use dumb-init to handle signals properly
 ENTRYPOINT ["dumb-init", "--"]
 
 # Start application
