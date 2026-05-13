@@ -25,5 +25,5 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 EXPOSE 3001
 
 # Start application
-WORKDIR /app/backend
-CMD ["npm", "start"]
+WORKDIR /app
+CMD ["node", "backend/dist/server.js"]
