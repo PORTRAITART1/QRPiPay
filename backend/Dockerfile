@@ -1,5 +1,4 @@
-# Backend Dockerfile - FINAL WORKING VERSION
-# Simple native Node.js deployment (not Docker multi-stage)
+# Backend Dockerfile - FINAL FIXED VERSION
 
 FROM node:20-alpine
 
@@ -8,14 +7,17 @@ WORKDIR /app
 # Copy entire monorepo
 COPY . .
 
-# Change to backend directory
+# Change to backend directory for build
 WORKDIR /app/backend
 
-# Install dependencies
-RUN npm install && npm cache clean --force
+# Install all dependencies
+RUN npm install
 
-# Build TypeScript
+# Build TypeScript to dist/
 RUN npm run build
+
+# Copy Prisma to dist folder so it's found at runtime
+RUN cp -r /app/database/prisma ./dist/
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
@@ -24,6 +26,5 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 # Expose port
 EXPOSE 3001
 
-# Start application
-WORKDIR /app
-CMD ["node", "backend/dist/server.js"]
+# Start from backend directory where dist exists
+CMD ["node", "dist/server.js"]
