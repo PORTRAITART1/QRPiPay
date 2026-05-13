@@ -10,7 +10,7 @@ WORKDIR /app
 COPY package*.json ./
 COPY tsconfig.json ./
 COPY src ./src
-COPY database/prisma ./prisma
+COPY ../database/prisma ./prisma
 
 # Install all dependencies (including devDependencies for TypeScript)
 RUN npm ci && npm cache clean --force
