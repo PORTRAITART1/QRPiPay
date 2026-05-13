@@ -11,7 +11,7 @@ COPY . .
 
 # Install dependencies from backend
 WORKDIR /app/backend
-RUN npm ci && npm cache clean --force
+RUN npm install && npm cache clean --force
 
 # Build TypeScript
 RUN npm run build
@@ -28,7 +28,7 @@ RUN apk add --no-cache dumb-init
 COPY backend/package*.json ./
 
 # Install runtime dependencies only
-RUN npm ci --only=production && npm cache clean --force
+RUN npm install && npm cache clean --force
 
 # Copy built application from builder
 COPY --from=builder /app/backend/dist ./dist

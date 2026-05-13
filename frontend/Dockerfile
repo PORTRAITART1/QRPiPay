@@ -11,7 +11,7 @@ COPY . .
 
 # Install and build from frontend
 WORKDIR /app/frontend
-RUN npm ci && npm run build
+RUN npm install && npm run build
 
 # Stage 2: Runtime (static server)
 FROM node:20-alpine
