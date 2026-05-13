@@ -1,43 +1,21 @@
-# Backend Dockerfile - FINAL VERSION
-# Works with ANY Root Directory setting (or none)
+# Backend Dockerfile - FINAL WORKING VERSION
+# Simple native Node.js deployment (not Docker multi-stage)
 
-# Stage 1: Build
-FROM node:20-alpine AS builder
+FROM node:20-alpine
 
 WORKDIR /app
 
-# Copy monorepo structure
+# Copy entire monorepo
 COPY . .
 
-# Install dependencies from backend
+# Change to backend directory
 WORKDIR /app/backend
+
+# Install dependencies
 RUN npm install && npm cache clean --force
 
 # Build TypeScript
 RUN npm run build
-
-# Stage 2: Runtime
-FROM node:20-alpine
-
-WORKDIR /app/backend
-
-# Install dumb-init for proper signal handling
-RUN apk add --no-cache dumb-init
-
-# Copy package files
-COPY backend/package*.json ./
-
-# Install runtime dependencies only
-RUN npm install && npm cache clean --force
-
-# Copy built application from builder
-COPY --from=builder /app/backend/dist ./dist
-
-# Copy Prisma schema and generated client
-COPY --from=builder /app/backend/prisma ./prisma
-
-# Generate Prisma Client at runtime (safety measure)
-RUN npx prisma generate || true
 
 # Health check
 HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
@@ -46,8 +24,5 @@ HEALTHCHECK --interval=30s --timeout=10s --start-period=5s --retries=3 \
 # Expose port
 EXPOSE 3001
 
-# Use dumb-init to handle signals properly
-ENTRYPOINT ["dumb-init", "--"]
-
 # Start application
-CMD ["node", "dist/server.js"]
+CMD ["npm", "start"]

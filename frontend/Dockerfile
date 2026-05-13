@@ -1,28 +1,24 @@
-# Frontend Dockerfile - FINAL VERSION
-# Works with ANY Root Directory setting (or none)
+# Frontend Dockerfile - FINAL WORKING VERSION
+# Simple native Node.js deployment (not Docker multi-stage)
 
-# Stage 1: Build
-FROM node:20-alpine AS builder
+FROM node:20-alpine
 
 WORKDIR /app
 
-# Copy monorepo structure
+# Copy entire monorepo
 COPY . .
 
-# Install and build from frontend
-WORKDIR /app/frontend
-RUN npm install && npm run build
-
-# Stage 2: Runtime (static server)
-FROM node:20-alpine
-
+# Change to frontend directory
 WORKDIR /app/frontend
 
-# Install serve to serve static files
+# Install dependencies
+RUN npm install && npm cache clean --force
+
+# Build application
+RUN npm run build
+
+# Install serve globally
 RUN npm install -g serve
-
-# Copy built files from builder
-COPY --from=builder /app/frontend/dist ./dist
 
 # Expose port
 EXPOSE 3000
