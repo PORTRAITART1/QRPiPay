@@ -1,38 +1,28 @@
-# Frontend Dockerfile - Multi-stage build
+# Frontend Dockerfile - FINAL VERSION
+# Works with ANY Root Directory setting (or none)
+
 # Stage 1: Build
 FROM node:20-alpine AS builder
 
 WORKDIR /app
 
-# Copy package files
-COPY package*.json ./
+# Copy monorepo structure
+COPY . .
 
-# Install dependencies
-RUN npm ci
-
-# Copy source code
-COPY tsconfig.json ./
-COPY tsconfig.node.json ./
-COPY vite.config.ts ./
-COPY index.html ./
-COPY postcss.config.cjs ./
-COPY tailwind.config.js ./
-COPY src ./src
-COPY public ./public 2>/dev/null || true
-
-# Build application
-RUN npm run build
+# Install and build from frontend
+WORKDIR /app/frontend
+RUN npm ci && npm run build
 
 # Stage 2: Runtime (static server)
 FROM node:20-alpine
 
-WORKDIR /app
+WORKDIR /app/frontend
 
 # Install serve to serve static files
 RUN npm install -g serve
 
 # Copy built files from builder
-COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/frontend/dist ./dist
 
 # Expose port
 EXPOSE 3000
