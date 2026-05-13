@@ -105,8 +105,8 @@ $BackendPayload = @{
     name = "qrpipay-backend"
     repo = $GitHubRepo
     branch = "master"
-    buildCommand = "cd backend && npm install && npm run build"
-    startCommand = "cd backend && npm start"
+    buildCommand = "cd backend; npm install; npm run build"
+    startCommand = "cd backend; npm start"
     plan = "free"
     region = "oregon"
     envVars = @(
@@ -150,7 +150,7 @@ $FrontendPayload = @{
     name = "qrpipay-frontend"
     repo = $GitHubRepo
     branch = "master"
-    buildCommand = "cd frontend && npm install && npm run build"
+    buildCommand = "cd frontend; npm install; npm run build"
     publishPath = "frontend/dist"
     plan = "free"
     region = "oregon"
@@ -193,7 +193,7 @@ Write-Host "║  Frontend:  https://qrpipay-frontend.onrender.com            ║
 Write-Host "║  Backend:   https://qrpipay-backend.onrender.com             ║" -ForegroundColor Green
 Write-Host "║  API:       https://qrpipay-backend.onrender.com/api         ║" -ForegroundColor Green
 Write-Host "║                                                               ║" -ForegroundColor Green
-Write-Host "║  JWT_SECRET: $JWTSecret" -ForegroundColor Green
+Write-Host "║  JWT_SECRET saved securely                                   ║" -ForegroundColor Green
 Write-Host "║                                                               ║" -ForegroundColor Green
 Write-Host "╚═══════════════════════════════════════════════════════════════╝" -ForegroundColor Green
 
