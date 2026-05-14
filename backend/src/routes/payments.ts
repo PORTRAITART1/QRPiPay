@@ -104,7 +104,7 @@ router.get('/:paymentId', async (req: Request, res: Response) => {
     }
 
     res.json(payment);
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[API] Get payment error:', error);
     res.status(500).json({ error: 'Failed to fetch payment' });
   }
@@ -133,7 +133,7 @@ router.post('/:paymentId/approve', async (req: Request, res: Response) => {
       success: true,
       payment,
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[API] Approval error:', error);
     res.status(500).json({ error: 'Approval failed' });
   }
@@ -212,7 +212,7 @@ router.post('/:paymentId/complete', async (req: Request, res: Response) => {
       success: true,
       payment,
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[API] Completion error:', error);
     res.status(500).json({ error: 'Completion failed' });
   }
@@ -260,7 +260,7 @@ router.get('/user/:userId', async (req: Request, res: Response) => {
       pages: Math.ceil(total / limit),
       payments,
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[API] Get user payments error:', error);
     res.status(500).json({ error: 'Failed to fetch payments' });
   }
@@ -295,7 +295,7 @@ router.get('/status/:status', async (req: Request, res: Response) => {
       count: payments.length,
       payments,
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[API] Get payments by status error:', error);
     res.status(500).json({ error: 'Failed to fetch payments' });
   }

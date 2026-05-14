@@ -87,7 +87,7 @@ router.get('/:piUid', async (req: Request, res: Response) => {
     }
 
     res.json(user);
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[API] Get user error:', error);
     res.status(500).json({ error: 'Failed to fetch user' });
   }
@@ -120,7 +120,7 @@ router.put('/:piUid', async (req: Request, res: Response) => {
       success: true,
       user,
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[API] Update user error:', error);
     res.status(500).json({ error: 'Failed to update user' });
   }
@@ -148,7 +148,7 @@ router.post('/:piUid/kyc/verify', async (req: Request, res: Response) => {
       success: true,
       user,
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[API] KYC verify error:', error);
     res.status(500).json({ error: 'Failed to verify KYC' });
   }
