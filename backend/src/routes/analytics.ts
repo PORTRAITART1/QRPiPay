@@ -59,7 +59,7 @@ router.get('/user/:userId', async (req: Request, res: Response) => {
       totals,
       daily: analytics,
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[API] Analytics error:', error);
     res.status(500).json({ error: 'Failed to fetch analytics' });
   }
@@ -112,7 +112,7 @@ router.get('/daily/:userId/:date', async (req: Request, res: Response) => {
       payments,
       paymentCount: payments.length,
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[API] Daily analytics error:', error);
     res.status(500).json({ error: 'Failed to fetch daily analytics' });
   }
@@ -199,10 +199,11 @@ router.get('/summary/:userId', async (req: Request, res: Response) => {
         },
       },
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[API] Summary error:', error);
     res.status(500).json({ error: 'Failed to fetch summary' });
   }
 });
 
 export default router;
+

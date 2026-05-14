@@ -28,7 +28,7 @@ router.get('/payments/:userId', async (req: Request, res: Response) => {
     res.send(csv);
 
     console.log('[API] Payments exported for:', userId);
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[API] Export payments error:', error);
     res.status(500).json({ error: 'Failed to export payments' });
   }
@@ -56,10 +56,11 @@ router.get('/analytics/:userId', async (req: Request, res: Response) => {
     res.send(csv);
 
     console.log('[API] Analytics exported for:', userId);
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[API] Export analytics error:', error);
     res.status(500).json({ error: 'Failed to export analytics' });
   }
 });
 
 export default router;
+

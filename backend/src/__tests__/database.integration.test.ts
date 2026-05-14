@@ -50,7 +50,7 @@ describe('Database Integration Tests', () => {
           },
         });
         fail('Should throw error');
-      } catch (error) {
+      } catch (error: unknown) {
         expect(error).toBeDefined();
       }
     });
@@ -168,3 +168,4 @@ describe('Database Integration Tests', () => {
     });
   });
 });
+

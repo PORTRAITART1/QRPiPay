@@ -38,7 +38,7 @@ app.use(async (req: Request, res: Response, next: NextFunction) => {
   try {
     await rateLimiter.consume(req.ip || 'unknown');
     next();
-  } catch (error) {
+  } catch (error: unknown) {
     res.status(429).json({ error: 'Too many requests' });
   }
 });
@@ -106,3 +106,4 @@ app.listen(port, () => {
   console.log(`📥 Export API: http://localhost:${port}/api/export`);
   console.log(`🗄️  Database: PostgreSQL + Prisma`);
 });
+
