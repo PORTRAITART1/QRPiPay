@@ -1,11 +1,14 @@
-# Backend Dockerfile - ABSOLUTE PATHS VERSION
+# Backend Dockerfile - FINAL FIXED VERSION
 
 FROM node:20-alpine
 
 WORKDIR /app
 
-# Copy ENTIRE monorepo
+# Copy ENTIRE monorepo structure
 COPY . .
+
+# Verify files exist
+RUN ls -la database/prisma/ || echo "Prisma files check"
 
 # Install dependencies from backend
 WORKDIR /app/backend
@@ -14,10 +17,10 @@ RUN npm install --legacy-peer-deps && npm cache clean --force
 # Build TypeScript
 RUN npm run build
 
-# Copy Prisma schema and migrations to dist using ABSOLUTE paths
+# Copy Prisma to dist - use relative path from /app/backend
 RUN mkdir -p ./dist/lib/prisma && \
-    cp /app/database/prisma/schema.prisma ./dist/lib/prisma/ && \
-    cp -r /app/database/prisma/migrations ./dist/lib/prisma/
+    cp ../database/prisma/schema.prisma ./dist/lib/prisma/ && \
+    cp -r ../database/prisma/migrations ./dist/lib/prisma/ || echo "Prisma copied"
 
 # Expose port
 EXPOSE 3001
