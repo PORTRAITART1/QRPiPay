@@ -52,11 +52,12 @@ router.post('/', async (req: Request, res: Response) => {
       success: true,
       user,
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[API] User creation error:', error);
+    const details = error instanceof z.ZodError ? error.errors : undefined;
     res.status(400).json({
       error: 'Invalid user data',
-      details: error instanceof z.ZodError ? error.errors : undefined,
+      details,
     });
   }
 });

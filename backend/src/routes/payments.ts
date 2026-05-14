@@ -66,11 +66,12 @@ router.post('/', async (req: Request, res: Response) => {
       piPaymentId,
       payment,
     });
-  } catch (error) {
+  } catch (error: unknown) {
     console.error('[API] Payment creation error:', error);
+    const details = error instanceof z.ZodError ? error.errors : undefined;
     res.status(400).json({
       error: 'Invalid payment data',
-      details: error instanceof z.ZodError ? error.errors : undefined,
+      details,
     });
   }
 });
