@@ -1,10 +1,10 @@
-# Backend Dockerfile - MONOREPO AWARE
+# Backend Dockerfile - ABSOLUTE PATHS VERSION
 
 FROM node:20-alpine
 
 WORKDIR /app
 
-# Copy ENTIRE monorepo structure (backend + database + frontend)
+# Copy ENTIRE monorepo
 COPY . .
 
 # Install dependencies from backend
@@ -14,9 +14,10 @@ RUN npm install --legacy-peer-deps && npm cache clean --force
 # Build TypeScript
 RUN npm run build
 
-# Prisma MUST be available at runtime - it's in ../database/prisma
-# Copy to dist so imports work
-RUN mkdir -p ./dist/lib && cp -r ../database/prisma ./dist/lib/
+# Copy Prisma schema and migrations to dist using ABSOLUTE paths
+RUN mkdir -p ./dist/lib/prisma && \
+    cp /app/database/prisma/schema.prisma ./dist/lib/prisma/ && \
+    cp -r /app/database/prisma/migrations ./dist/lib/prisma/
 
 # Expose port
 EXPOSE 3001

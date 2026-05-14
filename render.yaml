@@ -1,12 +1,11 @@
 services:
-  # Backend Service - Using Native Node.js (NOT Docker)
+  # Backend Service - Using Dockerfile
   - type: web
     name: qrpipay-backend
-    env: node
+    dockerfile: ./backend/Dockerfile
+    dockerContext: .
     plan: free
     region: oregon
-    buildCommand: cd backend && npm install && npm run build
-    startCommand: cd backend && npm start
     envVars:
       - key: NODE_ENV
         value: production
@@ -23,15 +22,13 @@ services:
       - key: LOG_LEVEL
         value: info
 
-  # Frontend Service - Using Native Node.js (NOT Docker)
+  # Frontend Service - Using Dockerfile
   - type: web
     name: qrpipay-frontend
-    env: node
+    dockerfile: ./frontend/Dockerfile
+    dockerContext: .
     plan: free
     region: oregon
-    buildCommand: cd frontend && npm install && npm run build
-    startCommand: npm install -g serve && serve -s dist -l 3000
-    staticPublishPath: frontend/dist
     envVars:
       - key: VITE_API_URL
         value: https://qrpipay-backend.onrender.com/api
