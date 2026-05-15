@@ -8,7 +8,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import { RateLimiterMemory } from 'rate-limiter-flexible';
 import dotenv from 'dotenv';
-import { PrismaClient } from './lib/prisma';
+import prisma from './lib/prisma';
 import paymentsRouter from './routes/payments';
 import analyticsRouter from './routes/analytics';
 import usersRouter from './routes/users';
