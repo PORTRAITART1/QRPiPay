@@ -8,7 +8,7 @@ import cors from 'cors';
 import helmet from 'helmet';
 import { RateLimiterMemory } from 'rate-limiter-flexible';
 import dotenv from 'dotenv';
-import prisma from './lib/prisma';
+import { PrismaClient } from './lib/prisma';
 import paymentsRouter from './routes/payments';
 import analyticsRouter from './routes/analytics';
 import usersRouter from './routes/users';
@@ -106,4 +106,5 @@ app.listen(port, () => {
   console.log(`📥 Export API: http://localhost:${port}/api/export`);
   console.log(`🗄️  Database: PostgreSQL + Prisma`);
 });
+
 
