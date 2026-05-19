@@ -2,19 +2,10 @@ services:
   # PostgreSQL Database
   - type: pserv
     name: qrpipay-db
-    env: docker
     plan: free
     region: frankfurt
-    repo: https://github.com/PORTRAITART1/QRPiPay.git
-    dockerCommand: docker run -e POSTGRES_USER=qrpipay -e POSTGRES_PASSWORD=$DB_PASSWORD -e POSTGRES_DB=qrpipay -p 5432:5432 postgres:15-alpine
-    envVars:
-      - key: POSTGRES_USER
-        value: qrpipay
-      - key: POSTGRES_PASSWORD
-        generateValue: true
-      - key: POSTGRES_DB
-        value: qrpipay
-
+    ipAllowList: []
+    
   # Backend API Service
   - type: web
     name: qrpipay-backend
@@ -22,17 +13,19 @@ services:
     plan: free
     region: frankfurt
     repo: https://github.com/PORTRAITART1/QRPiPay.git
+    branch: master
     rootDir: backend
     buildCommand: npm install --legacy-peer-deps
     startCommand: node src/server.js
-    
     envVars:
       - key: NODE_ENV
         value: production
       - key: PORT
         value: "3001"
       - key: DATABASE_URL
-        sync: false
+        fromDatabase:
+          name: qrpipay-db
+          property: connectionString
       - key: JWT_SECRET
         generateValue: true
       - key: FRONTEND_URL
@@ -52,25 +45,29 @@ services:
       - key: DB_USER
         value: qrpipay
       - key: DB_PASSWORD
-        sync: false
+        fromDatabase:
+          name: qrpipay-db
+          property: password
       - key: DB_NAME
         value: qrpipay
       - key: DB_HOST
-        value: qrpipay-db
+        fromDatabase:
+          name: qrpipay-db
+          property: host
       - key: DB_PORT
         value: "5432"
 
   # Frontend Web Application
-  - type: static_site
+  - type: web
     name: qrpipay-frontend
-    env: static
+    env: node
     plan: free
     region: frankfurt
     repo: https://github.com/PORTRAITART1/QRPiPay.git
+    branch: master
     rootDir: frontend
     buildCommand: npm install --legacy-peer-deps && npm run build
-    publishPath: dist
-    
+    startCommand: npx serve -s dist -l 3000
     envVars:
       - key: VITE_API_URL
         value: https://qrpipay-backend.onrender.com/api
