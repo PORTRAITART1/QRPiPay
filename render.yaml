@@ -4,8 +4,7 @@ services:
     name: qrpipay-db
     plan: free
     region: frankfurt
-    ipAllowList: []
-    
+
   # Backend API Service
   - type: web
     name: qrpipay-backend
