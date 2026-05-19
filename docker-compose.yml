@@ -1,57 +1,118 @@
 version: '3.8'
 
 services:
-  # PostgreSQL Database
+  # ==========================================
+  # PostgreSQL Database - Production Config
   postgres:
     image: postgres:15-alpine
     container_name: qrpipay-db
+    restart: unless-stopped
     environment:
-      POSTGRES_USER: qrpipay
-      POSTGRES_PASSWORD: dev_password
-      POSTGRES_DB: qrpipay
+      POSTGRES_USER: ${DB_USER:-qrpipay}
+      POSTGRES_PASSWORD: ${DB_PASSWORD:-dev_password}
+      POSTGRES_DB: ${DB_NAME:-qrpipay}
+      POSTGRES_INITDB_ARGS: "--encoding=UTF8"
     ports:
       - "5432:5432"
     volumes:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U qrpipay"]
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-qrpipay}"]
       interval: 10s
       timeout: 5s
       retries: 5
+      start_period: 10s
+    networks:
+      - qrpipay-network
+    security_opt:
+      - no-new-privileges:true
 
-  # Frontend
-  frontend:
-    build:
-      context: ./frontend
-      dockerfile: Dockerfile
-    ports:
-      - "3000:3000"
-    environment:
-      - VITE_API_URL=http://localhost:3001/api
-    depends_on:
-      - backend
-    volumes:
-      - ./frontend/src:/app/src
-    command: npm run dev
-
-  # Backend
+  # ==========================================
+  # Backend API Service
   backend:
     build:
-      context: ./backend
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: backend/Dockerfile
+    container_name: qrpipay-backend
+    restart: unless-stopped
     ports:
       - "3001:3001"
     environment:
-      - PORT=3001
-      - NODE_ENV=development
-      - FRONTEND_URL=http://localhost:3000
-      - DATABASE_URL=postgresql://qrpipay:dev_password@postgres:5432/qrpipay
+      # Core config
+      PORT: 3001
+      NODE_ENV: ${NODE_ENV:-development}
+      
+      # Database
+      DATABASE_URL: postgresql://${DB_USER:-qrpipay}:${DB_PASSWORD:-dev_password}@postgres:5432/${DB_NAME:-qrpipay}
+      DB_HOST: postgres
+      DB_PORT: 5432
+      DB_NAME: ${DB_NAME:-qrpipay}
+      DB_USER: ${DB_USER:-qrpipay}
+      DB_PASSWORD: ${DB_PASSWORD:-dev_password}
+      
+      # Security
+      FRONTEND_URL: ${FRONTEND_URL:-http://localhost:3000}
+      JWT_SECRET: ${JWT_SECRET:-dev-secret-key-change-in-production}
+      
+      # Pi Network
+      PI_API_KEY: ${PI_API_KEY}
+      PI_API_URL: ${PI_API_URL:-https://api.minepi.com}
+      PI_APP_ID: ${PI_APP_ID}
+      
+      # Rate limiting
+      RATE_LIMIT_MAX_REQUESTS: ${RATE_LIMIT_MAX_REQUESTS:-100}
+      RATE_LIMIT_WINDOW_MS: ${RATE_LIMIT_WINDOW_MS:-900000}
+      
+      # Logging
+      LOG_LEVEL: ${LOG_LEVEL:-info}
+    
     depends_on:
       postgres:
         condition: service_healthy
+    
     volumes:
       - ./backend/src:/app/src
+    
     command: npm run dev
+    
+    networks:
+      - qrpipay-network
+    
+    security_opt:
+      - no-new-privileges:true
+
+  # ==========================================
+  # Frontend Web Application
+  frontend:
+    build:
+      context: .
+      dockerfile: frontend/Dockerfile
+    container_name: qrpipay-frontend
+    restart: unless-stopped
+    ports:
+      - "3000:3000"
+    environment:
+      VITE_API_URL: ${VITE_API_URL:-http://localhost:3001/api}
+    
+    depends_on:
+      - backend
+    
+    volumes:
+      - ./frontend/src:/app/src
+    
+    networks:
+      - qrpipay-network
+    
+    security_opt:
+      - no-new-privileges:true
+
+networks:
+  qrpipay-network:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 172.20.0.0/16
 
 volumes:
   postgres_data:
+    driver: local
