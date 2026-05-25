@@ -2,17 +2,6 @@ node_modules
 npm-debug.log
 dist
 .env
-.env.local
 .git
 .gitignore
 README.md
-.DS_Store
-**/.DS_Store
-coverage
-.nyc_output
-.vscode
-.idea
-*.swp
-*.swo
-*~
-.eslintcache

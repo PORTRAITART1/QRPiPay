@@ -1,61 +1,37 @@
-import express from 'express';
-
+const express = require('express');
 const router = express.Router();
 
-// GET /api/users/:userId - Get user details
-router.get('/:userId', (req, res) => {
-  try {
-    const { userId } = req.params;
-
-    res.json({
-      userId,
-      username: 'testuser',
-      email: 'test@example.com',
-      businessName: 'Test Business',
-      piUid: userId,
-      createdAt: new Date().toISOString(),
-    });
-  } catch (error) {
-    console.error('Get user error:', error);
-    res.status(500).json({ error: 'Failed to fetch user' });
-  }
+router.get('/profile', (req, res) => {
+  res.json({
+    id: '1',
+    username: 'user',
+    email: 'user@example.com',
+    piAddress: 'pi_user123',
+    createdAt: new Date()
+  });
 });
 
-// PUT /api/users/:userId - Update user
-router.put('/:userId', (req, res) => {
-  try {
-    const { userId } = req.params;
-    const { username, businessName } = req.body;
-
-    res.json({
-      success: true,
-      userId,
-      username: username || 'testuser',
-      businessName: businessName || 'Test Business',
-      updatedAt: new Date().toISOString(),
-    });
-  } catch (error) {
-    console.error('Update user error:', error);
-    res.status(500).json({ error: 'Failed to update user' });
-  }
+router.post('/update', (req, res) => {
+  res.json({
+    success: true,
+    user: req.body
+  });
 });
 
-// GET /api/users/:userId/stats - Get user statistics
-router.get('/:userId/stats', (req, res) => {
-  try {
-    const { userId } = req.params;
-
-    res.json({
-      userId,
-      totalPayments: 0,
-      totalAmount: 0,
-      successRate: 0,
-      averagePayment: 0,
-    });
-  } catch (error) {
-    console.error('Get user stats error:', error);
-    res.status(500).json({ error: 'Failed to fetch user stats' });
-  }
+router.get('/stats', (req, res) => {
+  res.json({
+    totalPayments: 42,
+    totalAmount: 1500,
+    successRate: 98.5
+  });
 });
 
-export default router;
+router.get('/', (req, res) => {
+  res.json({
+    users: [
+      { id: '1', username: 'user1', email: 'user1@example.com' }
+    ]
+  });
+});
+
+module.exports = router;
