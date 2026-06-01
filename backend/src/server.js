@@ -35,11 +35,12 @@ app.get('/api/status', (req, res) => {
     version: '2.0.0',
     status: 'running',
     environment: process.env.NODE_ENV || 'development',
+    piIntegration: !!process.env.PI_API_KEY,
     timestamp: new Date().toISOString()
   });
 });
 
-// Routes
+// Routes avec Pi Network
 app.use('/api/auth', require('./routes/auth.js'));
 app.use('/api/payments', require('./routes/payments.js'));
 app.use('/api/qrcodes', require('./routes/qrcodes.js'));
@@ -53,4 +54,5 @@ app.use((err, req, res, next) => {
 
 app.listen(PORT, () => {
   console.log(`🚀 Backend running on port ${PORT}`);
+  console.log(`📡 Pi Network Integration: ${process.env.PI_API_KEY ? 'ENABLED' : 'DISABLED'}`);
 });
