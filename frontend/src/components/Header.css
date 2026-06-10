@@ -1,0 +1,29 @@
+.header {
+  background: linear-gradient(135deg, #6B0FB9 0%, #FFD700 100%);
+  padding: 1rem 2rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+.header-logo {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  text-decoration: none;
+  color: white;
+}
+
+.header-logo img {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+}
+
+.header-logo h1 {
+  font-size: 1.5rem;
+  margin: 0;
+  font-weight: bold;
+  color: white;
+}

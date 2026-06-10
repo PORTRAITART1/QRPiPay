@@ -12,6 +12,7 @@ import { PaymentHistoryPage } from './pages/PaymentHistoryPage';
 import { PaymentConfirmationPage } from './pages/PaymentConfirmationPage';
 import { AnalyticsPage } from './pages/AnalyticsPage';
 import './index.css';
+import Header from './components/Header';
 
 // Protected Route Component
 const ProtectedRoute: React.FC<{ element: React.ReactNode }> = ({ element }) => {
@@ -32,6 +33,7 @@ function App() {
 
   return (
     <Router>
+      <Header />
       <Routes>
         <Route path="/" element={<LoginPage />} />
         <Route
