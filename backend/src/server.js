@@ -7,14 +7,15 @@ require('dotenv').config();
 const app = express();
 const PORT = process.env.PORT || 3001;
 
-// Middleware
+// Security Middleware
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
 
 const limiter = rateLimit({
   windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS || '900000'),
-  max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS || '100')
+  max: parseInt(process.env.RATE_LIMIT_MAX_REQUESTS || '100'),
+  message: '⚠️ Too many requests, please try again later'
 });
 
 app.use('/api/', limiter);
@@ -40,19 +41,23 @@ app.get('/api/status', (req, res) => {
   });
 });
 
-// Routes avec Pi Network
+// Routes
 app.use('/api/auth', require('./routes/auth.js'));
 app.use('/api/payments', require('./routes/payments.js'));
 app.use('/api/qrcodes', require('./routes/qrcodes.js'));
 app.use('/api/users', require('./routes/users.js'));
 
-// Error handler
+// Global Error Handler
 app.use((err, req, res, next) => {
-  console.error(err);
-  res.status(500).json({ error: 'Internal Server Error' });
+  console.error('❌ Error:', err);
+  res.status(500).json({
+    error: 'Internal Server Error',
+    message: process.env.NODE_ENV === 'development' ? err.message : undefined
+  });
 });
 
 app.listen(PORT, () => {
   console.log(`🚀 Backend running on port ${PORT}`);
   console.log(`📡 Pi Network Integration: ${process.env.PI_API_KEY ? 'ENABLED' : 'DISABLED'}`);
+  console.log(`🔒 Security: Helmet + CORS + Rate Limiting enabled`);
 });
