@@ -11,6 +11,7 @@ import { QRGeneratorPage } from './pages/QRGeneratorPage';
 import { PaymentHistoryPage } from './pages/PaymentHistoryPage';
 import { PaymentConfirmationPage } from './pages/PaymentConfirmationPage';
 import { AnalyticsPage } from './pages/AnalyticsPage';
+import ToastProvider from './context/ToastContext';
 import './index.css';
 import Header from './components/Header';
 
@@ -32,6 +33,7 @@ function App() {
   }, [isAuthenticated, user]);
 
   return (
+    <ToastProvider>
     <Router>
       <Header />
       <Routes>
@@ -59,7 +61,7 @@ function App() {
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
-  );
-}
+  </ToastProvider>
+);
 
 export default App;

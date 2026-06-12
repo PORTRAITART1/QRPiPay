@@ -1,58 +1,40 @@
-/**
- * 🔔 Toast Notification Component
- */
-
 import React, { useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
+import './Toast.css';
 
 interface ToastProps {
+  id: string;
   message: string;
-  type?: 'success' | 'error' | 'info';
+  type: 'success' | 'error' | 'info';
   duration?: number;
-  onClose?: () => void;
+  onClose: (id: string) => void;
 }
 
-export const Toast: React.FC<ToastProps> = ({
+export default function Toast({
+  id,
   message,
-  type = 'info',
+  type,
   duration = 3000,
-  onClose,
-}) => {
+  onClose
+}: ToastProps) {
   useEffect(() => {
-    const timer = setTimeout(onClose, duration);
+    const timer = setTimeout(() => onClose(id), duration);
     return () => clearTimeout(timer);
-  }, [duration, onClose]);
-
-  const bgColor = {
-    success: 'bg-gradient-to-r from-green-500 to-green-600',
-    error: 'bg-gradient-to-r from-red-500 to-red-600',
-    info: 'bg-gradient-to-r from-blue-500 to-blue-600',
-  };
-
-  const icon = {
-    success: '✓',
-    error: '✕',
-    info: 'ℹ',
-  };
+  }, [id, duration, onClose]);
 
   return (
-    <motion.div
-      className={`fixed top-4 right-4 z-50 px-6 py-4 rounded-2xl text-white font-medium shadow-lg flex items-center gap-3 ${bgColor[type]}`}
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.3 }}
-    >
-      <span className="text-xl">{icon[type]}</span>
-      {message}
-    </motion.div>
+    <div className={`toast toast-${type}`}>
+      <div className="toast-content">
+        {type === 'success' && <span>✅</span>}
+        {type === 'error' && <span>❌</span>}
+        {type === 'info' && <span>ℹ️</span>}
+        <span>{message}</span>
+      </div>
+      <button
+        className="toast-close"
+        onClick={() => onClose(id)}
+      >
+        ×
+      </button>
+    </div>
   );
-};
-
-export const ToastContainer: React.FC<{ toasts: any[] }> = ({ toasts }) => (
-  <AnimatePresence>
-    {toasts.map((toast) => (
-      <Toast key={toast.id} {...toast} />
-    ))}
-  </AnimatePresence>
-);
+}

@@ -1,0 +1,25 @@
+import { useState, useEffect } from 'react';
+
+export function useTheme() {
+  const [isDark, setIsDark] = useState(() => {
+    // Vérifie localStorage ou préférence système
+    const saved = localStorage.getItem('theme');
+    if (saved) return saved === 'dark';
+    return window.matchMedia('(prefers-color-scheme: dark)').matches;
+  });
+
+  useEffect(() => {
+    const root = document.documentElement;
+    if (isDark) {
+      root.classList.add('dark-mode');
+      localStorage.setItem('theme', 'dark');
+    } else {
+      root.classList.remove('dark-mode');
+      localStorage.setItem('theme', 'light');
+    }
+  }, [isDark]);
+
+  const toggle = () => setIsDark(!isDark);
+
+  return { isDark, toggle };
+}
