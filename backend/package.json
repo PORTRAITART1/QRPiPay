@@ -4,11 +4,12 @@
   "description": "QRPiPay Backend - Pi Network Payment Terminal",
   "main": "src/server.js",
   "scripts": {
+  "build": "prisma generate",
   "dev": "node src/server.js",
-  "start": "node src/server.js",
-  "seed": "node prisma/seed.js",
-  "postinstall": "prisma generate"
-},
+  "start": "npm run build && node src/server.js",
+  "seed": "node prisma/seed.js"
+}
+,
   "dependencies": {
     "@prisma/client": "^4.16.2",
     "axios": "^1.16.1",
