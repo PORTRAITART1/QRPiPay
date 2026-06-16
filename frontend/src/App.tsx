@@ -61,7 +61,8 @@ function App() {
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Router>
-  </ToastProvider>
-);
+    </ToastProvider>
+  );
+}
 
 export default App;
