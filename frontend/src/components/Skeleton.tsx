@@ -8,7 +8,7 @@ interface SkeletonProps {
   circle?: boolean;
 }
 
-export default function Skeleton({
+export function Skeleton({
   width = '100%',
   height = '1rem',
   count = 1,
@@ -30,3 +30,5 @@ export default function Skeleton({
     </div>
   );
 }
+
+export default Skeleton;

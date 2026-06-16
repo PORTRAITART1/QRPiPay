@@ -8,7 +8,7 @@ interface CardProps {
   variant?: 'default' | 'outlined' | 'elevated';
 }
 
-export default function Card({
+export function Card({
   title,
   children,
   footer,
@@ -22,3 +22,5 @@ export default function Card({
     </div>
   );
 }
+
+export default Card;

@@ -9,7 +9,7 @@ interface ToastProps {
   onClose: (id: string) => void;
 }
 
-export default function Toast({
+export function Toast({
   id,
   message,
   type,
@@ -38,3 +38,5 @@ export default function Toast({
     </div>
   );
 }
+
+export default Toast;

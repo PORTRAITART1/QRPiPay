@@ -7,7 +7,7 @@ interface AlertProps {
   onClose?: () => void;
 }
 
-export default function Alert({ type, message, onClose }: AlertProps) {
+export function Alert({ type, message, onClose }: AlertProps) {
   return (
     <div className={`alert alert-${type}`}>
       <div className="alert-content">
@@ -23,3 +23,5 @@ export default function Alert({ type, message, onClose }: AlertProps) {
     </div>
   );
 }
+
+export default Alert;
