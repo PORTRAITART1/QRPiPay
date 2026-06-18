@@ -2,10 +2,16 @@ const express = require('express');
 const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
+const http = require('http');
 require('dotenv').config();
 
+const WebSocketService = require('./services/websocket.service.js');
+
 const app = express();
-const PORT = process.env.PORT || 3001;
+const server = http.createServer(app);
+
+// WebSocket
+const wsService = new WebSocketService(server);
 
 // Security Middleware
 app.use(helmet());
@@ -37,6 +43,7 @@ app.get('/api/status', (req, res) => {
     status: 'running',
     environment: process.env.NODE_ENV || 'development',
     piIntegration: !!process.env.PI_API_KEY,
+    websocket: 'enabled',
     timestamp: new Date().toISOString()
   });
 });
@@ -56,8 +63,13 @@ app.use((err, req, res, next) => {
   });
 });
 
-app.listen(PORT, () => {
+const PORT = process.env.PORT || 3001;
+
+server.listen(PORT, () => {
   console.log(`🚀 Backend running on port ${PORT}`);
   console.log(`📡 Pi Network Integration: ${process.env.PI_API_KEY ? 'ENABLED' : 'DISABLED'}`);
   console.log(`🔒 Security: Helmet + CORS + Rate Limiting enabled`);
+  console.log(`🔌 WebSocket: Connected`);
 });
+
+module.exports = { app, wsService };
