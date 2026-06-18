@@ -89,7 +89,7 @@ export const LoginPage: React.FC = () => {
             {/* Login Button */}
             <button
   disabled={!isPiBrowser}
-  onClick={handlePiLogin}
+  onClick={handleLogin}
   className={isPiBrowser ? 'btn btn-primary' : 'btn btn-disabled'}
 >
   {isPiBrowser ? 'Connexion avec Pi' : '⚠️ Pi Browser requis'}
