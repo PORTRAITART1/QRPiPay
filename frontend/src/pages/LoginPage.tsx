@@ -9,11 +9,13 @@ import { useAuthStore } from '../store/authStore';
 import { Button } from '../components/Button';
 import { Card } from '../components/Card';
 import { Toast } from '../components/Toast';
+import { useBrowser } from '../context/BrowserContext';
 
 export const LoginPage: React.FC = () => {
   const navigate = useNavigate();
   const { authenticate, isLoading, error } = useAuthStore();
   const [showToast, setShowToast] = useState(false);
+  const { isPiBrowser } = useBrowser();
 
   const handleLogin = async () => {
     try {
@@ -85,19 +87,13 @@ export const LoginPage: React.FC = () => {
             </p>
 
             {/* Login Button */}
-            <Button
-              variant="primary"
-              size="lg"
-              onClick={handleLogin}
-              loading={isLoading}
-              disabled={isLoading}
-              className="w-full"
-            >
-              <svg className="w-6 h-6" fill="currentColor" viewBox="0 0 24 24">
-                <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" />
-              </svg>
-              Connexion avec Pi
-            </Button>
+            <button
+  disabled={!isPiBrowser}
+  onClick={handlePiLogin}
+  className={isPiBrowser ? 'btn btn-primary' : 'btn btn-disabled'}
+>
+  {isPiBrowser ? 'Connexion avec Pi' : '⚠️ Pi Browser requis'}
+</button>
 
             {/* Error message */}
             {error && (
