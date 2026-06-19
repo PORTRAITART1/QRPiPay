@@ -53,6 +53,7 @@ app.use('/api/auth', require('./routes/auth.js'));
 app.use('/api/payments', require('./routes/payments.js'));
 app.use('/api/qrcodes', require('./routes/qrcodes.js'));
 app.use('/api/users', require('./routes/users.js'));
+app.use('/api/analytics', require('./routes/analytics.js'));
 
 // Global Error Handler
 app.use((err, req, res, next) => {
