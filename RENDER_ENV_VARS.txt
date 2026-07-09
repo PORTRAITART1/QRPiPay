@@ -1,0 +1,49 @@
+# ============================================
+# Render Environment Variables
+# Backend Service: qrpipay-backend
+# ============================================
+
+# ============================================
+# CORE CONFIG
+# ============================================
+NODE_ENV=production
+PORT=3001
+LOG_LEVEL=info
+
+# ============================================
+# DATABASE
+# ============================================
+# ⚠️ DATABASE_URL will be auto-set by Render when you connect PostgreSQL service
+# Format: postgresql://user:password@host:port/database
+# Leave empty in Render UI - it auto-connects
+
+# ============================================
+# SECURITY & JWT
+# ============================================
+# Generate strong JWT secret: 
+# $ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+JWT_SECRET=your-generated-32-char-secret-key-here-change-this
+
+# ============================================
+# PI NETWORK
+# ============================================
+PI_API_KEY=your-pi-network-api-key-here
+PI_API_URL=https://api.minepi.com
+PI_APP_ID=your-pi-app-id-here
+
+# ============================================
+# FRONTEND URL (CORS)
+# ============================================
+FRONTEND_URL=https://qrpipay-frontend.onrender.com
+CORS_ORIGIN=https://qrpipay-frontend.onrender.com
+
+# ============================================
+# RATE LIMITING
+# ============================================
+RATE_LIMIT_MAX_REQUESTS=100
+RATE_LIMIT_WINDOW_MS=900000
+
+# ============================================
+# Frontend Service: qrpipay-frontend
+# ============================================
+# VITE_API_URL=https://qrpipay-backend.onrender.com/api

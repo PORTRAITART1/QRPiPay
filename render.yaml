@@ -1,9 +1,16 @@
 services:
+  # ============================================
+  # PostgreSQL Database - Render Postgres Service
+  # ============================================
   - type: pserv
     name: qrpipay-db
     plan: free
     region: frankfurt
+    ipAllowList: []
 
+  # ============================================
+  # Backend API Service
+  # ============================================
   - type: web
     name: qrpipay-backend
     env: node
@@ -12,12 +19,54 @@ services:
     repo: https://github.com/PORTRAITART1/QRPiPay.git
     branch: master
     rootDir: backend
-    buildCommand: npm install --legacy-peer-deps
-    startCommand: node src/server.js
+    
+    buildCommand: npm ci --only=production && npx prisma generate
+    startCommand: npm start
+    
     envVars:
       - key: NODE_ENV
         value: production
+      - key: PORT
+        value: 3001
+      - key: LOG_LEVEL
+        value: info
+      
+      # Database - Will be auto-filled by Render Postgres service
+      - key: DATABASE_URL
+        fromDatabase:
+          name: qrpipay-db
+          property: connectionString
+      
+      # Security
+      - key: JWT_SECRET
+        sync: false
+      - key: FRONTEND_URL
+        value: https://qrpipay-frontend.onrender.com
+      
+      # Pi Network (add your real values)
+      - key: PI_API_KEY
+        sync: false
+      - key: PI_API_URL
+        value: https://api.minepi.com
+      - key: PI_APP_ID
+        sync: false
+      
+      # Rate Limiting
+      - key: RATE_LIMIT_MAX_REQUESTS
+        value: 100
+      - key: RATE_LIMIT_WINDOW_MS
+        value: 900000
+      
+      # CORS
+      - key: CORS_ORIGIN
+        value: https://qrpipay-frontend.onrender.com
+    
+    healthCheckPath: /health
+    autoDeploy: true
 
+  # ============================================
+  # Frontend Web Application
+  # ============================================
   - type: web
     name: qrpipay-frontend
     env: node
@@ -26,5 +75,13 @@ services:
     repo: https://github.com/PORTRAITART1/QRPiPay.git
     branch: master
     rootDir: frontend
-    buildCommand: npm install --legacy-peer-deps && npm run build
+    
+    buildCommand: npm ci --legacy-peer-deps && npm run build
     startCommand: npx serve -s dist -l 3000
+    
+    envVars:
+      - key: VITE_API_URL
+        value: https://qrpipay-backend.onrender.com/api
+    
+    healthCheckPath: /index.html
+    autoDeploy: true

@@ -3,6 +3,8 @@ const cors = require('cors');
 const helmet = require('helmet');
 const rateLimit = require('express-rate-limit');
 const http = require('http');
+const loggingMiddleware = require('./middleware/logging.js');
+const logger = require('./services/logger.service.js');
 require('dotenv').config();
 
 const WebSocketService = require('./services/websocket.service.js');
@@ -17,6 +19,7 @@ const wsService = new WebSocketService(server);
 app.use(helmet());
 app.use(cors());
 app.use(express.json());
+app.use(loggingMiddleware);
 
 const limiter = rateLimit({
   windowMs: parseInt(process.env.RATE_LIMIT_WINDOW_MS || '900000'),
@@ -57,20 +60,32 @@ app.use('/api/analytics', require('./routes/analytics.js'));
 
 // Global Error Handler
 app.use((err, req, res, next) => {
-  console.error('❌ Error:', err);
-  res.status(500).json({
-    error: 'Internal Server Error',
-    message: process.env.NODE_ENV === 'development' ? err.message : undefined
+  const statusCode = err.statusCode || 500;
+  const message = err.message || 'Internal Server Error';
+
+  logger.error({
+    error: message,
+    statusCode: statusCode,
+    stack: err.stack,
+    path: req.path,
+    method: req.method
+  });
+
+  res.status(statusCode).json({
+    error: message,
+    statusCode: statusCode,
+    timestamp: new Date().toISOString(),
+    ...(process.env.NODE_ENV === 'development' && { stack: err.stack })
   });
 });
 
 const PORT = process.env.PORT || 3001;
 
 server.listen(PORT, () => {
-  console.log(`🚀 Backend running on port ${PORT}`);
-  console.log(`📡 Pi Network Integration: ${process.env.PI_API_KEY ? 'ENABLED' : 'DISABLED'}`);
-  console.log(`🔒 Security: Helmet + CORS + Rate Limiting enabled`);
-  console.log(`🔌 WebSocket: Connected`);
+  logger.info(`🚀 Backend running on port ${PORT}`);
+  logger.info(`📡 Pi Network Integration: ${process.env.PI_API_KEY ? 'ENABLED' : 'DISABLED'}`);
+  logger.info(`🔒 Security: Helmet + CORS + Rate Limiting enabled`);
+  logger.info(`🔌 WebSocket: Connected`);
 });
 
 module.exports = { app, wsService };

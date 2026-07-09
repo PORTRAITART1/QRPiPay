@@ -1,43 +1,78 @@
 #!/bin/bash
-# QRPiPay Complete Deployment Script
-# ===================================
+
+# QRPiPay Production Deployment - Git Push Script
+# Pushes all changes to master for automatic Render deployment
 
 set -e
 
-echo "🚀 QRPiPay Deployment Pipeline"
-echo "==============================="
+echo "=========================================="
+echo "📦 QRPiPay Git Push for Deployment"
+echo "=========================================="
+echo ""
 
-# Step 1: Docker Compose Validation
-echo "✅ Step 1: Validating docker-compose configuration..."
-docker compose config > /dev/null && echo "   Docker Compose is valid"
+# Colors
+GREEN='\033[0;32m'
+YELLOW='\033[1;33m'
+RED='\033[0;31m'
+NC='\033[0m'
 
-# Step 2: Build Images
-echo "✅ Step 2: Building Docker images (multi-platform)..."
-docker buildx build --platform linux/amd64,linux/arm64 -t qrpipay-backend:latest -t qrpipay-backend:v2.0 backend/ --push 2>/dev/null || docker build -t qrpipay-backend:latest backend/
-docker buildx build --platform linux/amd64,linux/arm64 -t qrpipay-frontend:latest -t qrpipay-frontend:v1.0 frontend/ --push 2>/dev/null || docker build -t qrpipay-frontend:latest frontend/
+# Check git status
+echo -e "${YELLOW}📋 Git Status:${NC}"
+git status --short || true
+echo ""
 
-# Step 3: Start Services
-echo "✅ Step 3: Starting services..."
-docker compose up -d
-sleep 5
+# Ask for confirmation
+echo -e "${YELLOW}Files to commit:${NC}"
+echo "  - backend/Dockerfile (optimized multi-stage)"
+echo "  - frontend/Dockerfile (optimized multi-stage)"
+echo "  - render.yaml (Render config)"
+echo "  - backend/test-endpoints.js (validation script)"
+echo "  - security-audit.js"
+echo "  - local-validation.js"
+echo "  - PRODUCTION_CHECKLIST.md"
+echo "  - DEPLOYMENT_SUMMARY.md"
+echo ""
 
-# Step 4: Health Checks
-echo "✅ Step 4: Verifying service health..."
-POSTGRES_STATUS=$(docker compose ps postgres 2>/dev/null | grep -q "healthy" && echo "✓ healthy" || echo "✗ checking...")
-BACKEND_STATUS=$(curl -s http://localhost:3001/health | jq -r .status 2>/dev/null || echo "starting")
-FRONTEND_STATUS=$(curl -s -o /dev/null -w "%{http_code}" http://localhost:3000 2>/dev/null || echo "starting")
-
-echo "   PostgreSQL: $POSTGRES_STATUS"
-echo "   Backend: $BACKEND_STATUS"
-echo "   Frontend HTTP: $FRONTEND_STATUS"
-
-# Step 5: Show logs
-echo "✅ Step 5: Recent logs..."
-docker compose logs --tail=20
+read -p "Continue with commit and push? (y/n) " -n 1 -r
+echo
+if [[ ! $REPLY =~ ^[Yy]$ ]]; then
+  echo "Cancelled."
+  exit 1
+fi
 
 echo ""
-echo "✅ Deployment Complete!"
-echo "📊 Monitor: docker compose logs -f"
-echo "🌐 Frontend: http://localhost:3000"
-echo "💳 API: http://localhost:3001/api"
-echo "❤️ Health: curl http://localhost:3001/health"
+echo -e "${YELLOW}🔄 Staging files...${NC}"
+git add backend/Dockerfile frontend/Dockerfile render.yaml
+git add backend/test-endpoints.js security-audit.js local-validation.js
+git add PRODUCTION_CHECKLIST.md DEPLOYMENT_SUMMARY.md RENDER_*.txt start-dev.sh RENDER_DEPLOYMENT.sh
+
+echo -e "${GREEN}✅ Files staged${NC}"
+echo ""
+
+echo -e "${YELLOW}💬 Commit message:${NC}"
+read -p "Enter commit message (default: 'Production deployment: optimize Dockerfiles, add Render config, tests'): " msg
+msg=${msg:-"Production deployment: optimize Dockerfiles, add Render config, tests"}
+
+echo ""
+echo -e "${YELLOW}📝 Committing...${NC}"
+git commit -m "$msg"
+
+echo -e "${GREEN}✅ Committed${NC}"
+echo ""
+
+echo -e "${YELLOW}🚀 Pushing to master...${NC}"
+git push origin master
+
+echo -e "${GREEN}✅ Pushed${NC}"
+echo ""
+
+echo "=========================================="
+echo -e "${GREEN}✅ Deployment initiated!${NC}"
+echo "=========================================="
+echo ""
+echo "Next steps:"
+echo "1. Go to https://render.com/dashboard"
+echo "2. Watch deploy logs"
+echo "3. Verify https://qrpipay-backend.onrender.com/health"
+echo "4. Check https://qrpipay-frontend.onrender.com"
+echo ""
