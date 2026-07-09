@@ -3,7 +3,7 @@
 # ============================================
 FROM node:20-alpine AS builder
 
-RUN apk add --no-cache python3 make g++
+RUN apk add --no-cache python3 make g++ openssl openssl-dev
 
 WORKDIR /app
 
@@ -25,8 +25,8 @@ FROM node:20-alpine
 RUN addgroup -g 1001 -S nodejs && \
     adduser -S nodejs -u 1001
 
-# Health check dependency
-RUN apk add --no-cache curl
+# Health check dependency + OpenSSL for Prisma
+RUN apk add --no-cache curl openssl
 
 WORKDIR /app
 
