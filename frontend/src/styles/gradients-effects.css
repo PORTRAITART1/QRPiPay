@@ -1,0 +1,321 @@
+/**
+ * Gradients & Effects - Design System
+ * Reusable gradient and effect patterns
+ */
+
+:root {
+  /* ==========================================
+     GRADIENT TOKENS
+     ========================================== */
+
+  /* Hero Gradient - Main brand gradient */
+  --gradient-hero: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-secondary) 50%,
+    var(--color-tertiary) 100%
+  );
+
+  /* Subtle Gradient - Light background */
+  --gradient-subtle: linear-gradient(
+    135deg,
+    var(--color-gray-50) 0%,
+    var(--color-gray-100) 100%
+  );
+
+  /* Dark Gradient - Dark background */
+  --gradient-dark: linear-gradient(
+    135deg,
+    var(--color-dark-bg) 0%,
+    var(--color-dark-bg-secondary) 100%
+  );
+
+  /* Primary Gradient */
+  --gradient-primary: linear-gradient(
+    135deg,
+    var(--color-primary) 0%,
+    var(--color-primary-dark) 100%
+  );
+
+  /* Success Gradient */
+  --gradient-success: linear-gradient(
+    135deg,
+    var(--color-success) 0%,
+    var(--color-success-dark) 100%
+  );
+
+  /* Error Gradient */
+  --gradient-error: linear-gradient(
+    135deg,
+    var(--color-error) 0%,
+    var(--color-error-dark) 100%
+  );
+
+  /* Warning Gradient */
+  --gradient-warning: linear-gradient(
+    135deg,
+    var(--color-warning) 0%,
+    var(--color-warning-dark) 100%
+  );
+
+  /* Info Gradient */
+  --gradient-info: linear-gradient(
+    135deg,
+    var(--color-info) 0%,
+    var(--color-info-dark) 100%
+  );
+
+  /* ==========================================
+     BLUR EFFECTS
+     ========================================== */
+
+  --blur-none: blur(0);
+  --blur-sm: blur(4px);
+  --blur-base: blur(8px);
+  --blur-md: blur(12px);
+  --blur-lg: blur(16px);
+  --blur-xl: blur(24px);
+
+  /* ==========================================
+     FILTER EFFECTS
+     ========================================== */
+
+  --filter-grayscale: grayscale(100%);
+  --filter-sepia: sepia(100%);
+  --filter-brightness-dim: brightness(0.8);
+  --filter-brightness-bright: brightness(1.2);
+  --filter-contrast-low: contrast(0.8);
+  --filter-contrast-high: contrast(1.2);
+  --filter-saturate-low: saturate(0.8);
+  --filter-saturate-high: saturate(1.5);
+  --filter-hue-rotate: hue-rotate(45deg);
+  --filter-invert: invert(100%);
+  --filter-opacity: opacity(0.7);
+}
+
+/* ==========================================
+   GRADIENT UTILITIES
+   ========================================== */
+
+.gradient-hero {
+  background: var(--gradient-hero);
+}
+
+.gradient-primary {
+  background: var(--gradient-primary);
+}
+
+.gradient-success {
+  background: var(--gradient-success);
+}
+
+.gradient-error {
+  background: var(--gradient-error);
+}
+
+.gradient-warning {
+  background: var(--gradient-warning);
+}
+
+.gradient-info {
+  background: var(--gradient-info);
+}
+
+.gradient-subtle {
+  background: var(--gradient-subtle);
+}
+
+.gradient-dark {
+  background: var(--gradient-dark);
+}
+
+/* ==========================================
+   BACKDROP BLUR UTILITIES
+   ========================================== */
+
+.backdrop-blur-sm {
+  backdrop-filter: blur(4px);
+}
+
+.backdrop-blur-base {
+  backdrop-filter: blur(8px);
+}
+
+.backdrop-blur-md {
+  backdrop-filter: blur(12px);
+}
+
+.backdrop-blur-lg {
+  backdrop-filter: blur(16px);
+}
+
+/* ==========================================
+   HOVER EFFECTS
+   ========================================== */
+
+.hover-lift {
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+}
+
+.hover-lift:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-lg);
+}
+
+.hover-scale {
+  transition: transform var(--transition-base);
+}
+
+.hover-scale:hover {
+  transform: scale(1.02);
+}
+
+.hover-brightness {
+  transition: filter var(--transition-base);
+}
+
+.hover-brightness:hover {
+  filter: brightness(1.1);
+}
+
+/* ==========================================
+   FOCUS STATES
+   ========================================== */
+
+.focus-ring:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(125, 47, 234, 0.1),
+              0 0 0 5px var(--color-primary);
+}
+
+.focus-ring-error:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(239, 68, 68, 0.1),
+              0 0 0 5px var(--color-error);
+}
+
+.focus-ring-success:focus {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.1),
+              0 0 0 5px var(--color-success);
+}
+
+/* ==========================================
+   ANIMATION TOKENS
+   ========================================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-5px);
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* ==========================================
+   ANIMATION UTILITIES
+   ========================================== */
+
+.animate-fade {
+  animation: fadeIn var(--transition-base);
+}
+
+.animate-slide-up {
+  animation: slideInUp var(--transition-base);
+}
+
+.animate-slide-down {
+  animation: slideInDown var(--transition-base);
+}
+
+.animate-slide-left {
+  animation: slideInLeft var(--transition-base);
+}
+
+.animate-slide-right {
+  animation: slideInRight var(--transition-base);
+}
+
+.animate-bounce {
+  animation: bounce var(--transition-base);
+}
+
+.animate-spin {
+  animation: spin 1s linear infinite;
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite;
+}
