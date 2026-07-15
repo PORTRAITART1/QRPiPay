@@ -1,0 +1,228 @@
+/**
+ * Badge Styles - Design System
+ * Status and category badges
+ */
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  font-weight: var(--font-weight-semibold);
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  user-select: none;
+  transition: all var(--transition-fast);
+}
+
+/* ==========================================
+   SIZE VARIANTS
+   ========================================== */
+
+.badge-sm {
+  font-size: var(--font-size-xs);
+  padding: var(--spacing-1) var(--spacing-2);
+}
+
+.badge-md {
+  font-size: var(--font-size-sm);
+  padding: var(--spacing-2) var(--spacing-3);
+}
+
+.badge-lg {
+  font-size: var(--font-size-base);
+  padding: var(--spacing-3) var(--spacing-4);
+}
+
+/* ==========================================
+   COLOR VARIANTS
+   ========================================== */
+
+/* Default */
+.badge-default {
+  background-color: var(--color-gray-100);
+  color: var(--color-gray-700);
+  border: 1px solid var(--color-gray-300);
+}
+
+.badge-default:hover {
+  background-color: var(--color-gray-200);
+}
+
+/* Primary */
+.badge-primary {
+  background-color: var(--color-primary-light);
+  color: var(--color-primary-dark);
+  border: 1px solid var(--color-primary);
+}
+
+.badge-primary:hover {
+  background-color: rgba(125, 47, 234, 0.15);
+}
+
+/* Success */
+.badge-success {
+  background-color: var(--color-success-light);
+  color: var(--color-success-dark);
+  border: 1px solid var(--color-success);
+}
+
+.badge-success:hover {
+  background-color: rgba(16, 185, 129, 0.15);
+}
+
+/* Error */
+.badge-error {
+  background-color: var(--color-error-light);
+  color: var(--color-error-dark);
+  border: 1px solid var(--color-error);
+}
+
+.badge-error:hover {
+  background-color: rgba(239, 68, 68, 0.15);
+}
+
+/* Warning */
+.badge-warning {
+  background-color: var(--color-warning-light);
+  color: var(--color-warning-dark);
+  border: 1px solid var(--color-warning);
+}
+
+.badge-warning:hover {
+  background-color: rgba(245, 158, 11, 0.15);
+}
+
+/* Info */
+.badge-info {
+  background-color: var(--color-info-light);
+  color: var(--color-info-dark);
+  border: 1px solid var(--color-info);
+}
+
+.badge-info:hover {
+  background-color: rgba(59, 130, 246, 0.15);
+}
+
+/* ==========================================
+   ICON & TEXT
+   ========================================== */
+
+.badge-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.badge-text {
+  line-height: 1;
+}
+
+/* ==========================================
+   DISMISSIBLE
+   ========================================== */
+
+.badge-dismiss {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin-left: var(--spacing-1);
+  background: none;
+  border: none;
+  color: inherit;
+  cursor: pointer;
+  font-size: 12px;
+  font-weight: bold;
+  transition: opacity var(--transition-fast);
+  padding: 0;
+}
+
+.badge-dismiss:hover {
+  opacity: 0.7;
+}
+
+.badge-dismiss:focus {
+  outline: 1px solid currentColor;
+  outline-offset: 1px;
+}
+
+/* ==========================================
+   DARK MODE
+   ========================================== */
+
+@media (prefers-color-scheme: dark) {
+  .badge-default {
+    background-color: var(--color-gray-800);
+    color: var(--color-gray-200);
+    border-color: var(--color-gray-700);
+  }
+
+  .badge-default:hover {
+    background-color: var(--color-gray-700);
+  }
+
+  .badge-primary {
+    background-color: rgba(125, 47, 234, 0.2);
+    color: var(--color-primary-light);
+    border-color: var(--color-primary);
+  }
+
+  .badge-primary:hover {
+    background-color: rgba(125, 47, 234, 0.25);
+  }
+
+  .badge-success {
+    background-color: rgba(16, 185, 129, 0.2);
+    color: var(--color-success-light);
+    border-color: var(--color-success);
+  }
+
+  .badge-success:hover {
+    background-color: rgba(16, 185, 129, 0.25);
+  }
+
+  .badge-error {
+    background-color: rgba(239, 68, 68, 0.2);
+    color: var(--color-error-light);
+    border-color: var(--color-error);
+  }
+
+  .badge-error:hover {
+    background-color: rgba(239, 68, 68, 0.25);
+  }
+
+  .badge-warning {
+    background-color: rgba(245, 158, 11, 0.2);
+    color: var(--color-warning-light);
+    border-color: var(--color-warning);
+  }
+
+  .badge-warning:hover {
+    background-color: rgba(245, 158, 11, 0.25);
+  }
+
+  .badge-info {
+    background-color: rgba(59, 130, 246, 0.2);
+    color: var(--color-info-light);
+    border-color: var(--color-info);
+  }
+
+  .badge-info:hover {
+    background-color: rgba(59, 130, 246, 0.25);
+  }
+}
+
+/* ==========================================
+   ACCESSIBILITY
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .badge {
+    transition: none;
+  }
+
+  .badge-dismiss {
+    transition: none;
+  }
+}
