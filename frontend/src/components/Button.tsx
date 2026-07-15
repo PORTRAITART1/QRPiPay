@@ -1,33 +1,54 @@
+/**
+ * Button Component - Design System
+ * All variants using design tokens
+ */
+
 import React from 'react';
 import './Button.css';
 
-interface ButtonProps {
-  variant?: 'primary' | 'secondary' | 'danger';
+export interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  variant?: 'primary' | 'secondary' | 'outline' | 'ghost' | 'danger' | 'success';
   size?: 'sm' | 'md' | 'lg';
-  children: React.ReactNode;
-  onClick?: () => void;
+  loading?: boolean;
   disabled?: boolean;
-  type?: 'button' | 'submit' | 'reset';
+  fullWidth?: boolean;
+  children: React.ReactNode;
 }
 
-export function Button({
-  variant = 'primary',
-  size = 'md',
-  children,
-  onClick,
-  disabled = false,
-  type = 'button'
-}: ButtonProps) {
-  return (
-    <button
-      className={`btn btn-${variant} btn-${size}`}
-      onClick={onClick}
-      disabled={disabled}
-      type={type}
-    >
-      {children}
-    </button>
-  );
-}
+export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
+  ({
+    variant = 'primary',
+    size = 'md',
+    loading = false,
+    disabled = false,
+    fullWidth = false,
+    children,
+    className = '',
+    ...props
+  }, ref) => {
+    return (
+      <button
+        ref={ref}
+        disabled={disabled || loading}
+        className={`
+          btn
+          btn-${variant}
+          btn-${size}
+          ${fullWidth ? 'btn-full-width' : ''}
+          ${loading ? 'btn-loading' : ''}
+          ${className}
+        `.trim()}
+        {...props}
+      >
+        {loading && <span className="btn-spinner" />}
+        <span className={loading ? 'btn-text-hidden' : ''}>
+          {children}
+        </span>
+      </button>
+    );
+  }
+);
+
+Button.displayName = 'Button';
 
 export default Button;
