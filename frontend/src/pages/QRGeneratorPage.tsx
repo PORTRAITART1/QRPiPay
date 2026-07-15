@@ -10,8 +10,9 @@ import { useAuthStore } from '../store/authStore';
 import { usePaymentStore } from '../store/paymentStore';
 import { mockPiSDK } from '../services/mockPiSDK';
 import { Button } from '../components/Button';
-import { Card } from '../components/Card';
+import { Card, CardHeader, CardBody } from '../components/Card';
 import { Input } from '../components/Input';
+import { Badge } from '../components/Badge';
 
 interface QRPaymentData {
   amount: number;
@@ -258,22 +259,16 @@ export const QRGeneratorPage: React.FC = () => {
           <Card variant="glass">
             <div className="space-y-6">
               {/* Amount Input */}
-              <div className="space-y-2">
-                <label className="text-sm font-semibold text-white">
-                  Montant en Pi
-                </label>
-                <div className="relative">
-                  <div className="input-premium bg-white/10 text-2xl font-bold text-transparent bg-clip-text bg-gradient-to-r from-pi-purple-400 to-pi-orange-400 flex items-center">
-                    {amount || '0.00'}
-                  </div>
-                  <span className="absolute right-4 top-1/2 -translate-y-1/2 text-pi-orange-400 font-bold text-xl">
-                    🥧
-                  </span>
-                </div>
-                {errors.amount && (
-                  <p className="text-xs font-medium text-red-400">{errors.amount}</p>
-                )}
-              </div>
+              <Input
+                label="Montant en Pi"
+                type="number"
+                value={amount}
+                onChange={(e) => setAmount(e.target.value)}
+                placeholder="0.00"
+                error={errors.amount}
+                hint="Montant maximum: 1,000,000 Pi"
+                required
+              />
 
               {/* Numeric Keypad */}
               <div className="bg-white/5 border border-white/10 rounded-xl p-4 space-y-3">
@@ -298,29 +293,15 @@ export const QRGeneratorPage: React.FC = () => {
               </div>
 
               {/* Description */}
-              <div className="space-y-2">
-                <label className="text-sm font-semibold text-white">
-                  Description (optionnel)
-                </label>
-                <textarea
-                  value={description}
-                  onChange={(e) => setDescription(e.target.value)}
-                  placeholder="Ex: Café Latte + Croissant"
-                  maxLength={200}
-                  className="input-premium resize-none"
-                  rows={3}
-                />
-                <div className="flex justify-between items-center">
-                  {errors.description && (
-                    <p className="text-xs font-medium text-red-400">
-                      {errors.description}
-                    </p>
-                  )}
-                  <p className="text-xs text-pi-gray-400 ml-auto">
-                    {description.length}/200
-                  </p>
-                </div>
-              </div>
+              <Input
+                label="Description (optionnel)"
+                type="text"
+                value={description}
+                onChange={(e) => setDescription(e.target.value.slice(0, 200))}
+                placeholder="Ex: Café Latte + Croissant"
+                error={errors.description}
+                hint={`${description.length}/200 caractères`}
+              />
 
               {/* Summary */}
               {amount && (

@@ -7,7 +7,8 @@ import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { useAuthStore } from '../store/authStore';
 import { Button } from '../components/Button';
-import { Card } from '../components/Card';
+import { Card, CardHeader, CardBody } from '../components/Card';
+import { Badge } from '../components/Badge';
 import { Toast } from '../components/Toast';
 import { useBrowser } from '../context/BrowserContext';
 
@@ -87,19 +88,21 @@ export const LoginPage: React.FC = () => {
             </p>
 
             {/* Login Button */}
-            <button
-  disabled={!isPiBrowser}
-  onClick={handleLogin}
-  className={isPiBrowser ? 'btn btn-primary' : 'btn btn-disabled'}
->
-  {isPiBrowser ? 'Connexion avec Pi' : '⚠️ Pi Browser requis'}
-</button>
+            <Button
+              variant="primary"
+              size="lg"
+              disabled={!isPiBrowser}
+              onClick={handleLogin}
+              className="w-full"
+            >
+              {isPiBrowser ? 'Connexion avec Pi' : '⚠️ Pi Browser requis'}
+            </Button>
 
             {/* Error message */}
             {error && (
-              <div className="p-4 bg-red-500/20 border border-red-500/50 rounded-lg">
-                <p className="text-red-200 text-sm font-medium">{error}</p>
-              </div>
+              <Badge variant="error" size="md" className="w-full justify-center">
+                {error}
+              </Badge>
             )}
 
             {/* Footer */}
