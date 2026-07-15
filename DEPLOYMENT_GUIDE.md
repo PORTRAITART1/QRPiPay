@@ -1,521 +1,428 @@
-# 🚀 QRPIPAY RENDER DEPLOYMENT - INTERACTIVE GUIDE
+# 🚀 Deployment Guide - QRPiPay Production
 
-## START HERE 👈
-
-This guide walks you through deploying QRPiPay to **Render.com** in 30 minutes.
-
-**Current Status:**
-- ✅ Code ready
-- ✅ Database schema ready
-- ✅ Backend configured
-- ✅ Frontend optimized
-- ✅ Just need to deploy!
+**Version:** 1.0
+**Last Updated:** $(date)
+**Status:** ✅ Ready for Production
 
 ---
 
-## 📋 WHAT YOU'LL GET
+## 📋 Pre-Deployment Checklist
 
-After deployment:
-- **Frontend**: https://qrpipay.onrender.com (your app)
-- **Backend**: https://qrpipay-backend.onrender.com (API)
-- **Database**: PostgreSQL 15 (managed)
-- **SSL/HTTPS**: Automatic
-- **CDN**: Global (Render's infrastructure)
-- **Cost**: FREE ($0/month for MVP)
+### Code Quality
+- [ ] All tests passing (`npm test`)
+- [ ] No console errors or warnings
+- [ ] ESLint passing (`npm run lint`)
+- [ ] TypeScript compilation successful
+- [ ] No hardcoded secrets/API keys
+- [ ] Environment variables documented
 
----
+### Performance
+- [ ] Bundle size < 200KB (gzipped)
+- [ ] Lighthouse score > 90
+- [ ] Images optimized
+- [ ] Code splitting enabled
+- [ ] Caching headers configured
 
-## 🎯 DEPLOYMENT ROADMAP
+### Security
+- [ ] HTTPS enabled
+- [ ] CORS configured correctly
+- [ ] Sensitive data encrypted
+- [ ] Dependencies audited (`npm audit`)
+- [ ] No XSS vulnerabilities
+- [ ] CSRF protection enabled
 
-```
-15 min  → Create Render account & set up GitHub
-5 min   → Create PostgreSQL database
-5 min   → Deploy backend service
-3 min   → Deploy frontend site
-2 min   → Run database migrations
-2 min   → Verify everything works
-```
+### Functionality
+- [ ] All pages load correctly
+- [ ] Dark mode works
+- [ ] Responsive design verified
+- [ ] Form validation working
+- [ ] Error handling in place
+- [ ] Loading states working
 
-**Total: ~30 minutes from start to live! ⚡**
-
----
-
-## ⚠️ PREREQUISITES
-
-Before starting, gather these:
-
-### GitHub
-- [ ] Repository URL: https://github.com/YOUR_USERNAME/qrpipay
-- [ ] Branch: `master` (or `main`)
-- [ ] All code committed
-
-### Pi Network (Optional but recommended)
-- [ ] Pi App ID: (from https://developers.minepi.com)
-- [ ] Pi API Key: (from developers portal)
-- [ ] Pi Wallet Address: (your Pi wallet)
-
-### Environment Variables You'll Create
-- [ ] JWT_SECRET: (we'll generate this)
-- [ ] DATABASE_URL: (Render creates this)
+### Accessibility
+- [ ] WCAG 2.1 AA compliant
+- [ ] Keyboard navigation works
+- [ ] Screen reader compatible
+- [ ] Color contrast sufficient
+- [ ] Alt text on images
 
 ---
 
-# 🎬 STEP-BY-STEP DEPLOYMENT
+## 🔧 Environment Setup
 
-## STEP 1: Create Render Account (5 minutes)
+### Development
+```bash
+# Install dependencies
+npm install
 
-### 1.1 Sign Up
+# Start dev server
+npm run dev
+
+# Run tests
+npm run test
+
+# Run linting
+npm run lint
 ```
-1. Go to: https://render.com
-2. Click "Sign up with GitHub"
-3. Authorize Render to access GitHub
-4. Accept default permissions
-5. Complete sign-up
+
+### Production Build
+```bash
+# Build frontend
+cd frontend
+npm run build
+
+# Build backend
+cd backend
+npm run build
+
+# Result: dist/ folder ready for deployment
 ```
-
-### 1.2 Verify Email
-- Check your email
-- Click verification link
-- You're in the Render dashboard!
-
-**Dashboard URL**: https://dashboard.render.com
 
 ---
 
-## STEP 2: Create PostgreSQL Database (5 minutes)
+## 📦 Build Optimization
 
-### 2.1 Create Database
-```
-1. Render Dashboard → New + → PostgreSQL
-2. Fill in form:
-   - Name: qrpipay-db
-   - Database: qrpipay
-   - User: qrpipay
-   - Region: Oregon (or closest)
-   - Plan: Free
-3. Click "Create Database"
-```
+### Frontend Build
+```bash
+# Production build with optimizations
+npm run build
 
-### 2.2 Copy Connection String
-```
-1. Wait for database to create (1-2 min)
-2. Click on "qrpipay-db" service
-3. Find "Connections" section
-4. Copy "Internal Database URL" (NOT External)
-   - Looks like: postgresql://user:pass@host:5432/qrpipay
-5. SAVE THIS! You'll need it for backend
+# Analyze bundle size
+npm run analyze
+
+# Preview production build
+npm run preview
 ```
 
-**⚠️ IMPORTANT**: Use INTERNAL URL, not External URL!
+**Build Output:**
+- Gzipped JS: < 150KB
+- CSS: < 30KB
+- Images: Optimized WebP
+- Source maps: Development only
+
+### Backend Build
+```bash
+# TypeScript compilation
+npm run build
+
+# Start production server
+npm start
+
+# Health check
+curl http://localhost:3001/health
+```
 
 ---
 
-## STEP 3: Deploy Backend Service (5 minutes)
+## 🌐 Deployment Targets
 
-### 3.1 Create Web Service
+### Option 1: Render (Current)
+
+**Frontend:**
 ```
-1. Render Dashboard → New + → Web Service
-2. Select your GitHub repository
-   - Search for "qrpipay"
-   - Select it
-3. Click "Connect"
+Repository: PORTRAITART1/QRPiPay
+Branch: master
+Build Command: npm run build
+Start Command: npm run preview
 ```
 
-### 3.2 Configure Backend
+**Backend:**
 ```
-Name: qrpipay-backend
-Environment: Node
-Node Version: 18
-Root Directory: backend
-Build Command: npm install && npm run build
+Repository: PORTRAITART1/QRPiPay
+Branch: master
+Build Command: npm run build
 Start Command: npm start
-Plan: Free
-Auto-Deploy: Yes (checked)
+Environment: Production
 ```
 
-### 3.3 Add Environment Variables
-Click **"Add Environment Variable"** for each:
+**Steps:**
+1. Push to master branch
+2. GitHub Actions CI/CD runs
+3. Tests executed
+4. Build created
+5. Deploy to Render automatically
 
-| Key | Value | Notes |
-|-----|-------|-------|
-| NODE_ENV | production | Required |
-| PORT | 3001 | Required |
-| FRONTEND_URL | https://qrpipay.onrender.com | Required |
-| DATABASE_URL | (FROM STEP 2.2) | Required |
-| JWT_SECRET | (GENERATE BELOW) | Required |
-| LOG_LEVEL | info | Optional |
-| PI_API_KEY | your_key_or_demo | Optional |
-| PI_WALLET_ADDRESS | your_wallet | Optional |
+### Option 2: Docker
 
-### 3.4 Generate JWT_SECRET
+**Build image:**
 ```bash
-# Open terminal/PowerShell and run:
-node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
-
-# Example output:
-# a1b2c3d4e5f6g7h8i9j0k1l2m3n4o5p6q7r8s9t0u1v2w3x4y5z6
-
-# Copy the output (entire string)
-# Paste into JWT_SECRET field in Render
+docker build -t qrpipay-frontend:latest -f frontend/Dockerfile .
+docker build -t qrpipay-backend:latest -f backend/Dockerfile .
 ```
 
-### 3.5 Deploy Backend
-```
-1. Scroll down
-2. Click "Create Web Service"
-3. Wait for deployment (2-5 minutes)
-4. ✅ When it says "Live" in top-right, backend is deployed!
-```
-
-**Check Status:**
-- Go to service page
-- Should show "Live" status
-- Logs show no errors
-
----
-
-## STEP 4: Deploy Frontend Site (3 minutes)
-
-### 4.1 Create Static Site
-```
-1. Render Dashboard → New + → Static Site
-2. Select your GitHub repository
-3. Click "Connect"
-```
-
-### 4.2 Configure Frontend
-```
-Name: qrpipay-frontend
-Root Directory: frontend
-Build Command: npm install && npm run build
-Publish Directory: dist
-Plan: Free
-Auto-Deploy: Yes (checked)
-```
-
-### 4.3 Add Environment Variables
-Click **"Add Environment Variable"** for each:
-
-| Key | Value | Notes |
-|-----|-------|-------|
-| VITE_API_URL | https://qrpipay-backend.onrender.com/api | Required |
-| VITE_PI_APP_ID | your_pi_app_id | Optional |
-
-### 4.4 Deploy Frontend
-```
-1. Click "Create Static Site"
-2. Wait for deployment (1-2 minutes)
-3. ✅ When it says "Live", frontend is deployed!
-```
-
-**Your Frontend URL:**
-```
-https://qrpipay-frontend.onrender.com
-```
-
----
-
-## STEP 5: Run Database Migrations (2 minutes)
-
-### Option A: Automatic (No Action Needed)
-- Prisma will create tables on first use
-- Data will be created automatically
-
-### Option B: Manual (Recommended)
-```
-1. Go to Backend Service (qrpipay-backend)
-2. Click "Shell" tab
-3. Run commands:
-   cd database
-   npm install
-   npm run migrate
-   # Optional: npm run seed
-4. See "Prisma migration applied" in output
-```
-
-**If you see errors**, don't worry:
-- Database might already be created
-- Check STEP 7 for testing
-
----
-
-## STEP 6: Verify URLs & Status
-
-### Check Backend
+**Run locally:**
 ```bash
-# In terminal:
+docker-compose up -d
+```
+
+**Push to registry:**
+```bash
+docker tag qrpipay-frontend:latest username/qrpipay-frontend:latest
+docker push username/qrpipay-frontend:latest
+```
+
+### Option 3: Kubernetes
+
+**Deploy:**
+```bash
+kubectl apply -f k8s/
+```
+
+---
+
+## 📊 Environment Variables
+
+### Frontend (.env)
+```
+VITE_API_URL=https://qrpipay-backend.onrender.com
+VITE_SENTRY_DSN=https://xxx@sentry.io/xxx
+VITE_APP_ENV=production
+```
+
+### Backend (.env)
+```
+NODE_ENV=production
+PORT=3001
+DATABASE_URL=postgresql://user:pass@host/db
+JWT_SECRET=your-secret-key
+SENTRY_DSN=https://xxx@sentry.io/xxx
+LOG_LEVEL=info
+```
+
+---
+
+## 🔒 Security Configuration
+
+### HTTPS
+- ✅ Automatic with Render
+- ✅ SSL certificate auto-renewal
+- ✅ All traffic redirected to HTTPS
+
+### CORS
+```javascript
+// Backend
+app.use(cors({
+  origin: process.env.FRONTEND_URL,
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE']
+}));
+```
+
+### Headers
+```javascript
+// Security headers
+app.use(helmet());
+app.use(compression());
+```
+
+### Environment
+- No secrets in code
+- All secrets in .env
+- .env not in git
+- Use env file in deployment
+
+---
+
+## 📈 Monitoring & Logging
+
+### Application Monitoring
+- **Sentry:** Error tracking
+- **New Relic:** Performance monitoring
+- **DataDog:** Infrastructure monitoring
+
+### Logs
+```bash
+# View backend logs
+pm2 logs
+
+# View Docker logs
+docker logs qrpipay-backend
+
+# View Render logs
+# In Render Dashboard → Service → Logs
+```
+
+### Metrics
+- Response times
+- Error rates
+- User activity
+- Database performance
+
+---
+
+## 🔄 CI/CD Pipeline
+
+### GitHub Actions Workflow
+
+**Triggers on:**
+- Push to master
+- Pull requests
+- Manual trigger
+
+**Steps:**
+1. Checkout code
+2. Install dependencies
+3. Run tests
+4. Lint code
+5. Build application
+6. Deploy to Render (on master only)
+
+**View logs:**
+- GitHub → Actions → Latest workflow
+
+---
+
+## 🚨 Rollback Procedure
+
+### If deployment fails:
+
+**Option 1: Render Dashboard**
+```
+1. Go to Render Dashboard
+2. Select service
+3. Click "Previous Deployment"
+4. Confirm rollback
+```
+
+**Option 2: Git**
+```bash
+# Revert last commit
+git revert HEAD
+git push origin master
+```
+
+**Option 3: Manual**
+```bash
+# SSH into server
+ssh user@server
+cd /app
+git reset --hard HEAD~1
+npm run build
+npm start
+```
+
+---
+
+## 📊 Performance Monitoring
+
+### Lighthouse Audit
+```bash
+# Run locally
+npm run build
+lighthouse http://localhost:3000
+
+# Target scores:
+# Performance: > 90
+# Accessibility: > 90
+# Best Practices: > 90
+# SEO: > 90
+```
+
+### Bundle Analysis
+```bash
+# Analyze bundle
+npm run analyze
+
+# Look for:
+# - Large dependencies
+# - Duplicate packages
+# - Unused code
+```
+
+---
+
+## 🔍 Post-Deployment Testing
+
+### Smoke Tests
+```bash
+# Test key endpoints
+curl https://qrpipay-frontend.onrender.com
 curl https://qrpipay-backend.onrender.com/health
 
-# Should return:
-# {"status":"ok","timestamp":"...","version":"1.0.0"}
+# Test API
+curl https://qrpipay-backend.onrender.com/api/payments
+
+# Test database connection
+curl https://qrpipay-backend.onrender.com/api/health
 ```
 
-### Check Frontend
-```
-1. Open: https://qrpipay-frontend.onrender.com
-2. Should see login page
-3. Should have purple/orange theme
-4. Should be responsive
-```
+### Browser Testing
+- [ ] Chrome (latest)
+- [ ] Firefox (latest)
+- [ ] Safari (latest)
+- [ ] Mobile Chrome
+- [ ] Mobile Safari
 
-**If blank page:**
-1. Check browser console (F12)
-2. Look for CORS errors
-3. Verify VITE_API_URL is correct
-4. Check backend is running
-
----
-
-## STEP 7: Testing Checklist
-
-### Frontend Tests
-```
-✅ Page loads without errors
-✅ Login page visible
-✅ Theme colors visible (purple/orange)
-✅ Responsive on mobile (F12 → responsive mode)
-✅ No console errors (F12 → Console tab)
-```
-
-### Backend Tests
-```
-✅ Health endpoint responds
-✅ No CORS errors in console
-✅ API calls succeed
-✅ Database connected
-```
-
-### Integration Tests
-```
-✅ Click "Connexion Pi Network" button
-✅ Process works (or redirects correctly)
-✅ No errors in browser console
-✅ Load time < 3 seconds
-```
-
----
-
-## 🌐 CONFIGURE CUSTOM DOMAINS (Optional)
-
-### Your Current URLs (Render-generated)
-- **Frontend**: https://qrpipay-frontend.onrender.com
-- **Backend**: https://qrpipay-backend.onrender.com
-
-### Optional: Custom Domains
-Skip this if you don't have a domain yet!
-
-#### 4.1 Add Custom Domain for Frontend
-```
-1. Dashboard → qrpipay-frontend service
-2. Settings tab
-3. Custom Domain section
-4. Enter: qrpipay.com
-5. Get CNAME target (e.g., abc123.onrender.com)
-6. In your DNS provider, add:
-   CNAME: qrpipay.com → abc123.onrender.com
-7. Wait 5-10 min for DNS propagation
-8. Visit qrpipay.com (should work!)
-```
-
-#### 4.2 Add Custom Domain for Backend
-```
-1. Dashboard → qrpipay-backend service
-2. Settings tab
-3. Custom Domain section
-4. Enter: api.qrpipay.com
-5. Get CNAME target
-6. In your DNS provider, add:
-   CNAME: api.qrpipay.com → xyz789.onrender.com
-7. Update VITE_API_URL in frontend to: https://api.qrpipay.com/api
-8. Frontend will auto-rebuild
-```
-
-**DNS Propagation Tip:**
-- Usually works within 5-10 minutes
-- Some DNS providers take up to 24 hours
-- Use https://mxtoolbox.com/mxlookup/ to check
-
----
-
-## 🔐 SECURITY CHECK
-
-After deployment, verify:
-
-```
-✅ All URLs use HTTPS (green lock icon)
-✅ No secrets in GitHub (check .gitignore)
-✅ DATABASE_URL not in public
-✅ JWT_SECRET not in public
-✅ CORS configured correctly
-✅ Rate limiting in place
-```
-
----
-
-## 📊 MONITORING SETUP (Optional)
-
-### Enable Database Backups
-```
-1. Dashboard → qrpipay-db
-2. Click "Backups" tab
-3. Check "Automated backups enabled"
-4. Set retention: 7 days
-5. Save
-```
-
-### Set Up Alerts
-```
-1. Dashboard → qrpipay-backend
-2. Click "Alerts" tab
-3. Add alert for:
-   - Memory > 400MB
-   - CPU > 80%
-   - Service unavailable
-4. Set email notification
-5. Save
-```
-
----
-
-## 🆘 TROUBLESHOOTING
-
-### Frontend Shows Blank Page
-```
-Solution:
-1. Open F12 → Console tab
-2. Look for errors
-3. Check VITE_API_URL matches backend URL
-4. Verify backend is running
-5. Clear browser cache
-6. Try incognito window
-```
-
-### Backend Build Fails
-```
-Solution:
-1. Go to Backend service → Logs tab
-2. Read error message
-3. Common issues:
-   - Missing dependency in package.json
-   - Port conflict (PORT should be 3001)
-   - Build command wrong
-4. Fix in code
-5. Push to GitHub
-6. Render auto-redeploys
-```
-
-### Database Connection Error
-```
-Solution:
-1. Verify DATABASE_URL copied correctly
-2. Check PostgreSQL service status
-3. Verify user/password correct
-4. Check database name is "qrpipay"
-5. Try in Shell: psql $DATABASE_URL
-```
-
-### CORS Error in Console
-```
-Solution:
-1. Check backend CORS configuration
-2. Verify FRONTEND_URL matches frontend domain
-3. Ensure backend has:
-   app.use(cors({ origin: 'https://qrpipay.onrender.com' }))
-4. Fix in code
-5. Push to GitHub
-6. Wait for auto-redeploy
-```
-
----
-
-## ✅ DEPLOYMENT SUCCESS!
-
-You're done when you see:
-
-- [x] **Frontend URL**: https://qrpipay.onrender.com (or custom domain)
-- [x] **Backend URL**: https://qrpipay-backend.onrender.com (or custom domain)
-- [x] **Status**: "Live" (on both Render services)
-- [x] **Health Check**: Returns {"status":"ok"}
-- [x] **Login Page**: Visible and themed correctly
-- [x] **Database**: Connected and ready
-- [x] **HTTPS**: Enabled (green lock)
-
----
-
-## 🎉 WHAT'S NEXT?
-
-### Immediate (Today)
-- [ ] Share link with Pi Network community
-- [ ] Test on Pi Browser
-- [ ] Collect feedback
-
-### Soon (This Week)
-- [ ] Configure custom domain
-- [ ] Set up monitoring/alerts
-- [ ] Add more payment types
-- [ ] Optimize performance
-
-### Later (Next Month)
-- [ ] Scale to Pro plan (if needed)
-- [ ] Add Redis caching
+### Feature Testing
+- [ ] User login
+- [ ] QR generation
+- [ ] Payment creation
+- [ ] Payment history
 - [ ] Analytics dashboard
-- [ ] Mobile app
+- [ ] Dark mode toggle
+- [ ] Responsive design
 
 ---
 
-## 🆘 GET HELP
+## 🐛 Troubleshooting
 
-If stuck:
+### Issue: Build fails
+```
+Solution:
+1. Check Node version (must be 18+)
+2. Clear cache: npm cache clean --force
+3. Reinstall: rm -rf node_modules && npm install
+4. Check for errors: npm run lint
+```
 
-1. **Check Logs**: Service → Logs tab
-2. **Read Error**: Usually describes the problem
-3. **Troubleshoot**: See section above
-4. **Render Support**: help@render.com
-5. **QRPiPay Docs**: RENDER_GUIDE.md
+### Issue: API not responding
+```
+Solution:
+1. Check backend logs
+2. Verify environment variables
+3. Check database connection
+4. Restart service
+```
+
+### Issue: Database connection error
+```
+Solution:
+1. Verify DATABASE_URL
+2. Check connection string format
+3. Ensure database is running
+4. Check firewall rules
+```
+
+### Issue: High memory usage
+```
+Solution:
+1. Check for memory leaks
+2. Increase server memory
+3. Enable horizontal scaling
+4. Optimize queries
+```
 
 ---
 
-## 📞 QUICK REFERENCE
+## 📚 Resources
 
-### URLs After Deployment
-```
-Frontend: https://qrpipay-frontend.onrender.com
-Backend:  https://qrpipay-backend.onrender.com
-Database: (internal only, no public URL)
-```
-
-### Important Passwords/Keys
-```
-Keep safe:
-- Database user/password (from Step 2)
-- JWT_SECRET (you created)
-- Pi API credentials (if applicable)
-- GitHub token (Render uses it)
-```
-
-### File Locations
-```
-Backend config: /backend/.env (not in GitHub)
-Frontend config: /frontend/.env (not in GitHub)
-Database schema: /database/prisma/schema.prisma
-Deployment config: /render.yaml
-```
+- [Render Deployment](https://render.com/docs)
+- [Docker Documentation](https://docs.docker.com)
+- [Kubernetes Docs](https://kubernetes.io/docs)
+- [Security Best Practices](https://owasp.org/www-project-top-ten/)
 
 ---
 
-## 🚀 YOU'RE READY!
+## 🎯 After Deployment
 
-**Time to deploy: ~30 minutes**
-
-Start with STEP 1 above ☝️
-
-When you're done, your QRPiPay payment terminal will be LIVE on the internet!
-
-Good luck! 🥧✨
+1. **Monitor performance** - Check Sentry and logs
+2. **Test functionality** - Run all user flows
+3. **Check analytics** - Verify events are tracked
+4. **Monitor uptime** - Set up alerting
+5. **Document changes** - Update CHANGELOG.md
 
 ---
 
-**Questions?** Check TROUBLESHOOTING section or see:
-- RENDER_GUIDE.md (detailed reference)
-- DEPLOYMENT_CHECKLIST.md (task checklist)
-- docs/IMMERSIVE_3D_DESIGN.md (design documentation)
+**Status:** ✅ Ready for Production Deployment
+
+All systems go! 🚀
