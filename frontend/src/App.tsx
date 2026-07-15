@@ -12,6 +12,7 @@ import { PaymentHistoryPage } from './pages/PaymentHistoryPage';
 import { PaymentConfirmationPage } from './pages/PaymentConfirmationPage';
 import { AnalyticsPage } from './pages/AnalyticsPage';
 import ToastProvider from './context/ToastContext';
+import { ThemeProvider } from './context/ThemeContext';
 import './index.css';
 import Header from './components/Header';
 import { BrowserProvider } from './context/BrowserContext';
@@ -33,39 +34,41 @@ function App() {
     }
   }, [isAuthenticated, user]);
 
-return (
-  <BrowserProvider>
-    <ToastProvider>
-      <Router>
-        <Header />
-        <Routes>
-          <Route path="/" element={<LoginPage />} />
-          <Route
-            path="/dashboard"
-            element={<ProtectedRoute element={<DashboardPage />} />}
-          />
-          <Route
-            path="/qr-generator"
-            element={<ProtectedRoute element={<QRGeneratorPage />} />}
-          />
-          <Route
-            path="/history"
-            element={<ProtectedRoute element={<PaymentHistoryPage />} />}
-          />
-          <Route
-            path="/analytics"
-            element={<ProtectedRoute element={<AnalyticsPage />} />}
-          />
-          <Route
-            path="/confirmation"
-            element={<ProtectedRoute element={<PaymentConfirmationPage />} />}
-          />
-          <Route path="*" element={<Navigate to="/" />} />
-        </Routes>
-      </Router>
-    </ToastProvider>
-  </BrowserProvider>
-);
+  return (
+    <ThemeProvider>
+      <BrowserProvider>
+        <ToastProvider>
+          <Router>
+            <Header />
+            <Routes>
+              <Route path="/" element={<LoginPage />} />
+              <Route
+                path="/dashboard"
+                element={<ProtectedRoute element={<DashboardPage />} />}
+              />
+              <Route
+                path="/qr-generator"
+                element={<ProtectedRoute element={<QRGeneratorPage />} />}
+              />
+              <Route
+                path="/history"
+                element={<ProtectedRoute element={<PaymentHistoryPage />} />}
+              />
+              <Route
+                path="/analytics"
+                element={<ProtectedRoute element={<AnalyticsPage />} />}
+              />
+              <Route
+                path="/confirmation"
+                element={<ProtectedRoute element={<PaymentConfirmationPage />} />}
+              />
+              <Route path="*" element={<Navigate to="/" />} />
+            </Routes>
+          </Router>
+        </ToastProvider>
+      </BrowserProvider>
+    </ThemeProvider>
+  );
 }
 
 export default App;
