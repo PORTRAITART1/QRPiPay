@@ -63,3 +63,20 @@ model Transaction {
   @@index([paymentId])
   @@index([userId])
 }
+
+model BetaApplication {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  piAddress String
+  experience String   @default("beginner")
+  motivation String?
+  agreeTerms Boolean  @default(false)
+  status    String   @default("PENDING")
+  appliedAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  feedback  String?
+
+  @@index([status])
+  @@index([email])
+}
