@@ -1,0 +1,265 @@
+/**
+ * Premium Button Styles - Navy + Cyan Harmony
+ * Smooth animations, glowing effects
+ */
+
+.btn-premium {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  font-family: var(--font-body);
+  font-weight: var(--font-weight-semibold);
+  border: none;
+  background: none;
+  padding: var(--spacing-3) var(--spacing-4);
+  border-radius: 1rem;
+  cursor: pointer;
+  transition: all var(--transition-base);
+  user-select: none;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ==========================================
+   SIZE VARIANTS
+   ========================================== */
+
+.btn-premium-sm {
+  padding: var(--spacing-2) var(--spacing-3);
+  font-size: var(--font-size-sm);
+  border-radius: 0.75rem;
+}
+
+.btn-premium-md {
+  padding: var(--spacing-3) var(--spacing-4);
+  font-size: var(--font-size-base);
+  border-radius: 1rem;
+}
+
+.btn-premium-lg {
+  padding: var(--spacing-4) var(--spacing-6);
+  font-size: var(--font-size-lg);
+  border-radius: 1.25rem;
+}
+
+/* ==========================================
+   VARIANT: PRIMARY (Navy + Cyan)
+   ========================================== */
+
+.btn-premium-primary {
+  background: var(--color-primary);
+  color: var(--color-white);
+  border: 2px solid var(--color-secondary);
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+}
+
+.btn-premium-primary:hover:not(:disabled) {
+  background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-light) 100%);
+  border-color: var(--color-secondary-light);
+  box-shadow: 0 0 25px rgba(0, 212, 255, 0.5);
+  transform: translateY(-2px);
+}
+
+.btn-premium-primary:active:not(:disabled) {
+  transform: translateY(0);
+  box-shadow: 0 0 10px rgba(0, 212, 255, 0.3);
+}
+
+.btn-premium-primary:focus-visible {
+  outline: none;
+  box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.2),
+              0 0 30px rgba(0, 212, 255, 0.6);
+}
+
+/* ==========================================
+   VARIANT: SECONDARY (Cyan dominant)
+   ========================================== */
+
+.btn-premium-secondary {
+  background: var(--color-secondary);
+  color: var(--color-primary);
+  border: 2px solid var(--color-secondary);
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+  font-weight: var(--font-weight-bold);
+}
+
+.btn-premium-secondary:hover:not(:disabled) {
+  background: var(--color-secondary-light);
+  border-color: var(--color-white);
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.6);
+  transform: translateY(-2px);
+}
+
+.btn-premium-secondary:active:not(:disabled) {
+  background: var(--color-secondary-dark);
+  transform: translateY(0);
+}
+
+/* ==========================================
+   VARIANT: OUTLINE (Navy outline, Cyan on hover)
+   ========================================== */
+
+.btn-premium-outline {
+  background: transparent;
+  color: var(--color-primary);
+  border: 2px solid var(--color-primary-light);
+}
+
+.btn-premium-outline:hover:not(:disabled) {
+  border-color: var(--color-secondary);
+  background: rgba(0, 212, 255, 0.05);
+  color: var(--color-secondary);
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.3);
+}
+
+/* ==========================================
+   VARIANT: GHOST (Minimal style)
+   ========================================== */
+
+.btn-premium-ghost {
+  background: transparent;
+  color: var(--color-secondary);
+  border: none;
+}
+
+.btn-premium-ghost:hover:not(:disabled) {
+  background: rgba(0, 212, 255, 0.1);
+  box-shadow: inset 0 0 15px rgba(0, 212, 255, 0.2);
+}
+
+/* ==========================================
+   VARIANT: DANGER (Coral, rare use)
+   ========================================== */
+
+.btn-premium-danger {
+  background: var(--color-error);
+  color: var(--color-white);
+  border: 2px solid var(--color-error);
+  box-shadow: 0 0 15px rgba(255, 107, 122, 0.3);
+}
+
+.btn-premium-danger:hover:not(:disabled) {
+  background: var(--color-error-dark);
+  box-shadow: 0 0 25px rgba(255, 107, 122, 0.5);
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   VARIANT: SUCCESS (Cyan, same as secondary)
+   ========================================== */
+
+.btn-premium-success {
+  background: var(--color-secondary);
+  color: var(--color-primary);
+  border: 2px solid var(--color-secondary);
+  box-shadow: 0 0 15px rgba(0, 212, 255, 0.4);
+}
+
+.btn-premium-success:hover:not(:disabled) {
+  background: var(--color-secondary-light);
+  box-shadow: 0 0 30px rgba(0, 212, 255, 0.6);
+  transform: translateY(-2px);
+}
+
+/* ==========================================
+   STATES
+   ========================================== */
+
+.btn-premium:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+}
+
+.btn-premium-full-width {
+  width: 100%;
+}
+
+.btn-premium-with-icon {
+  gap: var(--spacing-2);
+}
+
+/* ==========================================
+   LOADING STATE
+   ========================================== */
+
+.btn-premium-loading {
+  color: transparent;
+  pointer-events: none;
+}
+
+.btn-premium-spinner {
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: spinPremium 0.8s linear infinite;
+}
+
+@keyframes spinPremium {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.btn-premium-text-hidden {
+  visibility: hidden;
+}
+
+.btn-premium-icon-el {
+  display: inline-flex;
+  align-items: center;
+  font-size: 1.2em;
+}
+
+/* ==========================================
+   DARK MODE
+   ========================================== */
+
+@media (prefers-color-scheme: dark) {
+  .btn-premium-outline {
+    color: var(--color-white);
+    border-color: var(--color-primary-lighter);
+  }
+
+  .btn-premium-outline:hover:not(:disabled) {
+    border-color: var(--color-secondary);
+    background: rgba(0, 212, 255, 0.08);
+    color: var(--color-secondary-light);
+  }
+}
+
+/* ==========================================
+   LIGHT MODE
+   ========================================== */
+
+@media (prefers-color-scheme: light) {
+  .btn-premium-primary {
+    background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
+  }
+
+  .btn-premium-ghost {
+    color: var(--color-primary);
+  }
+
+  .btn-premium-ghost:hover:not(:disabled) {
+    background: rgba(26, 35, 50, 0.05);
+    color: var(--color-secondary);
+  }
+}
+
+/* ==========================================
+   ACCESSIBILITY
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .btn-premium {
+    transition: none;
+  }
+
+  .btn-premium-spinner {
+    animation: none;
+  }
+}
