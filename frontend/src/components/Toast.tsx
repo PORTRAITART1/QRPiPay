@@ -1,42 +1,79 @@
+/**
+ * Toast Component - Design System
+ * Notification toasts with auto-dismiss
+ */
+
 import React, { useEffect } from 'react';
 import './Toast.css';
 
-interface ToastProps {
-  id: string;
+export interface ToastProps extends React.HTMLAttributes<HTMLDivElement> {
+  variant?: 'success' | 'error' | 'warning' | 'info';
+  title?: string;
   message: string;
-  type: 'success' | 'error' | 'info';
   duration?: number;
-  onClose: (id: string) => void;
+  onClose?: () => void;
+  dismissible?: boolean;
 }
 
-export function Toast({
-  id,
-  message,
-  type,
-  duration = 3000,
-  onClose
-}: ToastProps) {
-  useEffect(() => {
-    const timer = setTimeout(() => onClose(id), duration);
-    return () => clearTimeout(timer);
-  }, [id, duration, onClose]);
+export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
+  ({
+    variant = 'info',
+    title,
+    message,
+    duration = 3000,
+    onClose,
+    dismissible = true,
+    className = '',
+    ...props
+  }, ref) => {
+    useEffect(() => {
+      if (duration > 0) {
+        const timer = setTimeout(() => {
+          onClose?.();
+        }, duration);
+        return () => clearTimeout(timer);
+      }
+    }, [duration, onClose]);
 
-  return (
-    <div className={`toast toast-${type}`}>
-      <div className="toast-content">
-        {type === 'success' && <span>✅</span>}
-        {type === 'error' && <span>❌</span>}
-        {type === 'info' && <span>ℹ️</span>}
-        <span>{message}</span>
-      </div>
-      <button
-        className="toast-close"
-        onClick={() => onClose(id)}
+    return (
+      <div
+        ref={ref}
+        className={`
+          toast
+          toast-${variant}
+          ${className}
+        `.trim()}
+        role="status"
+        aria-live="polite"
+        {...props}
       >
-        ×
-      </button>
-    </div>
-  );
-}
+        <div className="toast-content">
+          <div className="toast-icon">
+            {variant === 'success' && '✓'}
+            {variant === 'error' && '✕'}
+            {variant === 'warning' && '⚠'}
+            {variant === 'info' && 'ℹ'}
+          </div>
+          <div className="toast-text">
+            {title && <h4 className="toast-title">{title}</h4>}
+            <p className="toast-message">{message}</p>
+          </div>
+        </div>
+
+        {dismissible && (
+          <button
+            className="toast-close"
+            onClick={onClose}
+            aria-label="Dismiss notification"
+          >
+            ✕
+          </button>
+        )}
+      </div>
+    );
+  }
+);
+
+Toast.displayName = 'Toast';
 
 export default Toast;

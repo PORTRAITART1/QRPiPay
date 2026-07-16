@@ -1,52 +1,195 @@
+/**
+ * Toast Styles - Design System
+ * Notification toasts
+ */
+
 .toast {
-  background: white;
-  border-radius: 0.5rem;
-  padding: 1rem;
-  margin-bottom: 0.5rem;
+  position: fixed;
+  bottom: var(--spacing-6);
+  right: var(--spacing-6);
+  max-width: 400px;
+  padding: var(--spacing-4);
+  border-radius: var(--radius-lg);
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-  animation: slideIn 0.3s ease-out;
+  justify-content: space-between;
+  gap: var(--spacing-3);
+  box-shadow: var(--shadow-lg);
+  z-index: var(--z-toast);
+  animation: slideInRight 300ms ease-out;
+  background: var(--color-white);
+  border: 1px solid var(--color-border);
 }
 
-@keyframes slideIn {
-  from {
-    transform: translateX(400px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
+/* ==========================================
+   VARIANTS
+   ========================================== */
 
 .toast-success {
-  border-left: 4px solid #10b981;
+  background: var(--color-success-light);
+  border-color: var(--color-success);
+  color: var(--color-success-dark);
 }
 
 .toast-error {
-  border-left: 4px solid #ef4444;
+  background: var(--color-error-light);
+  border-color: var(--color-error);
+  color: var(--color-error-dark);
+}
+
+.toast-warning {
+  background: var(--color-warning-light);
+  border-color: var(--color-warning);
+  color: var(--color-warning-dark);
 }
 
 .toast-info {
-  border-left: 4px solid #3b82f6;
+  background: var(--color-info-light);
+  border-color: var(--color-info);
+  color: var(--color-info-dark);
 }
+
+/* ==========================================
+   CONTENT
+   ========================================== */
 
 .toast-content {
   display: flex;
-  align-items: center;
-  gap: 0.75rem;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+  flex: 1;
 }
+
+.toast-icon {
+  font-size: 20px;
+  font-weight: bold;
+  flex-shrink: 0;
+}
+
+.toast-text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.toast-title {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  margin: 0;
+  line-height: 1;
+}
+
+.toast-message {
+  font-size: var(--font-size-sm);
+  margin: 0;
+  line-height: var(--line-height-normal);
+}
+
+/* ==========================================
+   CLOSE BUTTON
+   ========================================== */
 
 .toast-close {
   background: none;
   border: none;
-  font-size: 1.5rem;
+  color: inherit;
   cursor: pointer;
-  opacity: 0.5;
+  font-size: 18px;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: opacity var(--transition-fast);
 }
 
 .toast-close:hover {
-  opacity: 1;
+  opacity: 0.7;
+}
+
+.toast-close:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+/* ==========================================
+   ANIMATIONS
+   ========================================== */
+
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOutRight {
+  from {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  to {
+    opacity: 0;
+    transform: translateX(20px);
+  }
+}
+
+/* ==========================================
+   RESPONSIVE
+   ========================================== */
+
+@media (max-width: 640px) {
+  .toast {
+    max-width: calc(100% - var(--spacing-4));
+    bottom: var(--spacing-4);
+    right: var(--spacing-2);
+    left: var(--spacing-2);
+  }
+}
+
+/* ==========================================
+   DARK MODE
+   ========================================== */
+
+@media (prefers-color-scheme: dark) {
+  .toast {
+    background: var(--color-dark-bg-secondary);
+    border-color: var(--color-gray-700);
+  }
+
+  .toast-success {
+    background: rgba(16, 185, 129, 0.15);
+    border-color: var(--color-success);
+  }
+
+  .toast-error {
+    background: rgba(239, 68, 68, 0.15);
+    border-color: var(--color-error);
+  }
+
+  .toast-warning {
+    background: rgba(245, 158, 11, 0.15);
+    border-color: var(--color-warning);
+  }
+
+  .toast-info {
+    background: rgba(59, 130, 246, 0.15);
+    border-color: var(--color-info);
+  }
+}
+
+/* ==========================================
+   ACCESSIBILITY
+   ========================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .toast {
+    animation: none;
+  }
 }
