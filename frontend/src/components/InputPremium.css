@@ -12,7 +12,7 @@
 .input-premium-label {
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-semibold);
-  color: var(--color-secondary);
+  color: var(--color-white);
   display: block;
 }
 

@@ -41,7 +41,7 @@
 /* Primary - Navy + Cyan border */
 .badge-premium-primary {
   background: var(--color-primary);
-  color: var(--color-secondary);
+  color: var(--color-white);
   border-color: var(--color-secondary);
   box-shadow: 0 0 10px rgba(0, 212, 255, 0.2);
 }

@@ -1,6 +1,7 @@
 /**
  * 🔐 Login Page - Premium Design (Navy + Cyan)
  * Harmonious color palette with smooth animations
+ * ✅ WCAG AA Contrast Compliant
  */
 
 import React, { useState } from 'react';
@@ -110,7 +111,7 @@ export const LoginPage: React.FC = () => {
                   <h1 className="text-4xl font-black bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-300 bg-clip-text text-transparent">
                     QRPiPay
                   </h1>
-                  <p className="text-xl font-bold text-cyan-300">
+                  <p className="text-xl font-bold text-white">
                     Accepte Pi en 10 secondes
                   </p>
                 </div>
@@ -119,7 +120,7 @@ export const LoginPage: React.FC = () => {
                 <div className="h-0.5 bg-gradient-to-r from-transparent via-cyan-500 to-transparent shadow-lg shadow-cyan-500/50" />
 
                 {/* Description */}
-                <p className="text-center text-cyan-200 text-base leading-relaxed">
+                <p className="text-center text-white text-base leading-relaxed">
                   Générez des codes QR de paiement instantanés. Acceptez des
                   paiements Pi directement depuis Pi Browser.
                 </p>
@@ -148,10 +149,10 @@ export const LoginPage: React.FC = () => {
                 )}
 
                 {/* Footer info */}
-                <div className="space-y-2 text-sm text-cyan-200/70">
+                <div className="space-y-2 text-sm text-cyan-100">
                   <p>
                     Fonctionne uniquement dans{' '}
-                    <span className="font-bold text-cyan-300">Pi Browser</span>
+                    <span className="font-bold text-white">Pi Browser</span>
                   </p>
                   <p>
                     Cette application utilise la Pi Network API pour traiter les
@@ -175,7 +176,7 @@ export const LoginPage: React.FC = () => {
                   <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
                     1,247
                   </div>
-                  <div className="text-xs text-cyan-200/60 mt-2">Commerçants actifs</div>
+                  <div className="text-xs text-cyan-100 mt-2">Commerçants actifs</div>
                 </div>
               </CardBodyPremium>
             </CardPremium>
@@ -186,7 +187,7 @@ export const LoginPage: React.FC = () => {
                   <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
                     12,456
                   </div>
-                  <div className="text-xs text-cyan-200/60 mt-2">Pi traités</div>
+                  <div className="text-xs text-cyan-100 mt-2">Pi traités</div>
                 </div>
               </CardBodyPremium>
             </CardPremium>

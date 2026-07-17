@@ -11,6 +11,8 @@ import { QRGeneratorPage } from './pages/QRGeneratorPage';
 import { PaymentHistoryPage } from './pages/PaymentHistoryPage';
 import { PaymentConfirmationPage } from './pages/PaymentConfirmationPage';
 import { AnalyticsPage } from './pages/AnalyticsPage';
+import { BetaProgramPage } from './pages/BetaProgramPage';
+import { BetaAdminDashboard } from './pages/BetaAdminDashboard';
 import ToastProvider from './context/ToastContext';
 import { ThemeProvider } from './context/ThemeContext';
 import './index.css';
@@ -42,6 +44,8 @@ function App() {
             <Header />
             <Routes>
               <Route path="/" element={<LoginPage />} />
+              <Route path="/beta" element={<BetaProgramPage />} />
+              <Route path="/beta/admin" element={<BetaAdminDashboard />} />
               <Route
                 path="/dashboard"
                 element={<ProtectedRoute element={<DashboardPage />} />}

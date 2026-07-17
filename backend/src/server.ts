@@ -13,6 +13,7 @@ import paymentsRouter from './routes/payments';
 import analyticsRouter from './routes/analytics';
 import usersRouter from './routes/users';
 import exportRouter from './routes/export';
+import betaRouter from './routes/beta';
 
 dotenv.config();
 
@@ -70,6 +71,7 @@ app.use('/api/payments', paymentsRouter);
 app.use('/api/analytics', analyticsRouter);
 app.use('/api/users', usersRouter);
 app.use('/api/export', exportRouter);
+app.use('/api/beta', betaRouter);
 
 // 404 handler
 app.use((req: Request, res: Response) => {
@@ -104,6 +106,7 @@ app.listen(port, () => {
   console.log(`💳 Payments API: http://localhost:${port}/api/payments`);
   console.log(`📈 Analytics API: http://localhost:${port}/api/analytics`);
   console.log(`📥 Export API: http://localhost:${port}/api/export`);
+  console.log(`🧪 Beta API: http://localhost:${port}/api/beta`);
   console.log(`🗄️  Database: PostgreSQL + Prisma`);
 });
 
