@@ -3,6 +3,7 @@
  * Harmonious color palette with smooth animations
  * ✅ WCAG AA Contrast Compliant
  * ✅ PERFECTLY CENTERED
+ * ✅ MOBILE OPTIMIZED - Responsive font sizes
  */
 
 import React, { useState } from 'react';
@@ -37,7 +38,7 @@ export const LoginPage: React.FC = () => {
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Cyan glow orb 1 */}
         <motion.div
-          className="absolute w-96 h-96 rounded-full blur-3xl"
+          className="absolute w-64 md:w-96 h-64 md:h-96 rounded-full blur-3xl"
           style={{
             background: 'radial-gradient(circle, rgba(0, 212, 255, 0.2) 0%, transparent 70%)',
             top: '10%',
@@ -52,7 +53,7 @@ export const LoginPage: React.FC = () => {
 
         {/* Navy glow orb 2 */}
         <motion.div
-          className="absolute w-96 h-96 rounded-full blur-3xl"
+          className="absolute w-64 md:w-96 h-64 md:h-96 rounded-full blur-3xl"
           style={{
             background: 'radial-gradient(circle, rgba(26, 35, 50, 0.2) 0%, transparent 70%)',
             bottom: '10%',
@@ -67,13 +68,13 @@ export const LoginPage: React.FC = () => {
 
         {/* Cyan accent glow */}
         <motion.div
-          className="absolute w-72 h-72 rounded-full blur-2xl"
+          className="absolute w-48 md:w-72 h-48 md:h-72 rounded-full blur-2xl"
           style={{
             background: 'radial-gradient(circle, rgba(0, 212, 255, 0.15) 0%, transparent 70%)',
             top: '50%',
             left: '50%',
-            marginLeft: '-144px',
-            marginTop: '-144px',
+            marginLeft: '-96px',
+            marginTop: '-96px',
           }}
           animate={{
             scale: [1, 1.2, 1],
@@ -84,12 +85,12 @@ export const LoginPage: React.FC = () => {
 
       {/* Main content - PERFECTLY CENTERED */}
       <motion.div
-        className="relative z-10 min-h-screen w-full flex items-center justify-center p-4 overflow-x-hidden"
+        className="relative z-10 min-h-screen w-full flex items-center justify-center p-3 md:p-4 overflow-x-hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
       >
-        <div className="w-full max-w-md">
+        <div className="w-full max-w-sm">
           {/* Main card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -97,33 +98,32 @@ export const LoginPage: React.FC = () => {
             transition={{ duration: 0.6 }}
           >
             <CardPremium variant="glow">
-              <CardBodyPremium className="space-y-8">
-                {/* Logo animation */}
+              <CardBodyPremium className="space-y-4 md:space-y-6">
+                {/* Logo animation - SMALLER ON MOBILE */}
                 <motion.div
-                  className="text-6xl text-center"
+                  className="text-4xl md:text-6xl text-center"
                   animate={{ scale: [1, 1.1, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
                   🥧
                 </motion.div>
 
-                {/* Title with gradient */}
-                <div className="text-center space-y-3">
-                  <h1 className="text-4xl font-black bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-300 bg-clip-text text-transparent">
+                {/* Title with gradient - RESPONSIVE SIZE */}
+                <div className="text-center space-y-2 md:space-y-3">
+                  <h1 className="text-2xl md:text-4xl font-black bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-300 bg-clip-text text-transparent leading-tight">
                     QRPiPay
                   </h1>
-                  <p className="text-xl font-bold text-white">
-                    Accepte Pi en 10 secondes
+                  <p className="text-sm md:text-lg font-bold text-white leading-tight">
+                    Accepte Pi en 10s
                   </p>
                 </div>
 
                 {/* Divider with glow */}
                 <div className="h-0.5 bg-gradient-to-r from-transparent via-cyan-500 to-transparent shadow-lg shadow-cyan-500/50" />
 
-                {/* Description */}
-                <p className="text-center text-white text-base leading-relaxed">
-                  Générez des codes QR de paiement instantanés. Acceptez des
-                  paiements Pi directement depuis Pi Browser.
+                {/* Description - SMALLER TEXT */}
+                <p className="text-center text-white text-xs md:text-sm leading-relaxed">
+                  Générez des codes QR de paiement. Acceptez les paiements Pi directement.
                 </p>
 
                 {/* Login button */}
@@ -132,7 +132,7 @@ export const LoginPage: React.FC = () => {
                   size="lg"
                   disabled={!isPiBrowser}
                   onClick={handleLogin}
-                  className="w-full font-bold"
+                  className="w-full font-bold text-sm md:text-base"
                 >
                   {isPiBrowser ? '🔓 Connexion avec Pi' : '⚠️ Pi Browser requis'}
                 </ButtonPremium>
@@ -143,47 +143,46 @@ export const LoginPage: React.FC = () => {
                     initial={{ opacity: 0, y: -10 }}
                     animate={{ opacity: 1, y: 0 }}
                   >
-                    <BadgePremium variant="error" size="md" className="w-full justify-center">
+                    <BadgePremium variant="error" size="sm" className="w-full justify-center text-xs">
                       {error}
                     </BadgePremium>
                   </motion.div>
                 )}
 
-                {/* Footer info */}
-                <div className="space-y-2 text-sm text-cyan-100">
+                {/* Footer info - MUCH SMALLER */}
+                <div className="space-y-1 text-xs text-cyan-100">
                   <p>
-                    Fonctionne uniquement dans{' '}
+                    Fonctionne dans{' '}
                     <span className="font-bold text-white">Pi Browser</span>
                   </p>
                   <p>
-                    Cette application utilise la Pi Network API pour traiter les
-                    paiements de manière sécurisée.
+                    Paiements sécurisés via Pi Network API
                   </p>
                 </div>
               </CardBodyPremium>
             </CardPremium>
           </motion.div>
 
-          {/* Stats cards - FIXED: Numbers now CYAN (visible) */}
+          {/* Stats cards - FIXED: Numbers now CYAN (visible) - SMALLER */}
           <motion.div
-            className="mt-8 grid grid-cols-2 gap-4 w-full"
+            className="mt-4 md:mt-6 grid grid-cols-2 gap-2 md:gap-4 w-full"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
             {/* Card 1: Active Merchants */}
             <CardPremium variant="outline">
-              <CardBodyPremium>
-                <div className="text-center space-y-2">
-                  {/* Number - CYAN gradient (VISIBLE) */}
-                  <div className="text-4xl font-black bg-gradient-to-r from-cyan-300 to-cyan-100 bg-clip-text text-transparent">
+              <CardBodyPremium className="p-2 md:p-4">
+                <div className="text-center space-y-1">
+                  {/* Number - CYAN gradient (VISIBLE) - SMALLER */}
+                  <div className="text-2xl md:text-4xl font-black bg-gradient-to-r from-cyan-300 to-cyan-100 bg-clip-text text-transparent">
                     1,247
                   </div>
                   
                   {/* Icon + Label - CLEAR and BOLD */}
-                  <div className="flex flex-col items-center gap-1">
-                    <span className="text-2xl">🏪</span>
-                    <p className="text-base font-bold text-white leading-tight">
+                  <div className="flex flex-col items-center gap-0.5">
+                    <span className="text-lg md:text-2xl">🏪</span>
+                    <p className="text-xs md:text-sm font-bold text-white leading-tight">
                       Commerçants
                     </p>
                     <p className="text-xs font-semibold text-cyan-300">
@@ -196,17 +195,17 @@ export const LoginPage: React.FC = () => {
 
             {/* Card 2: Pi Processed */}
             <CardPremium variant="outline">
-              <CardBodyPremium>
-                <div className="text-center space-y-2">
-                  {/* Number - CYAN gradient (VISIBLE) */}
-                  <div className="text-4xl font-black bg-gradient-to-r from-cyan-300 to-cyan-100 bg-clip-text text-transparent">
+              <CardBodyPremium className="p-2 md:p-4">
+                <div className="text-center space-y-1">
+                  {/* Number - CYAN gradient (VISIBLE) - SMALLER */}
+                  <div className="text-2xl md:text-4xl font-black bg-gradient-to-r from-cyan-300 to-cyan-100 bg-clip-text text-transparent">
                     12,456
                   </div>
                   
                   {/* Icon + Label - CLEAR and BOLD */}
-                  <div className="flex flex-col items-center gap-1">
-                    <span className="text-2xl">💰</span>
-                    <p className="text-base font-bold text-white leading-tight">
+                  <div className="flex flex-col items-center gap-0.5">
+                    <span className="text-lg md:text-2xl">💰</span>
+                    <p className="text-xs md:text-sm font-bold text-white leading-tight">
                       Pi
                     </p>
                     <p className="text-xs font-semibold text-cyan-300">
@@ -220,7 +219,7 @@ export const LoginPage: React.FC = () => {
 
           {/* Bottom accent line */}
           <motion.div
-            className="mt-8 h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-500 rounded-full w-full"
+            className="mt-4 md:mt-6 h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-500 rounded-full w-full"
             animate={{
               boxShadow: [
                 '0 0 20px rgba(0, 212, 255, 0.5)',
