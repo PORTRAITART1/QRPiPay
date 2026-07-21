@@ -1,0 +1,211 @@
+/**
+ * ════════════════════════════════════════════════════════════════
+ * GLOBAL NO-SCROLL-HORIZONTAL ENFORCER
+ * ════════════════════════════════════════════════════════════════
+ * Cette feuille CSS s'assure qu'AUCUN scroll horizontal
+ * ne peut apparaitre sur l'application QRPiPay
+ * ════════════════════════════════════════════════════════════════
+ */
+
+/* NIVEAU 1: HTML & BODY - La base */
+html,
+body {
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+  width: 100%;
+  max-width: 100vw;
+  margin: 0;
+  padding: 0;
+  position: relative;
+}
+
+/* NIVEAU 2: ROOT & MAIN CONTAINERS */
+#root,
+main,
+.app,
+.container {
+  overflow-x: hidden !important;
+  overflow-y: visible;
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+/* NIVEAU 3: ALL ELEMENTS - Force max-width */
+* {
+  max-width: 100%;
+  box-sizing: border-box;
+}
+
+/* NIVEAU 4: SPECIFIC CONTAINERS */
+div,
+section,
+article,
+nav,
+header,
+footer,
+main {
+  overflow-x: hidden !important;
+}
+
+/* NIVEAU 5: FLEX & GRID PARENTS */
+.flex,
+.grid,
+.flex-row,
+.flex-col {
+  overflow-x: hidden !important;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* NIVEAU 6: REMOVE ALL SCROLLBARS */
+/* Webkit browsers (Chrome, Safari, Edge) */
+::-webkit-scrollbar {
+  display: none;
+}
+
+::-webkit-scrollbar-thumb {
+  display: none;
+}
+
+::-webkit-scrollbar-track {
+  display: none;
+}
+
+/* Firefox */
+* {
+  scrollbar-width: none !important;
+  -ms-overflow-style: none !important;
+}
+
+/* NIVEAU 7: PAGE CONTENT */
+.page-content,
+.content-wrapper,
+.main-content {
+  overflow-x: hidden !important;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* NIVEAU 8: CARDS & CONTAINERS */
+.card,
+.card-premium,
+.container,
+.wrapper {
+  overflow-x: hidden !important;
+}
+
+/* NIVEAU 9: MODALS & DIALOGS */
+.modal,
+.dialog,
+.popup {
+  overflow-x: hidden !important;
+  max-width: 100vw;
+}
+
+/* NIVEAU 10: PREVENT BODY MARGIN/PADDING OVERFLOW */
+body::before,
+body::after {
+  content: none !important;
+  display: none !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* OVERRIDE TAILWIND OVERFLOW CLASSES */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.overflow-hidden {
+  overflow: hidden !important;
+  overflow-x: hidden !important;
+  overflow-y: hidden !important;
+}
+
+.overflow-auto {
+  overflow: auto !important;
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+.overflow-visible {
+  overflow: visible !important;
+  overflow-x: hidden !important;
+  overflow-y: visible !important;
+}
+
+.overflow-scroll {
+  overflow: scroll !important;
+  overflow-x: hidden !important;
+  overflow-y: scroll !important;
+}
+
+.overflow-x-auto {
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+.overflow-x-hidden {
+  overflow-x: hidden !important;
+}
+
+.overflow-y-auto {
+  overflow-x: hidden !important;
+  overflow-y: auto !important;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* POSITION ABSOLUTE/FIXED ELEMENTS */
+/* ═══════════════════════════════════════════════════════════════ */
+
+.fixed,
+.absolute,
+[position="fixed"],
+[position="absolute"] {
+  max-width: 100vw;
+  overflow-x: hidden;
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* RESPONSIVE ADJUSTMENTS */
+/* ═══════════════════════════════════════════════════════════════ */
+
+@media (max-width: 768px) {
+  html, body {
+    overflow-x: hidden !important;
+    max-width: 100vw;
+  }
+
+  * {
+    max-width: 100%;
+  }
+
+  .container {
+    padding: 0 16px;
+    max-width: 100%;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) {
+  html, body {
+    overflow-x: hidden !important;
+  }
+}
+
+@media (min-width: 1025px) {
+  html, body {
+    overflow-x: hidden !important;
+  }
+}
+
+/* ═══════════════════════════════════════════════════════════════ */
+/* EMERGENCY FALLBACK */
+/* ═══════════════════════════════════════════════════════════════ */
+
+/* Si quelque chose essaie de créer un scroll */
+[style*="overflow-x: auto"],
+[style*="overflow-x: scroll"],
+[style*="overflow: auto"],
+[style*="overflow: scroll"] {
+  overflow-x: hidden !important !important;
+  overflow-y: auto !important;
+}

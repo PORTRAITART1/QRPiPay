@@ -2,6 +2,7 @@
  * 🔐 Login Page - Premium Design (Navy + Cyan)
  * Harmonious color palette with smooth animations
  * ✅ WCAG AA Contrast Compliant
+ * ✅ PERFECTLY CENTERED
  */
 
 import React, { useState } from 'react';
@@ -31,7 +32,7 @@ export const LoginPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 relative overflow-hidden">
+    <div className="min-h-screen w-full bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 relative overflow-x-hidden overflow-y-auto">
       {/* Animated background elements */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Cyan glow orb 1 */}
@@ -81,14 +82,14 @@ export const LoginPage: React.FC = () => {
         />
       </div>
 
-      {/* Main content */}
+      {/* Main content - PERFECTLY CENTERED */}
       <motion.div
-        className="relative z-10 min-h-screen flex items-center justify-center p-4"
+        className="relative z-10 min-h-screen w-full flex items-center justify-center p-4 overflow-x-hidden"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ duration: 0.6 }}
       >
-        <div className="max-w-md w-full">
+        <div className="w-full max-w-md">
           {/* Main card */}
           <motion.div
             initial={{ opacity: 0, y: 20 }}
@@ -165,7 +166,7 @@ export const LoginPage: React.FC = () => {
 
           {/* Stats cards - FIXED: Numbers now CYAN (visible) */}
           <motion.div
-            className="mt-8 grid grid-cols-2 gap-4"
+            className="mt-8 grid grid-cols-2 gap-4 w-full"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
@@ -219,7 +220,7 @@ export const LoginPage: React.FC = () => {
 
           {/* Bottom accent line */}
           <motion.div
-            className="mt-8 h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-500 rounded-full"
+            className="mt-8 h-1 bg-gradient-to-r from-cyan-500 via-blue-500 to-cyan-500 rounded-full w-full"
             animate={{
               boxShadow: [
                 '0 0 20px rgba(0, 212, 255, 0.5)',

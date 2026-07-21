@@ -79,8 +79,9 @@ function App() {
       <BrowserProvider>
         <ToastProvider>
           <Router>
-            <Header />
-            <Routes>
+            <div className="overflow-x-hidden w-screen max-w-full">
+              <Header />
+              <Routes>
               <Route path="/" element={<LoginPage />} />
               <Route path="/beta" element={<BetaProgramPage />} />
               <Route path="/beta/admin" element={<BetaAdminDashboard />} />

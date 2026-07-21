@@ -1,5 +1,6 @@
 /**
  * 🔲 QR Code Generator Page - Premium Design (Navy + Cyan)
+ * PERFECTLY CENTERED CONTENT
  */
 
 import React, { useState } from 'react';
@@ -115,136 +116,142 @@ export const QRGeneratorPage: React.FC = () => {
     setErrors({ amount: '', description: '' });
   };
 
-  // QR Display Screen
+  // QR Display Screen - PERFECTLY CENTERED
   if (showQR && qrData) {
     return (
-      <motion.div
-        className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 p-4 md:p-6 flex items-center justify-center overflow-hidden"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-      >
-        <CardPremium variant="glow" className="max-w-md w-full">
-          <CardBodyPremium className="space-y-6">
-            {/* Header */}
-            <motion.div
-              className="text-center space-y-2"
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              transition={{ delay: 0.1 }}
-            >
-              <h1 className="text-3xl md:text-4xl font-black text-white">
-                QR Prêt! ✓
-              </h1>
-              <p className="text-cyan-200 text-sm md:text-base">
-                Montrez ce code au client
-              </p>
-            </motion.div>
-
-            {/* QR Code */}
-            <motion.div
-              className="bg-white p-4 md:p-6 rounded-2xl inline-block shadow-2xl mx-auto"
-              initial={{ scale: 0.5, opacity: 0 }}
-              animate={{ scale: 1, opacity: 1 }}
-              transition={{ delay: 0.2 }}
-            >
-              <QRCode
-                value={JSON.stringify(qrData)}
-                size={250}
-                level="H"
-                includeMargin={true}
-                renderAs="canvas"
-              />
-            </motion.div>
-
-            {/* Amount Display */}
-            <motion.div
-              className="space-y-2 text-center"
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.3 }}
-            >
-              <p className="text-cyan-200 text-xs md:text-sm font-semibold">
-                MONTANT À PAYER
-              </p>
-              <p className="text-4xl md:text-5xl font-black bg-gradient-to-r from-cyan-300 to-cyan-100 bg-clip-text text-transparent">
-                {qrData.amount.toFixed(2)}
-              </p>
-              <p className="text-2xl font-bold text-cyan-300">
-                Pi
-              </p>
-            </motion.div>
-
-            {/* Description */}
-            <motion.div
-              className="p-3 md:p-4 bg-white/5 rounded-xl border border-cyan-500/30"
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.4 }}
-            >
-              <p className="text-white font-bold text-sm md:text-base text-center">
-                {qrData.memo}
-              </p>
-              <p className="text-xs md:text-sm text-cyan-300 mt-2 text-center">
-                Généré à {new Date(qrData.timestamp).toLocaleTimeString('fr-FR')}
-              </p>
-            </motion.div>
-
-            {/* Timer */}
-            <motion.div
-              className="flex justify-center"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.5 }}
-            >
-              <BadgePremium variant="info" size="md">
-                ⏱️ Expire dans 05:00
-              </BadgePremium>
-            </motion.div>
-
-            {/* Info */}
-            <motion.div
-              className="p-3 md:p-4 bg-cyan-500/10 rounded-lg border border-cyan-500/30"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.6 }}
-            >
-              <p className="text-xs md:text-sm text-cyan-100 text-center font-medium">
-                💡 Le client scanne ce code avec son application Pi Browser
-              </p>
-            </motion.div>
-
-            {/* Buttons */}
-            <motion.div
-              className="grid grid-cols-2 gap-3"
-              initial={{ y: 20, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              transition={{ delay: 0.7 }}
-            >
-              <ButtonPremium
-                variant="secondary"
-                size="md"
-                onClick={() => setShowQR(false)}
+      <div className="min-h-screen w-full bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 overflow-x-hidden overflow-y-auto flex items-center justify-center p-4">
+        <motion.div
+          className="w-full max-w-sm"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+        >
+          <CardPremium variant="glow">
+            <CardBodyPremium className="space-y-6 flex flex-col items-center">
+              {/* Header */}
+              <motion.div
+                className="text-center space-y-2 w-full"
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                transition={{ delay: 0.1 }}
               >
-                ← Retour
-              </ButtonPremium>
-              <ButtonPremium
-                variant="primary"
-                size="md"
-                onClick={handleReset}
+                <h1 className="text-3xl md:text-4xl font-black text-white">
+                  QR Prêt! ✓
+                </h1>
+                <p className="text-cyan-200 text-sm md:text-base">
+                  Montrez ce code au client
+                </p>
+              </motion.div>
+
+              {/* QR Code - PERFECTLY CENTERED */}
+              <motion.div
+                className="flex justify-center w-full"
+                initial={{ scale: 0.5, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ delay: 0.2 }}
               >
-                Nouveau →
-              </ButtonPremium>
-            </motion.div>
-          </CardBodyPremium>
-        </CardPremium>
-      </motion.div>
+                <div className="bg-white p-4 md:p-6 rounded-2xl shadow-2xl">
+                  <QRCode
+                    value={JSON.stringify(qrData)}
+                    size={250}
+                    level="H"
+                    includeMargin={true}
+                    renderAs="canvas"
+                  />
+                </div>
+              </motion.div>
+
+              {/* Amount Display */}
+              <motion.div
+                className="space-y-2 text-center w-full"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.3 }}
+              >
+                <p className="text-cyan-200 text-xs md:text-sm font-semibold">
+                  MONTANT À PAYER
+                </p>
+                <p className="text-4xl md:text-5xl font-black bg-gradient-to-r from-cyan-300 to-cyan-100 bg-clip-text text-transparent">
+                  {qrData.amount.toFixed(2)}
+                </p>
+                <p className="text-2xl font-bold text-cyan-300">
+                  Pi
+                </p>
+              </motion.div>
+
+              {/* Description */}
+              <motion.div
+                className="p-3 md:p-4 bg-white/5 rounded-xl border border-cyan-500/30 w-full"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.4 }}
+              >
+                <p className="text-white font-bold text-sm md:text-base text-center">
+                  {qrData.memo}
+                </p>
+                <p className="text-xs md:text-sm text-cyan-300 mt-2 text-center">
+                  Généré à {new Date(qrData.timestamp).toLocaleTimeString('fr-FR')}
+                </p>
+              </motion.div>
+
+              {/* Timer */}
+              <motion.div
+                className="flex justify-center w-full"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.5 }}
+              >
+                <BadgePremium variant="info" size="md">
+                  ⏱️ Expire dans 05:00
+                </BadgePremium>
+              </motion.div>
+
+              {/* Info */}
+              <motion.div
+                className="p-3 md:p-4 bg-cyan-500/10 rounded-lg border border-cyan-500/30 w-full"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ delay: 0.6 }}
+              >
+                <p className="text-xs md:text-sm text-cyan-100 text-center font-medium">
+                  💡 Le client scanne ce code avec son application Pi Browser
+                </p>
+              </motion.div>
+
+              {/* Buttons */}
+              <motion.div
+                className="grid grid-cols-2 gap-3 w-full"
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ delay: 0.7 }}
+              >
+                <ButtonPremium
+                  variant="secondary"
+                  size="md"
+                  onClick={() => setShowQR(false)}
+                  className="w-full"
+                >
+                  ← Retour
+                </ButtonPremium>
+                <ButtonPremium
+                  variant="primary"
+                  size="md"
+                  onClick={handleReset}
+                  className="w-full"
+                >
+                  Nouveau →
+                </ButtonPremium>
+              </motion.div>
+            </CardBodyPremium>
+          </CardPremium>
+        </motion.div>
+      </div>
     );
   }
 
-  // Form Screen
+  // Form Screen - PERFECTLY CENTERED
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 p-4 md:p-6 overflow-hidden">
-      <div className="max-w-2xl mx-auto">
+    <div className="min-h-screen w-full bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 p-4 md:p-6 overflow-x-hidden overflow-y-auto">
+      <div className="max-w-2xl mx-auto w-full">
         {/* Header */}
         <motion.div
           className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8"
@@ -274,11 +281,12 @@ export const QRGeneratorPage: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
+          className="w-full"
         >
           <CardPremium variant="glow">
             <CardBodyPremium className="space-y-6">
               {/* Amount Input */}
-              <div className="space-y-2">
+              <div className="space-y-2 w-full">
                 <label className="text-white font-bold text-sm md:text-base">
                   💰 Montant en Pi
                 </label>
@@ -300,17 +308,17 @@ export const QRGeneratorPage: React.FC = () => {
               </div>
 
               {/* Numeric Keypad */}
-              <div className="bg-white/5 border border-cyan-500/30 rounded-xl p-4 space-y-3">
+              <div className="bg-white/5 border border-cyan-500/30 rounded-xl p-4 space-y-3 w-full">
                 <p className="text-cyan-200 text-xs md:text-sm font-bold uppercase">
                   ⌨️ Clavier Numérique
                 </p>
-                <div className="grid grid-cols-4 gap-2">
+                <div className="grid grid-cols-4 gap-2 w-full">
                   {['7', '8', '9', '⌫', '4', '5', '6', '.', '1', '2', '3', '0'].map(
                     (num) => (
                       <motion.button
                         key={num}
                         onClick={() => handleNumPad(num)}
-                        className="py-2 md:py-3 bg-gradient-to-br from-cyan-500/20 to-cyan-500/5 text-white font-bold rounded-lg border border-cyan-500/30 hover:border-cyan-400/50 hover:bg-cyan-500/30 transition-all text-sm md:text-base"
+                        className="py-2 md:py-3 bg-gradient-to-br from-cyan-500/20 to-cyan-500/5 text-white font-bold rounded-lg border border-cyan-500/30 hover:border-cyan-400/50 hover:bg-cyan-500/30 transition-all text-sm md:text-base w-full"
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
                       >
@@ -322,7 +330,7 @@ export const QRGeneratorPage: React.FC = () => {
               </div>
 
               {/* Description */}
-              <div className="space-y-2">
+              <div className="space-y-2 w-full">
                 <label className="text-white font-bold text-sm md:text-base">
                   📝 Description (optionnel)
                 </label>
@@ -346,7 +354,7 @@ export const QRGeneratorPage: React.FC = () => {
               {/* Summary */}
               {amount && (
                 <motion.div
-                  className="p-3 md:p-4 bg-gradient-to-r from-cyan-500/20 to-cyan-500/10 border border-cyan-500/30 rounded-xl"
+                  className="p-3 md:p-4 bg-gradient-to-r from-cyan-500/20 to-cyan-500/10 border border-cyan-500/30 rounded-xl w-full"
                   initial={{ opacity: 0, y: 10 }}
                   animate={{ opacity: 1, y: 0 }}
                 >
@@ -385,7 +393,7 @@ export const QRGeneratorPage: React.FC = () => {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.2 }}
-          className="mt-6"
+          className="mt-6 w-full"
         >
           <CardPremium variant="glow">
             <CardBodyPremium>
