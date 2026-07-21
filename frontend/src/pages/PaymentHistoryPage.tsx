@@ -1,15 +1,14 @@
 /**
- * 📜 Payment History Page
- * Refactored with new component library
+ * 📜 Payment History Page - Premium Design (Navy + Cyan)
  */
 
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { usePaymentStore } from '../store/paymentStore';
-import { Button } from '../components/Button';
-import { Card, CardHeader, CardBody, CardFooter } from '../components/Card';
-import { Badge } from '../components/Badge';
+import { ButtonPremium } from '../components/ButtonPremium';
+import { CardPremium, CardBodyPremium } from '../components/CardPremium';
+import { BadgePremium } from '../components/BadgePremium';
 
 type FilterStatus = 'all' | 'completed' | 'pending' | 'failed';
 
@@ -48,75 +47,92 @@ export const PaymentHistoryPage: React.FC = () => {
   }, [payments]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 p-4 md:p-6 overflow-hidden">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
         <motion.div
-          className="flex justify-between items-center mb-8"
+          className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 mb-8"
           initial={{ opacity: 0, y: -20 }}
           animate={{ opacity: 1, y: 0 }}
         >
           <div>
-            <h1 className="text-3xl font-bold text-gray-900 dark:text-white">
+            <h1 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent">
               📜 Historique Paiements
             </h1>
-            <p className="text-gray-600 dark:text-gray-400 text-sm">
-              {filteredAndSorted.length} transaction{filteredAndSorted.length > 1 ? 's' : ''}
+            <p className="text-cyan-200 text-sm md:text-base mt-1">
+              {filteredAndSorted.length} transaction{filteredAndSorted.length !== 1 ? 's' : ''}
             </p>
           </div>
-          <Button variant="outline" onClick={() => navigate('/dashboard')}>
+          <ButtonPremium
+            variant="secondary"
+            size="md"
+            onClick={() => navigate('/dashboard')}
+            className="whitespace-nowrap"
+          >
             ← Retour
-          </Button>
+          </ButtonPremium>
         </motion.div>
 
         {/* Stats */}
         <motion.div
-          className="grid grid-cols-1 md:grid-cols-3 gap-4 mb-8"
+          className="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mb-8"
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.1 }}
         >
-          <Card variant="elevated">
-            <CardBody>
-              <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">
-                Total Complétés
+          {/* Completed */}
+          <CardPremium variant="glow">
+            <CardBodyPremium className="space-y-3">
+              <p className="text-cyan-200 text-xs md:text-sm font-semibold">
+                ✓ Total Complétés
               </p>
-              <p className="text-3xl font-bold bg-gradient-to-r from-green-600 to-green-400 bg-clip-text text-transparent">
-                {stats.completed.toFixed(2)} Pi
+              <p className="text-3xl md:text-4xl font-black bg-gradient-to-r from-green-400 to-green-200 bg-clip-text text-transparent">
+                {stats.completed.toFixed(2)}
               </p>
-              <Badge variant="success" size="sm" className="mt-2">
+              <p className="text-green-300 font-bold text-sm md:text-base">
+                Pi
+              </p>
+              <BadgePremium variant="success" size="sm">
                 ✓ Succès
-              </Badge>
-            </CardBody>
-          </Card>
+              </BadgePremium>
+            </CardBodyPremium>
+          </CardPremium>
 
-          <Card variant="elevated">
-            <CardBody>
-              <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">
-                En Attente
+          {/* Pending */}
+          <CardPremium variant="glow">
+            <CardBodyPremium className="space-y-3">
+              <p className="text-cyan-200 text-xs md:text-sm font-semibold">
+                ⏳ En Attente
               </p>
-              <p className="text-3xl font-bold text-orange-500">
-                {stats.pending.toFixed(2)} Pi
+              <p className="text-3xl md:text-4xl font-black text-orange-300">
+                {stats.pending.toFixed(2)}
               </p>
-              <Badge variant="warning" size="sm" className="mt-2">
+              <p className="text-orange-300 font-bold text-sm md:text-base">
+                Pi
+              </p>
+              <BadgePremium variant="warning" size="sm">
                 ⏳ En cours
-              </Badge>
-            </CardBody>
-          </Card>
+              </BadgePremium>
+            </CardBodyPremium>
+          </CardPremium>
 
-          <Card variant="elevated">
-            <CardBody>
-              <p className="text-gray-500 dark:text-gray-400 text-sm font-medium">
-                Total Transactions
+          {/* Total */}
+          <CardPremium variant="glow">
+            <CardBodyPremium className="space-y-3">
+              <p className="text-cyan-200 text-xs md:text-sm font-semibold">
+                📊 Total Transactions
               </p>
-              <p className="text-3xl font-bold text-blue-500">
+              <p className="text-3xl md:text-4xl font-black bg-gradient-to-r from-cyan-300 to-cyan-100 bg-clip-text text-transparent">
                 {stats.total}
               </p>
-              <Badge variant="info" size="sm" className="mt-2">
-                📊 Au total
-              </Badge>
-            </CardBody>
-          </Card>
+              <p className="text-cyan-300 font-bold text-sm md:text-base">
+                Au total
+              </p>
+              <BadgePremium variant="info" size="sm">
+                📊 Tous
+              </BadgePremium>
+            </CardBodyPremium>
+          </CardPremium>
         </motion.div>
 
         {/* Filters & Sort */}
@@ -129,7 +145,7 @@ export const PaymentHistoryPage: React.FC = () => {
           {/* Filter Buttons */}
           <div className="flex gap-2 flex-wrap">
             {(['all', 'completed', 'pending', 'failed'] as const).map((status) => (
-              <Button
+              <ButtonPremium
                 key={status}
                 variant={filter === status ? 'primary' : 'outline'}
                 size="sm"
@@ -142,26 +158,26 @@ export const PaymentHistoryPage: React.FC = () => {
                   : status === 'pending'
                   ? '⏳ En attente'
                   : '✕ Échoués'}
-              </Button>
+              </ButtonPremium>
             ))}
           </div>
 
           {/* Sort Buttons */}
-          <div className="flex gap-2">
-            <Button
+          <div className="flex gap-2 flex-wrap">
+            <ButtonPremium
               variant={sortBy === 'date' ? 'primary' : 'outline'}
               size="sm"
               onClick={() => setSortBy('date')}
             >
               📅 Date
-            </Button>
-            <Button
+            </ButtonPremium>
+            <ButtonPremium
               variant={sortBy === 'amount' ? 'primary' : 'outline'}
               size="sm"
               onClick={() => setSortBy('amount')}
             >
               💰 Montant
-            </Button>
+            </ButtonPremium>
           </div>
         </motion.div>
 
@@ -171,90 +187,94 @@ export const PaymentHistoryPage: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
         >
-          <Card variant="elevated">
-            <CardBody>
+          <CardPremium variant="glow">
+            <CardBodyPremium>
               {filteredAndSorted.length === 0 ? (
-                <div className="text-center py-12">
-                  <p className="text-gray-500 dark:text-gray-400 text-lg font-medium">
+                <div className="text-center py-8 md:py-12">
+                  <p className="text-cyan-200 text-base md:text-lg font-semibold">
                     Aucune transaction trouvée
                   </p>
-                  <p className="text-gray-400 dark:text-gray-500 text-sm mt-2">
+                  <p className="text-cyan-300 text-sm md:text-base mt-2">
                     Commencez par créer un QR code de paiement
                   </p>
-                  <Button 
-                    variant="primary" 
-                    className="mt-4"
+                  <ButtonPremium
+                    variant="primary"
+                    size="md"
+                    className="mt-4 w-full md:w-auto"
                     onClick={() => navigate('/qr-generator')}
                   >
                     Créer un paiement
-                  </Button>
+                  </ButtonPremium>
                 </div>
               ) : (
-                <div className="space-y-2">
+                <div className="space-y-3">
                   {filteredAndSorted.map((payment, index) => (
                     <motion.div
                       key={payment.id}
-                      className="flex justify-between items-center p-4 rounded-lg border border-gray-200 dark:border-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800 transition-colors"
+                      className="flex justify-between items-center p-3 md:p-4 rounded-lg border border-cyan-500/30 bg-white/5 hover:bg-white/10 hover:border-cyan-400/50 transition-all"
                       initial={{ opacity: 0, x: -20 }}
                       animate={{ opacity: 1, x: 0 }}
                       transition={{ delay: index * 0.05 }}
                       whileHover={{ x: 4 }}
                     >
                       {/* Left */}
-                      <div className="flex-1">
-                        <div className="flex items-center gap-3">
-                          {/* Status Icon */}
-                          <div
-                            className={`w-10 h-10 rounded-full flex items-center justify-center text-lg ${
-                              payment.status === 'completed'
-                                ? 'bg-green-100 dark:bg-green-900/30 text-green-600'
-                                : payment.status === 'pending'
-                                ? 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-600'
-                                : 'bg-red-100 dark:bg-red-900/30 text-red-600'
-                            }`}
-                          >
-                            {payment.status === 'completed'
-                              ? '✓'
+                      <div className="flex items-center gap-3 flex-1 min-w-0">
+                        {/* Status Icon */}
+                        <div
+                          className={`w-8 md:w-10 h-8 md:h-10 rounded-full flex items-center justify-center text-sm md:text-lg font-bold flex-shrink-0 ${
+                            payment.status === 'completed'
+                              ? 'bg-green-500/30 text-green-300'
                               : payment.status === 'pending'
-                              ? '⏳'
-                              : '✕'}
-                          </div>
+                              ? 'bg-orange-500/30 text-orange-300'
+                              : 'bg-red-500/30 text-red-300'
+                          }`}
+                        >
+                          {payment.status === 'completed'
+                            ? '✓'
+                            : payment.status === 'pending'
+                            ? '⏳'
+                            : '✕'}
+                        </div>
 
-                          {/* Details */}
-                          <div>
-                            <p className="text-gray-900 dark:text-white font-semibold">
-                              {payment.memo}
-                            </p>
-                            <p className="text-xs text-gray-500 dark:text-gray-400">
-                              {payment.createdAt.toLocaleString('fr-FR')}
-                            </p>
-                          </div>
+                        {/* Details */}
+                        <div className="min-w-0 flex-1">
+                          <p className="text-white font-semibold text-sm md:text-base truncate">
+                            {payment.memo}
+                          </p>
+                          <p className="text-xs md:text-sm text-cyan-300">
+                            {payment.createdAt.toLocaleString('fr-FR')}
+                          </p>
                         </div>
                       </div>
 
                       {/* Right */}
-                      <div className="text-right">
-                        <p className="text-gray-900 dark:text-white font-bold text-lg">
+                      <div className="text-right ml-4 flex-shrink-0">
+                        <p className="text-white font-bold text-sm md:text-base">
                           {payment.amount.toFixed(2)} Pi
                         </p>
-                        <Badge variant={
-                          payment.status === 'completed' ? 'success' :
-                          payment.status === 'pending' ? 'warning' :
-                          'error'
-                        } size="sm">
+                        <BadgePremium
+                          variant={
+                            payment.status === 'completed'
+                              ? 'success'
+                              : payment.status === 'pending'
+                              ? 'warning'
+                              : 'error'
+                          }
+                          size="xs"
+                        >
                           {payment.status === 'completed'
                             ? 'Complété'
                             : payment.status === 'pending'
                             ? 'En attente'
                             : 'Échoué'}
-                        </Badge>
+                        </BadgePremium>
                       </div>
                     </motion.div>
                   ))}
                 </div>
               )}
-            </CardBody>
-          </Card>
+            </CardBodyPremium>
+          </CardPremium>
         </motion.div>
 
         {/* Export Button */}
@@ -264,9 +284,9 @@ export const PaymentHistoryPage: React.FC = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
         >
-          <Button variant="secondary" className="w-full">
+          <ButtonPremium variant="secondary" size="md" className="w-full">
             📥 Exporter en CSV
-          </Button>
+          </ButtonPremium>
         </motion.div>
       </div>
     </div>

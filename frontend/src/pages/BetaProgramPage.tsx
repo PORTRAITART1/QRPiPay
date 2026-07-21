@@ -62,7 +62,7 @@ export const BetaProgramPage: React.FC = () => {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 py-12 px-4">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-blue-900 to-slate-800 py-12 px-4 overflow-hidden">
       {/* Background animation */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <motion.div

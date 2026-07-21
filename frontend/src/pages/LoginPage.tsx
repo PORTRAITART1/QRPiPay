@@ -163,7 +163,7 @@ export const LoginPage: React.FC = () => {
             </CardPremium>
           </motion.div>
 
-          {/* Stats cards - IMPROVED CLARITY */}
+          {/* Stats cards - FIXED: Numbers now CYAN (visible) */}
           <motion.div
             className="mt-8 grid grid-cols-2 gap-4"
             initial={{ opacity: 0, y: 20 }}
@@ -174,8 +174,8 @@ export const LoginPage: React.FC = () => {
             <CardPremium variant="outline">
               <CardBodyPremium>
                 <div className="text-center space-y-2">
-                  {/* Number - BIGGER and BRIGHTER */}
-                  <div className="text-4xl font-black text-white">
+                  {/* Number - CYAN gradient (VISIBLE) */}
+                  <div className="text-4xl font-black bg-gradient-to-r from-cyan-300 to-cyan-100 bg-clip-text text-transparent">
                     1,247
                   </div>
                   
@@ -197,8 +197,8 @@ export const LoginPage: React.FC = () => {
             <CardPremium variant="outline">
               <CardBodyPremium>
                 <div className="text-center space-y-2">
-                  {/* Number - BIGGER and BRIGHTER */}
-                  <div className="text-4xl font-black text-white">
+                  {/* Number - CYAN gradient (VISIBLE) */}
+                  <div className="text-4xl font-black bg-gradient-to-r from-cyan-300 to-cyan-100 bg-clip-text text-transparent">
                     12,456
                   </div>
                   
