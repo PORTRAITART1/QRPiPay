@@ -163,31 +163,55 @@ export const LoginPage: React.FC = () => {
             </CardPremium>
           </motion.div>
 
-          {/* Stats cards */}
+          {/* Stats cards - IMPROVED CLARITY */}
           <motion.div
             className="mt-8 grid grid-cols-2 gap-4"
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.6, delay: 0.2 }}
           >
+            {/* Card 1: Active Merchants */}
             <CardPremium variant="outline">
               <CardBodyPremium>
-                <div className="text-center">
-                  <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                <div className="text-center space-y-2">
+                  {/* Number - BIGGER and BRIGHTER */}
+                  <div className="text-4xl font-black text-white">
                     1,247
                   </div>
-                  <div className="text-xs text-cyan-100 mt-2">Commerçants actifs</div>
+                  
+                  {/* Icon + Label - CLEAR and BOLD */}
+                  <div className="flex flex-col items-center gap-1">
+                    <span className="text-2xl">🏪</span>
+                    <p className="text-base font-bold text-white leading-tight">
+                      Commerçants
+                    </p>
+                    <p className="text-xs font-semibold text-cyan-300">
+                      actifs
+                    </p>
+                  </div>
                 </div>
               </CardBodyPremium>
             </CardPremium>
 
+            {/* Card 2: Pi Processed */}
             <CardPremium variant="outline">
               <CardBodyPremium>
-                <div className="text-center">
-                  <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
+                <div className="text-center space-y-2">
+                  {/* Number - BIGGER and BRIGHTER */}
+                  <div className="text-4xl font-black text-white">
                     12,456
                   </div>
-                  <div className="text-xs text-cyan-100 mt-2">Pi traités</div>
+                  
+                  {/* Icon + Label - CLEAR and BOLD */}
+                  <div className="flex flex-col items-center gap-1">
+                    <span className="text-2xl">💰</span>
+                    <p className="text-base font-bold text-white leading-tight">
+                      Pi
+                    </p>
+                    <p className="text-xs font-semibold text-cyan-300">
+                      traités
+                    </p>
+                  </div>
                 </div>
               </CardBodyPremium>
             </CardPremium>

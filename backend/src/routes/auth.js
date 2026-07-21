@@ -2,29 +2,44 @@ const express = require('express');
 const router = express.Router();
 const { PrismaClient } = require('@prisma/client');
 const jwt = require('jsonwebtoken');
-const piAuthService = require('../services/piAuth.service.js');
+const axios = require('axios');
 
 const prisma = new PrismaClient();
 
-// Pi Authentication Callback
-router.post('/callback', async (req, res) => {
+/**
+ * Validate Pi Network Access Token
+ * Frontend sends accessToken, backend verifies with Pi API
+ */
+router.post('/validate-token', async (req, res) => {
   try {
     const { accessToken } = req.body;
 
     if (!accessToken) {
-      return res.status(400).json({ error: 'accessToken required' });
+      return res.status(400).json({ 
+        valid: false, 
+        error: 'Access token required' 
+      });
     }
 
-    // Valide le token Pi
-    const validation = await piAuthService.validateAccessToken(accessToken);
-    
-    if (!validation.success) {
-      return res.status(401).json({ error: validation.error });
+    // Validate token with Pi API
+    // GET https://api.minepi.com/v2/me with Authorization: Bearer <accessToken>
+    const response = await axios.get('https://api.minepi.com/v2/me', {
+      headers: {
+        'Authorization': `Bearer ${accessToken}`,
+        'Content-Type': 'application/json'
+      }
+    });
+
+    const piUser = response.data;
+
+    if (!piUser || !piUser.uid) {
+      return res.status(401).json({ 
+        valid: false, 
+        error: 'Invalid Pi token' 
+      });
     }
 
-    const piUser = validation.user;
-
-    // Crée ou met à jour l'utilisateur en base
+    // Create or update user in database
     const user = await prisma.user.upsert({
       where: { piAddress: piUser.uid },
       update: { verified: true },
@@ -36,36 +51,43 @@ router.post('/callback', async (req, res) => {
       }
     });
 
-    // Génère un JWT session
-    const token = jwt.sign(
+    // Generate session token (JWT)
+    const sessionToken = jwt.sign(
       { 
         id: user.id,
         piAddress: user.piAddress,
-        username: user.username
+        username: user.username,
+        piUid: piUser.uid
       },
       process.env.JWT_SECRET || 'dev-secret',
       { expiresIn: '24h' }
     );
 
     res.json({
-      success: true,
+      valid: true,
       user: {
         id: user.id,
         piAddress: user.piAddress,
         username: user.username,
         verified: user.verified
       },
-      token: token,
-      message: '✅ Authenticated with Pi Network'
+      sessionToken: sessionToken,
+      message: '✅ Token validated successfully'
     });
 
   } catch (error) {
-    console.error('❌ Auth error:', error);
-    res.status(500).json({ error: 'Authentication failed' });
+    console.error('❌ Token validation error:', error.response?.data || error.message);
+    
+    return res.status(401).json({ 
+      valid: false, 
+      error: 'Token validation failed: ' + (error.response?.data?.error || error.message)
+    });
   }
 });
 
-// Get current user
+/**
+ * Get current authenticated user
+ */
 router.get('/me', async (req, res) => {
   try {
     const token = req.headers.authorization?.split(' ')[1];
@@ -79,10 +101,34 @@ router.get('/me', async (req, res) => {
       where: { id: decoded.id }
     });
 
-    res.json(user);
+    if (!user) {
+      return res.status(404).json({ error: 'User not found' });
+    }
+
+    res.json({
+      success: true,
+      user: {
+        id: user.id,
+        piAddress: user.piAddress,
+        username: user.username,
+        verified: user.verified
+      }
+    });
   } catch (error) {
+    console.error('❌ Auth error:', error);
     res.status(401).json({ error: 'Invalid token' });
   }
+});
+
+/**
+ * Logout (frontend should clear session)
+ */
+router.post('/logout', (req, res) => {
+  // Frontend clears token from storage
+  res.json({ 
+    success: true, 
+    message: 'Logged out successfully' 
+  });
 });
 
 module.exports = router;

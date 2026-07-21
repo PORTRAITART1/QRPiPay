@@ -1,10 +1,11 @@
 /**
- * 🎭 App Component - Router setup
+ * 🎭 App Component - Router setup with Pi Network initialization
  */
 
 import React, { useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useAuthStore } from './store/authStore';
+import { piService } from './services/PiService';
 import { LoginPage } from './pages/LoginPage';
 import { DashboardPage } from './pages/DashboardPage';
 import { QRGeneratorPage } from './pages/QRGeneratorPage';
@@ -26,7 +27,44 @@ const ProtectedRoute: React.FC<{ element: React.ReactNode }> = ({ element }) => 
 };
 
 function App() {
-  const { isAuthenticated, user } = useAuthStore();
+  const { isAuthenticated, user, authenticate } = useAuthStore();
+
+  /**
+   * Initialize Pi Network SDK on app load
+   * Attempt automatic authentication if Pi Browser detected
+   */
+  useEffect(() => {
+    const initializePi = async () => {
+      console.log('🥧 QRPiPay initializing...');
+
+      try {
+        // Initialize Pi SDK
+        const initialized = await piService.initialize();
+        
+        if (!initialized) {
+          console.warn('⚠️ Pi SDK could not be initialized (might not be in Pi Browser)');
+          return;
+        }
+
+        console.log('✅ Pi SDK initialized successfully');
+
+        // Attempt automatic authentication if not already authenticated
+        if (!isAuthenticated && window.Pi) {
+          console.log('🔐 Attempting automatic Pi authentication...');
+          try {
+            await authenticate();
+            console.log('✅ Automatic authentication successful');
+          } catch (error) {
+            console.warn('ℹ️ Automatic authentication not available (user may need to click sign-in)');
+          }
+        }
+      } catch (error) {
+        console.error('❌ Pi initialization error:', error);
+      }
+    };
+
+    initializePi();
+  }, []);
 
   useEffect(() => {
     console.log('🥧 QRPiPay initialized');

@@ -1,14 +1,19 @@
 /**
  * 🏪 Auth Store - Zustand
- * Global state management pour authentification
+ * Global state management pour authentification Pi Network
  */
 
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { mockPiSDK, MockPiUser } from '../services/mockPiSDK';
+import { piService } from '../services/PiService';
+
+export interface AuthUser {
+  uid: string;
+  username: string;
+}
 
 interface AuthState {
-  user: MockPiUser | null;
+  user: AuthUser | null;
   accessToken: string | null;
   isAuthenticated: boolean;
   isLoading: boolean;
@@ -16,46 +21,105 @@ interface AuthState {
 
   // Actions
   authenticate: () => Promise<void>;
+  validateToken: (accessToken: string) => Promise<boolean>;
   logout: () => void;
   setError: (error: string | null) => void;
 }
 
 export const useAuthStore = create<AuthState>()(
   persist(
-    (set) => ({
+    (set, get) => ({
       user: null,
       accessToken: null,
       isAuthenticated: false,
       isLoading: false,
       error: null,
 
+      /**
+       * Authenticate with Pi Network
+       */
       authenticate: async () => {
         set({ isLoading: true, error: null });
         try {
-          const result = await mockPiSDK.authenticate();
+          // Authenticate with Pi Network
+          const piResult = await piService.authenticate(['username']);
+
+          if (!piResult.success || !piResult.accessToken || !piResult.user) {
+            throw new Error(piResult.error || 'Authentication failed');
+          }
+
+          // Validate token on backend
+          const isValid = await get().validateToken(piResult.accessToken);
+
+          if (!isValid) {
+            throw new Error('Token validation failed');
+          }
+
+          // Set authenticated state
           set({
-            user: result.user,
-            accessToken: result.accessToken,
+            user: piResult.user,
+            accessToken: piResult.accessToken,
             isAuthenticated: true,
             isLoading: false,
           });
+
+          console.log(`✅ Successfully authenticated as ${piResult.user.username}`);
         } catch (error) {
+          const errorMessage = error instanceof Error ? error.message : 'Authentication failed';
+          console.error('❌ Authentication error:', errorMessage);
           set({
-            error: error instanceof Error ? error.message : 'Authentication failed',
+            error: errorMessage,
             isLoading: false,
+            isAuthenticated: false,
           });
+          throw error;
         }
       },
 
+      /**
+       * Validate access token on backend
+       */
+      validateToken: async (accessToken: string): Promise<boolean> => {
+        try {
+          const response = await fetch('/api/auth/validate-token', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ accessToken }),
+          });
+
+          if (!response.ok) {
+            console.error('❌ Token validation failed:', response.statusText);
+            return false;
+          }
+
+          const data = await response.json();
+          console.log('✅ Token validated successfully');
+          return data.valid === true;
+        } catch (error) {
+          console.error('❌ Token validation error:', error);
+          return false;
+        }
+      },
+
+      /**
+       * Logout
+       */
       logout: () => {
+        piService.logout();
         set({
           user: null,
           accessToken: null,
           isAuthenticated: false,
           error: null,
         });
+        console.log('✅ Logged out');
       },
 
+      /**
+       * Set error message
+       */
       setError: (error) => {
         set({ error });
       },
