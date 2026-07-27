@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Modal Component - Design System
  * Dialog/Modal with overlay
  */
@@ -70,7 +70,7 @@ export const Modal = React.forwardRef<HTMLDivElement, ModalProps>(
                   onClick={onClose}
                   aria-label="Close modal"
                 >
-                  ✕
+                  âœ•
                 </button>
               )}
             </div>

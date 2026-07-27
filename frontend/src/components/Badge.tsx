@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Badge Component - Design System
  * Status and category badges
  */
@@ -46,7 +46,7 @@ export const Badge = React.forwardRef<HTMLSpanElement, BadgeProps>(
             aria-label="Dismiss"
             type="button"
           >
-            ✕
+            âœ•
           </button>
         )}
       </span>

@@ -1,5 +1,5 @@
-/**
- * 🔲 QR Code Generator Page - Premium Design (Navy + Cyan)
+﻿/**
+ * ðŸ”² QR Code Generator Page - Premium Design (Navy + Cyan)
  * PERFECTLY CENTERED CONTENT
  */
 
@@ -38,7 +38,7 @@ export const QRGeneratorPage: React.FC = () => {
     const newErrors = { amount: '', description: '' };
 
     if (!amount || parseFloat(amount) <= 0) {
-      newErrors.amount = 'Le montant doit être supérieur à 0';
+      newErrors.amount = 'Le montant doit Ãªtre supÃ©rieur Ã  0';
     }
 
     if (parseFloat(amount) > 1000000) {
@@ -50,7 +50,7 @@ export const QRGeneratorPage: React.FC = () => {
     }
 
     if (description.length > 200) {
-      newErrors.description = 'Maximum 200 caractères';
+      newErrors.description = 'Maximum 200 caractÃ¨res';
     }
 
     setErrors(newErrors);
@@ -89,7 +89,7 @@ export const QRGeneratorPage: React.FC = () => {
 
       setShowQR(true);
     } catch (error) {
-      setError(error instanceof Error ? error.message : 'Erreur lors de la génération');
+      setError(error instanceof Error ? error.message : 'Erreur lors de la gÃ©nÃ©ration');
     } finally {
       setIsGenerating(false);
       setLoading(false);
@@ -97,7 +97,7 @@ export const QRGeneratorPage: React.FC = () => {
   };
 
   const handleNumPad = (num: string) => {
-    if (num === '⌫') {
+    if (num === 'âŒ«') {
       setAmount(amount.slice(0, -1));
     } else if (num === '.') {
       if (!amount.includes('.')) {
@@ -135,7 +135,7 @@ export const QRGeneratorPage: React.FC = () => {
                 transition={{ delay: 0.1 }}
               >
                 <h1 className="text-3xl md:text-4xl font-black text-white">
-                  QR Prêt! ✓
+                  QR PrÃªt! âœ“
                 </h1>
                 <p className="text-cyan-200 text-sm md:text-base">
                   Montrez ce code au client
@@ -168,7 +168,7 @@ export const QRGeneratorPage: React.FC = () => {
                 transition={{ delay: 0.3 }}
               >
                 <p className="text-cyan-200 text-xs md:text-sm font-semibold">
-                  MONTANT À PAYER
+                  MONTANT Ã€ PAYER
                 </p>
                 <p className="text-4xl md:text-5xl font-black bg-gradient-to-r from-cyan-300 to-cyan-100 bg-clip-text text-transparent">
                   {qrData.amount.toFixed(2)}
@@ -189,7 +189,7 @@ export const QRGeneratorPage: React.FC = () => {
                   {qrData.memo}
                 </p>
                 <p className="text-xs md:text-sm text-cyan-300 mt-2 text-center">
-                  Généré à {new Date(qrData.timestamp).toLocaleTimeString('fr-FR')}
+                  GÃ©nÃ©rÃ© Ã  {new Date(qrData.timestamp).toLocaleTimeString('fr-FR')}
                 </p>
               </motion.div>
 
@@ -201,7 +201,7 @@ export const QRGeneratorPage: React.FC = () => {
                 transition={{ delay: 0.5 }}
               >
                 <BadgePremium variant="info" size="md">
-                  ⏱️ Expire dans 05:00
+                  â±ï¸ Expire dans 05:00
                 </BadgePremium>
               </motion.div>
 
@@ -213,7 +213,7 @@ export const QRGeneratorPage: React.FC = () => {
                 transition={{ delay: 0.6 }}
               >
                 <p className="text-xs md:text-sm text-cyan-100 text-center font-medium">
-                  💡 Le client scanne ce code avec son application Pi Browser
+                  ðŸ’¡ Le client scanne ce code avec son application Pi Browser
                 </p>
               </motion.div>
 
@@ -230,7 +230,7 @@ export const QRGeneratorPage: React.FC = () => {
                   onClick={() => setShowQR(false)}
                   className="w-full"
                 >
-                  ← Retour
+                  â† Retour
                 </ButtonPremium>
                 <ButtonPremium
                   variant="primary"
@@ -238,7 +238,7 @@ export const QRGeneratorPage: React.FC = () => {
                   onClick={handleReset}
                   className="w-full"
                 >
-                  Nouveau →
+                  Nouveau â†’
                 </ButtonPremium>
               </motion.div>
             </CardBodyPremium>
@@ -260,10 +260,10 @@ export const QRGeneratorPage: React.FC = () => {
         >
           <div>
             <h1 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent">
-              Nouveau Paiement 🔲
+              Nouveau Paiement ðŸ”²
             </h1>
             <p className="text-cyan-200 text-sm md:text-base mt-1">
-              Générez un QR code de paiement
+              GÃ©nÃ©rez un QR code de paiement
             </p>
           </div>
           <ButtonPremium
@@ -272,7 +272,7 @@ export const QRGeneratorPage: React.FC = () => {
             onClick={() => navigate('/dashboard')}
             className="whitespace-nowrap"
           >
-            ← Retour
+            â† Retour
           </ButtonPremium>
         </motion.div>
 
@@ -288,7 +288,7 @@ export const QRGeneratorPage: React.FC = () => {
               {/* Amount Input */}
               <div className="space-y-2 w-full">
                 <label className="text-white font-bold text-sm md:text-base">
-                  💰 Montant en Pi
+                  ðŸ’° Montant en Pi
                 </label>
                 <InputPremium
                   type="number"
@@ -299,7 +299,7 @@ export const QRGeneratorPage: React.FC = () => {
                 />
                 {errors.amount && (
                   <p className="text-red-400 text-xs md:text-sm font-medium">
-                    ⚠️ {errors.amount}
+                    âš ï¸ {errors.amount}
                   </p>
                 )}
                 <p className="text-cyan-300 text-xs md:text-sm font-medium">
@@ -310,10 +310,10 @@ export const QRGeneratorPage: React.FC = () => {
               {/* Numeric Keypad */}
               <div className="bg-white/5 border border-cyan-500/30 rounded-xl p-4 space-y-3 w-full">
                 <p className="text-cyan-200 text-xs md:text-sm font-bold uppercase">
-                  ⌨️ Clavier Numérique
+                  âŒ¨ï¸ Clavier NumÃ©rique
                 </p>
                 <div className="grid grid-cols-4 gap-2 w-full">
-                  {['7', '8', '9', '⌫', '4', '5', '6', '.', '1', '2', '3', '0'].map(
+                  {['7', '8', '9', 'âŒ«', '4', '5', '6', '.', '1', '2', '3', '0'].map(
                     (num) => (
                       <motion.button
                         key={num}
@@ -332,22 +332,22 @@ export const QRGeneratorPage: React.FC = () => {
               {/* Description */}
               <div className="space-y-2 w-full">
                 <label className="text-white font-bold text-sm md:text-base">
-                  📝 Description (optionnel)
+                  ðŸ“ Description (optionnel)
                 </label>
                 <InputPremium
                   type="text"
                   value={description}
                   onChange={(e) => setDescription(e.target.value.slice(0, 200))}
-                  placeholder="Ex: Café Latte + Croissant"
+                  placeholder="Ex: CafÃ© Latte + Croissant"
                   disabled={false}
                 />
                 {errors.description && (
                   <p className="text-red-400 text-xs md:text-sm font-medium">
-                    ⚠️ {errors.description}
+                    âš ï¸ {errors.description}
                   </p>
                 )}
                 <p className="text-cyan-300 text-xs md:text-sm font-medium">
-                  {description.length}/200 caractères
+                  {description.length}/200 caractÃ¨res
                 </p>
               </div>
 
@@ -382,7 +382,7 @@ export const QRGeneratorPage: React.FC = () => {
                 disabled={isGenerating || !amount}
                 className="w-full text-base md:text-lg font-bold"
               >
-                🔲 Générer QR Code
+                ðŸ”² GÃ©nÃ©rer QR Code
               </ButtonPremium>
             </CardBodyPremium>
           </CardPremium>
@@ -398,12 +398,12 @@ export const QRGeneratorPage: React.FC = () => {
           <CardPremium variant="glow">
             <CardBodyPremium>
               <h3 className="text-sm md:text-base font-bold text-white mb-3">
-                💡 Comment ça fonctionne?
+                ðŸ’¡ Comment Ã§a fonctionne?
               </h3>
               <ol className="text-xs md:text-sm text-cyan-200 space-y-2 list-decimal list-inside font-medium">
                 <li>Entrez le montant en Pi</li>
                 <li>Ajoutez une description (optionnel)</li>
-                <li>Générez le QR code</li>
+                <li>GÃ©nÃ©rez le QR code</li>
                 <li>Le client scanne le code</li>
                 <li>La transaction se confirme automatiquement</li>
               </ol>

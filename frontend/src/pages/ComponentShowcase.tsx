@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Component Showcase Page
  * Interactive demonstration of all design system components
  */
@@ -32,7 +32,7 @@ export const ComponentShowcase: React.FC = () => {
     {
       id: 'buttons',
       label: 'Buttons',
-      icon: '🔘',
+      icon: 'ðŸ”˜',
       content: (
         <div className="space-y-6">
           <div>
@@ -70,7 +70,7 @@ export const ComponentShowcase: React.FC = () => {
     {
       id: 'forms',
       label: 'Forms',
-      icon: '📋',
+      icon: 'ðŸ“‹',
       content: (
         <div className="space-y-6">
           <Input
@@ -108,7 +108,7 @@ export const ComponentShowcase: React.FC = () => {
     {
       id: 'badges',
       label: 'Badges',
-      icon: '🏷️',
+      icon: 'ðŸ·ï¸',
       content: (
         <div className="space-y-6">
           <div>
@@ -135,13 +135,13 @@ export const ComponentShowcase: React.FC = () => {
           <div>
             <h3 className="text-lg font-bold mb-4">With Icons</h3>
             <div className="flex flex-wrap gap-3">
-              <Badge icon="✨" variant="primary">
+              <Badge icon="âœ¨" variant="primary">
                 Starred
               </Badge>
-              <Badge icon="✓" variant="success">
+              <Badge icon="âœ“" variant="success">
                 Completed
               </Badge>
-              <Badge icon="⚠" variant="warning">
+              <Badge icon="âš " variant="warning">
                 Warning
               </Badge>
             </div>
@@ -152,7 +152,7 @@ export const ComponentShowcase: React.FC = () => {
     {
       id: 'notifications',
       label: 'Notifications',
-      icon: '🔔',
+      icon: 'ðŸ””',
       content: (
         <div className="space-y-4">
           <Button
@@ -176,7 +176,7 @@ export const ComponentShowcase: React.FC = () => {
 
           <div className="mt-6 p-4 bg-blue-50 dark:bg-blue-900/20 rounded-lg border border-blue-200 dark:border-blue-800">
             <p className="text-sm text-blue-900 dark:text-blue-100">
-              💡 Click any button to see a toast notification appear in the
+              ðŸ’¡ Click any button to see a toast notification appear in the
               bottom-right corner
             </p>
           </div>
@@ -189,13 +189,13 @@ export const ComponentShowcase: React.FC = () => {
     {
       id: 'edit',
       label: 'Edit',
-      icon: '✏️',
+      icon: 'âœï¸',
       onClick: () => handleShowToast('info'),
     },
     {
       id: 'view',
       label: 'View',
-      icon: '👁️',
+      icon: 'ðŸ‘ï¸',
       onClick: () => handleShowToast('info'),
     },
     {
@@ -205,7 +205,7 @@ export const ComponentShowcase: React.FC = () => {
     {
       id: 'delete',
       label: 'Delete',
-      icon: '🗑️',
+      icon: 'ðŸ—‘ï¸',
       onClick: () => handleShowToast('error'),
     },
   ];
@@ -220,7 +220,7 @@ export const ComponentShowcase: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
         >
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
-            🎨 Component Showcase
+            ðŸŽ¨ Component Showcase
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
             Interactive demonstration of all design system components
@@ -273,7 +273,7 @@ export const ComponentShowcase: React.FC = () => {
             </CardHeader>
             <CardBody>
               <Dropdown
-                trigger={<Button variant="outline">⋯ Actions</Button>}
+                trigger={<Button variant="outline">â‹¯ Actions</Button>}
                 items={dropdownItems}
               />
             </CardBody>

@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import './Alert.css';
 
 interface AlertProps {
@@ -11,14 +11,14 @@ export function Alert({ type, message, onClose }: AlertProps) {
   return (
     <div className={`alert alert-${type}`}>
       <div className="alert-content">
-        {type === 'success' && <span>✅</span>}
-        {type === 'error' && <span>❌</span>}
-        {type === 'warning' && <span>⚠️</span>}
-        {type === 'info' && <span>ℹ️</span>}
+        {type === 'success' && <span>âœ…</span>}
+        {type === 'error' && <span>âŒ</span>}
+        {type === 'warning' && <span>âš ï¸</span>}
+        {type === 'info' && <span>â„¹ï¸</span>}
         <span>{message}</span>
       </div>
       {onClose && (
-        <button className="alert-close" onClick={onClose}>×</button>
+        <button className="alert-close" onClick={onClose}>Ã—</button>
       )}
     </div>
   );

@@ -1,5 +1,5 @@
-/**
- * 📈 Analytics Page - Premium Design (Navy + Cyan)
+﻿/**
+ * ðŸ“ˆ Analytics Page - Premium Design (Navy + Cyan)
  */
 
 import React from 'react';
@@ -30,7 +30,7 @@ export const AnalyticsPage: React.FC = () => {
         >
           <div>
             <h1 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent">
-              📊 Analytics
+              ðŸ“Š Analytics
             </h1>
             <p className="text-cyan-200 text-sm md:text-base mt-1">
               Vue d'ensemble de vos paiements
@@ -42,7 +42,7 @@ export const AnalyticsPage: React.FC = () => {
             onClick={() => navigate('/dashboard')}
             className="whitespace-nowrap"
           >
-            ← Retour
+            â† Retour
           </ButtonPremium>
         </motion.div>
 
@@ -57,7 +57,7 @@ export const AnalyticsPage: React.FC = () => {
           <CardPremium variant="glow">
             <CardBodyPremium className="space-y-2">
               <p className="text-cyan-200 text-xs md:text-sm font-bold">
-                💰 REVENU TOTAL
+                ðŸ’° REVENU TOTAL
               </p>
               <p className="text-2xl md:text-3xl font-black bg-gradient-to-r from-cyan-300 to-cyan-100 bg-clip-text text-transparent">
                 25,430.00
@@ -66,7 +66,7 @@ export const AnalyticsPage: React.FC = () => {
                 Pi
               </p>
               <BadgePremium variant="success" size="xs">
-                ↑ 12% ce mois
+                â†‘ 12% ce mois
               </BadgePremium>
             </CardBodyPremium>
           </CardPremium>
@@ -75,7 +75,7 @@ export const AnalyticsPage: React.FC = () => {
           <CardPremium variant="glow">
             <CardBodyPremium className="space-y-2">
               <p className="text-cyan-200 text-xs md:text-sm font-bold">
-                📋 TRANSACTIONS
+                ðŸ“‹ TRANSACTIONS
               </p>
               <p className="text-2xl md:text-3xl font-black text-cyan-300">
                 1,247
@@ -84,7 +84,7 @@ export const AnalyticsPage: React.FC = () => {
                 Au total
               </p>
               <BadgePremium variant="success" size="xs">
-                ↑ 5% ce mois
+                â†‘ 5% ce mois
               </BadgePremium>
             </CardBodyPremium>
           </CardPremium>
@@ -93,7 +93,7 @@ export const AnalyticsPage: React.FC = () => {
           <CardPremium variant="glow">
             <CardBodyPremium className="space-y-2">
               <p className="text-cyan-200 text-xs md:text-sm font-bold">
-                💵 MONTANT MOYEN
+                ðŸ’µ MONTANT MOYEN
               </p>
               <p className="text-2xl md:text-3xl font-black bg-gradient-to-r from-green-300 to-green-100 bg-clip-text text-transparent">
                 20.39
@@ -102,7 +102,7 @@ export const AnalyticsPage: React.FC = () => {
                 Pi
               </p>
               <BadgePremium variant="success" size="xs">
-                ↑ 3% ce mois
+                â†‘ 3% ce mois
               </BadgePremium>
             </CardBodyPremium>
           </CardPremium>
@@ -111,16 +111,16 @@ export const AnalyticsPage: React.FC = () => {
           <CardPremium variant="glow">
             <CardBodyPremium className="space-y-2">
               <p className="text-cyan-200 text-xs md:text-sm font-bold">
-                📈 TAUX CONVERSION
+                ðŸ“ˆ TAUX CONVERSION
               </p>
               <p className="text-2xl md:text-3xl font-black text-orange-300">
                 98.5%
               </p>
               <p className="text-orange-300 font-semibold text-xs md:text-sm">
-                Réussite
+                RÃ©ussite
               </p>
               <BadgePremium variant="success" size="xs">
-                ✓ Excellent
+                âœ“ Excellent
               </BadgePremium>
             </CardBodyPremium>
           </CardPremium>
@@ -137,7 +137,7 @@ export const AnalyticsPage: React.FC = () => {
           <CardPremium variant="glow">
             <CardBodyPremium>
               <h2 className="text-lg md:text-xl font-black text-white mb-4">
-                📅 Activité Cette Semaine
+                ðŸ“… ActivitÃ© Cette Semaine
               </h2>
               <div className="space-y-3">
                 {[
@@ -175,7 +175,7 @@ export const AnalyticsPage: React.FC = () => {
           <CardPremium variant="glow">
             <CardBodyPremium>
               <h2 className="text-lg md:text-xl font-black text-white mb-4">
-                🏆 Transactions Majeures
+                ðŸ† Transactions Majeures
               </h2>
               <div className="space-y-3">
                 {[
@@ -218,10 +218,10 @@ export const AnalyticsPage: React.FC = () => {
           transition={{ delay: 0.3 }}
         >
           <ButtonPremium variant="secondary" size="md" className="w-full text-base font-bold">
-            📥 Exporter CSV
+            ðŸ“¥ Exporter CSV
           </ButtonPremium>
           <ButtonPremium variant="secondary" size="md" className="w-full text-base font-bold">
-            📊 Générer Rapport PDF
+            ðŸ“Š GÃ©nÃ©rer Rapport PDF
           </ButtonPremium>
         </motion.div>
       </div>

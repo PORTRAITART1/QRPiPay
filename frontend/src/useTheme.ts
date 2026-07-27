@@ -1,8 +1,8 @@
-import { useState, useEffect } from 'react';
+﻿import { useState, useEffect } from 'react';
 
 export function useTheme() {
   const [isDark, setIsDark] = useState(() => {
-    // Vérifie localStorage ou préférence système
+    // VÃ©rifie localStorage ou prÃ©fÃ©rence systÃ¨me
     const saved = localStorage.getItem('theme');
     if (saved) return saved === 'dark';
     return window.matchMedia('(prefers-color-scheme: dark)').matches;

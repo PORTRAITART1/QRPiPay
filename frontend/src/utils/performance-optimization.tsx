@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Frontend Performance Optimization - Code Splitting & Lazy Loading
  * App.tsx with optimized routing
  */

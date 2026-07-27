@@ -1,5 +1,5 @@
-/**
- * 🎨 Header Component - Responsive Navigation
+﻿/**
+ * ðŸŽ¨ Header Component - Responsive Navigation
  * Desktop + Mobile support
  */
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+﻿import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { Card } from './Card';
 import { Skeleton } from './Skeleton';
@@ -36,7 +36,7 @@ export function AnalyticsDashboard() {
         setStats(response.data.stats);
       }
     } catch (err) {
-      console.error('❌ Error fetching stats:', err);
+      console.error('âŒ Error fetching stats:', err);
       setError('Failed to load analytics');
     } finally {
       setLoading(false);
@@ -65,7 +65,7 @@ export function AnalyticsDashboard() {
 
   return (
     <div className="space-y-6">
-      <h2 className="text-2xl font-bold">📊 Analytics</h2>
+      <h2 className="text-2xl font-bold">ðŸ“Š Analytics</h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {/* Total Payments */}
@@ -95,7 +95,7 @@ export function AnalyticsDashboard() {
         {/* Total Amount */}
         <Card title="Total Amount">
           <div className="text-4xl font-bold text-blue-600">
-            π {stats?.totalAmount.toFixed(2)}
+            Ï€ {stats?.totalAmount.toFixed(2)}
           </div>
           <p className="text-gray-600 text-sm mt-2">Total Pi received</p>
         </Card>
@@ -103,7 +103,7 @@ export function AnalyticsDashboard() {
         {/* Average Amount */}
         <Card title="Average Amount">
           <div className="text-4xl font-bold text-indigo-600">
-            π {stats?.averageAmount}
+            Ï€ {stats?.averageAmount}
           </div>
           <p className="text-gray-600 text-sm mt-2">Per transaction</p>
         </Card>
@@ -122,7 +122,7 @@ export function AnalyticsDashboard() {
         onClick={fetchStats}
         className="px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700"
       >
-        🔄 Refresh
+        ðŸ”„ Refresh
       </button>
     </div>
   );

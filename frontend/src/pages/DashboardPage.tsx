@@ -1,5 +1,5 @@
-/**
- * 📊 Dashboard Page - Premium Design (Navy + Cyan)
+﻿/**
+ * ðŸ“Š Dashboard Page - Premium Design (Navy + Cyan)
  * Main interface for merchants
  */
 
@@ -44,10 +44,10 @@ export const DashboardPage: React.FC = () => {
         >
           <div>
             <h1 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent">
-              Bonjour, {user?.username}! 👋
+              Bonjour, {user?.username}! ðŸ‘‹
             </h1>
             <p className="text-cyan-200 text-sm md:text-base mt-1">
-              Voici votre activité d'aujourd'hui
+              Voici votre activitÃ© d'aujourd'hui
             </p>
           </div>
           <ButtonPremium
@@ -56,7 +56,7 @@ export const DashboardPage: React.FC = () => {
             onClick={logout}
             className="whitespace-nowrap"
           >
-            Déconnexion
+            DÃ©connexion
           </ButtonPremium>
         </motion.div>
 
@@ -73,7 +73,7 @@ export const DashboardPage: React.FC = () => {
               <div className="flex justify-between items-start">
                 <div className="flex-1">
                   <p className="text-cyan-200 text-xs md:text-sm font-semibold">
-                    💰 Total Aujourd'hui
+                    ðŸ’° Total Aujourd'hui
                   </p>
                   <p className="text-3xl md:text-4xl font-black bg-gradient-to-r from-cyan-300 to-cyan-100 bg-clip-text text-transparent mt-2">
                     {totalToday}
@@ -84,7 +84,7 @@ export const DashboardPage: React.FC = () => {
                 </div>
               </div>
               <BadgePremium variant="success" size="sm">
-                ✓ Complétés
+                âœ“ ComplÃ©tÃ©s
               </BadgePremium>
             </CardBodyPremium>
           </CardPremium>
@@ -95,7 +95,7 @@ export const DashboardPage: React.FC = () => {
               <div className="flex justify-between items-start">
                 <div className="flex-1">
                   <p className="text-cyan-200 text-xs md:text-sm font-semibold">
-                    ⏳ En Attente
+                    â³ En Attente
                   </p>
                   <p className="text-3xl md:text-4xl font-black text-cyan-300 mt-2">
                     {pendingCount}
@@ -106,7 +106,7 @@ export const DashboardPage: React.FC = () => {
                 </div>
               </div>
               <BadgePremium variant="warning" size="sm">
-                ⌛ En cours
+                âŒ› En cours
               </BadgePremium>
             </CardBodyPremium>
           </CardPremium>
@@ -117,7 +117,7 @@ export const DashboardPage: React.FC = () => {
               <div className="flex justify-between items-start">
                 <div className="flex-1">
                   <p className="text-cyan-200 text-xs md:text-sm font-semibold">
-                    ✓ Complétés
+                    âœ“ ComplÃ©tÃ©s
                   </p>
                   <p className="text-3xl md:text-4xl font-black text-cyan-300 mt-2">
                     {completedCount}
@@ -128,7 +128,7 @@ export const DashboardPage: React.FC = () => {
                 </div>
               </div>
               <BadgePremium variant="success" size="sm">
-                🎉 Réussi{completedCount !== 1 ? 's' : ''}
+                ðŸŽ‰ RÃ©ussi{completedCount !== 1 ? 's' : ''}
               </BadgePremium>
             </CardBodyPremium>
           </CardPremium>
@@ -144,7 +144,7 @@ export const DashboardPage: React.FC = () => {
           <CardPremium variant="glow">
             <CardBodyPremium>
               <h2 className="text-lg md:text-xl font-black text-white mb-4">
-                💎 Actions Rapides
+                ðŸ’Ž Actions Rapides
               </h2>
               <div className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4">
                 <ButtonPremium
@@ -153,7 +153,7 @@ export const DashboardPage: React.FC = () => {
                   className="w-full text-xs md:text-sm"
                   onClick={() => navigate('/qr-generator')}
                 >
-                  🔲 Nouveau QR
+                  ðŸ”² Nouveau QR
                 </ButtonPremium>
                 <ButtonPremium
                   variant="secondary"
@@ -161,7 +161,7 @@ export const DashboardPage: React.FC = () => {
                   className="w-full text-xs md:text-sm"
                   onClick={() => navigate('/history')}
                 >
-                  📋 Historique
+                  ðŸ“‹ Historique
                 </ButtonPremium>
                 <ButtonPremium
                   variant="secondary"
@@ -169,14 +169,14 @@ export const DashboardPage: React.FC = () => {
                   className="w-full text-xs md:text-sm"
                   onClick={() => navigate('/analytics')}
                 >
-                  📊 Analytics
+                  ðŸ“Š Analytics
                 </ButtonPremium>
                 <ButtonPremium
                   variant="outline"
                   size="md"
                   className="w-full text-xs md:text-sm"
                 >
-                  ⚙️ Paramètres
+                  âš™ï¸ ParamÃ¨tres
                 </ButtonPremium>
               </div>
             </CardBodyPremium>
@@ -192,7 +192,7 @@ export const DashboardPage: React.FC = () => {
           <CardPremium variant="glow">
             <CardBodyPremium>
               <h2 className="text-lg md:text-xl font-black text-white mb-4">
-                💼 Derniers paiements
+                ðŸ’¼ Derniers paiements
               </h2>
 
               {payments.length === 0 ? (
@@ -206,7 +206,7 @@ export const DashboardPage: React.FC = () => {
                     className="mt-4 w-full md:w-auto"
                     onClick={() => navigate('/qr-generator')}
                   >
-                    Créer un paiement
+                    CrÃ©er un paiement
                   </ButtonPremium>
                 </div>
               ) : (
@@ -243,10 +243,10 @@ export const DashboardPage: React.FC = () => {
                           size="xs"
                         >
                           {payment.status === 'completed'
-                            ? '✓ Complété'
+                            ? 'âœ“ ComplÃ©tÃ©'
                             : payment.status === 'pending'
-                            ? '⏳ En attente'
-                            : '✕ Échoué'}
+                            ? 'â³ En attente'
+                            : 'âœ• Ã‰chouÃ©'}
                         </BadgePremium>
                       </div>
                     </motion.div>
@@ -261,7 +261,7 @@ export const DashboardPage: React.FC = () => {
                   className="w-full mt-4 text-cyan-300 hover:text-cyan-100"
                   onClick={() => navigate('/history')}
                 >
-                  Voir tous les paiements →
+                  Voir tous les paiements â†’
                 </ButtonPremium>
               )}
             </CardBodyPremium>

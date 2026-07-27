@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Feedback Form Page
  * Collect user testing feedback
  */
@@ -78,7 +78,7 @@ export const FeedbackForm: React.FC = () => {
     {
       id: 'general',
       label: 'General',
-      icon: '📋',
+      icon: 'ðŸ“‹',
       content: (
         <div className="space-y-6">
           <Input
@@ -144,7 +144,7 @@ export const FeedbackForm: React.FC = () => {
     {
       id: 'issues',
       label: 'Issues Found',
-      icon: '🐛',
+      icon: 'ðŸ›',
       content: (
         <div className="space-y-6">
           <Input
@@ -199,7 +199,7 @@ export const FeedbackForm: React.FC = () => {
     {
       id: 'features',
       label: 'Features',
-      icon: '⭐',
+      icon: 'â­',
       content: (
         <div className="space-y-6">
           <TextArea
@@ -235,7 +235,7 @@ export const FeedbackForm: React.FC = () => {
     {
       id: 'design',
       label: 'Design',
-      icon: '🎨',
+      icon: 'ðŸŽ¨',
       content: (
         <div className="space-y-6">
           <Select
@@ -283,7 +283,7 @@ export const FeedbackForm: React.FC = () => {
     {
       id: 'performance',
       label: 'Performance',
-      icon: '⚡',
+      icon: 'âš¡',
       content: (
         <div className="space-y-6">
           <Select
@@ -316,7 +316,7 @@ export const FeedbackForm: React.FC = () => {
     {
       id: 'accessibility',
       label: 'Accessibility',
-      icon: '♿',
+      icon: 'â™¿',
       content: (
         <div className="space-y-6">
           <Select
@@ -372,7 +372,7 @@ export const FeedbackForm: React.FC = () => {
           animate={{ opacity: 1, y: 0 }}
         >
           <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
-            📝 User Feedback Form
+            ðŸ“ User Feedback Form
           </h1>
           <p className="text-gray-600 dark:text-gray-400">
             Thank you for testing QRPiPay! Your feedback helps us improve.
@@ -408,7 +408,7 @@ export const FeedbackForm: React.FC = () => {
           transition={{ delay: 0.2 }}
         >
           <p className="text-sm text-blue-900 dark:text-blue-100">
-            💡 <strong>Note:</strong> Your feedback is valuable to us. All information is
+            ðŸ’¡ <strong>Note:</strong> Your feedback is valuable to us. All information is
             confidential and used only to improve QRPiPay.
           </p>
         </motion.div>

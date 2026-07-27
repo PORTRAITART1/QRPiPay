@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Component Tests - Jest & React Testing Library
  * Unit tests for all design system components
  */
@@ -266,8 +266,8 @@ describe('Badge Component', () => {
   });
 
   it('renders with icon', () => {
-    render(<Badge icon="✨">Starred</Badge>);
-    expect(screen.getByText('✨')).toBeInTheDocument();
+    render(<Badge icon="âœ¨">Starred</Badge>);
+    expect(screen.getByText('âœ¨')).toBeInTheDocument();
   });
 });
 
@@ -331,7 +331,7 @@ describe('Component Integration', () => {
         <Card variant="elevated">
           <CardBody>
             <p>Total: 100 Pi</p>
-            <Badge variant="success">✓ Completed</Badge>
+            <Badge variant="success">âœ“ Completed</Badge>
           </CardBody>
         </Card>
         <Button variant="primary">New Payment</Button>
@@ -340,7 +340,7 @@ describe('Component Integration', () => {
     );
 
     expect(screen.getByText('Total: 100 Pi')).toBeInTheDocument();
-    expect(screen.getByText('✓ Completed')).toBeInTheDocument();
+    expect(screen.getByText('âœ“ Completed')).toBeInTheDocument();
     expect(screen.getByRole('button', { name: /new payment/i })).toBeInTheDocument();
   });
 });

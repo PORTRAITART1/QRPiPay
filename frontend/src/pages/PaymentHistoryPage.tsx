@@ -1,5 +1,5 @@
-/**
- * 📜 Payment History Page - Premium Design (Navy + Cyan)
+﻿/**
+ * ðŸ“œ Payment History Page - Premium Design (Navy + Cyan)
  */
 
 import React, { useState, useMemo } from 'react';
@@ -57,7 +57,7 @@ export const PaymentHistoryPage: React.FC = () => {
         >
           <div>
             <h1 className="text-3xl md:text-4xl font-black bg-gradient-to-r from-cyan-400 to-cyan-300 bg-clip-text text-transparent">
-              📜 Historique Paiements
+              ðŸ“œ Historique Paiements
             </h1>
             <p className="text-cyan-200 text-sm md:text-base mt-1">
               {filteredAndSorted.length} transaction{filteredAndSorted.length !== 1 ? 's' : ''}
@@ -69,7 +69,7 @@ export const PaymentHistoryPage: React.FC = () => {
             onClick={() => navigate('/dashboard')}
             className="whitespace-nowrap"
           >
-            ← Retour
+            â† Retour
           </ButtonPremium>
         </motion.div>
 
@@ -84,7 +84,7 @@ export const PaymentHistoryPage: React.FC = () => {
           <CardPremium variant="glow">
             <CardBodyPremium className="space-y-3">
               <p className="text-cyan-200 text-xs md:text-sm font-semibold">
-                ✓ Total Complétés
+                âœ“ Total ComplÃ©tÃ©s
               </p>
               <p className="text-3xl md:text-4xl font-black bg-gradient-to-r from-green-400 to-green-200 bg-clip-text text-transparent">
                 {stats.completed.toFixed(2)}
@@ -93,7 +93,7 @@ export const PaymentHistoryPage: React.FC = () => {
                 Pi
               </p>
               <BadgePremium variant="success" size="sm">
-                ✓ Succès
+                âœ“ SuccÃ¨s
               </BadgePremium>
             </CardBodyPremium>
           </CardPremium>
@@ -102,7 +102,7 @@ export const PaymentHistoryPage: React.FC = () => {
           <CardPremium variant="glow">
             <CardBodyPremium className="space-y-3">
               <p className="text-cyan-200 text-xs md:text-sm font-semibold">
-                ⏳ En Attente
+                â³ En Attente
               </p>
               <p className="text-3xl md:text-4xl font-black text-orange-300">
                 {stats.pending.toFixed(2)}
@@ -111,7 +111,7 @@ export const PaymentHistoryPage: React.FC = () => {
                 Pi
               </p>
               <BadgePremium variant="warning" size="sm">
-                ⏳ En cours
+                â³ En cours
               </BadgePremium>
             </CardBodyPremium>
           </CardPremium>
@@ -120,7 +120,7 @@ export const PaymentHistoryPage: React.FC = () => {
           <CardPremium variant="glow">
             <CardBodyPremium className="space-y-3">
               <p className="text-cyan-200 text-xs md:text-sm font-semibold">
-                📊 Total Transactions
+                ðŸ“Š Total Transactions
               </p>
               <p className="text-3xl md:text-4xl font-black bg-gradient-to-r from-cyan-300 to-cyan-100 bg-clip-text text-transparent">
                 {stats.total}
@@ -129,7 +129,7 @@ export const PaymentHistoryPage: React.FC = () => {
                 Au total
               </p>
               <BadgePremium variant="info" size="sm">
-                📊 Tous
+                ðŸ“Š Tous
               </BadgePremium>
             </CardBodyPremium>
           </CardPremium>
@@ -154,10 +154,10 @@ export const PaymentHistoryPage: React.FC = () => {
                 {status === 'all'
                   ? 'Tous'
                   : status === 'completed'
-                  ? '✓ Complétés'
+                  ? 'âœ“ ComplÃ©tÃ©s'
                   : status === 'pending'
-                  ? '⏳ En attente'
-                  : '✕ Échoués'}
+                  ? 'â³ En attente'
+                  : 'âœ• Ã‰chouÃ©s'}
               </ButtonPremium>
             ))}
           </div>
@@ -169,14 +169,14 @@ export const PaymentHistoryPage: React.FC = () => {
               size="sm"
               onClick={() => setSortBy('date')}
             >
-              📅 Date
+              ðŸ“… Date
             </ButtonPremium>
             <ButtonPremium
               variant={sortBy === 'amount' ? 'primary' : 'outline'}
               size="sm"
               onClick={() => setSortBy('amount')}
             >
-              💰 Montant
+              ðŸ’° Montant
             </ButtonPremium>
           </div>
         </motion.div>
@@ -192,10 +192,10 @@ export const PaymentHistoryPage: React.FC = () => {
               {filteredAndSorted.length === 0 ? (
                 <div className="text-center py-8 md:py-12">
                   <p className="text-cyan-200 text-base md:text-lg font-semibold">
-                    Aucune transaction trouvée
+                    Aucune transaction trouvÃ©e
                   </p>
                   <p className="text-cyan-300 text-sm md:text-base mt-2">
-                    Commencez par créer un QR code de paiement
+                    Commencez par crÃ©er un QR code de paiement
                   </p>
                   <ButtonPremium
                     variant="primary"
@@ -203,7 +203,7 @@ export const PaymentHistoryPage: React.FC = () => {
                     className="mt-4 w-full md:w-auto"
                     onClick={() => navigate('/qr-generator')}
                   >
-                    Créer un paiement
+                    CrÃ©er un paiement
                   </ButtonPremium>
                 </div>
               ) : (
@@ -230,10 +230,10 @@ export const PaymentHistoryPage: React.FC = () => {
                           }`}
                         >
                           {payment.status === 'completed'
-                            ? '✓'
+                            ? 'âœ“'
                             : payment.status === 'pending'
-                            ? '⏳'
-                            : '✕'}
+                            ? 'â³'
+                            : 'âœ•'}
                         </div>
 
                         {/* Details */}
@@ -263,10 +263,10 @@ export const PaymentHistoryPage: React.FC = () => {
                           size="xs"
                         >
                           {payment.status === 'completed'
-                            ? 'Complété'
+                            ? 'ComplÃ©tÃ©'
                             : payment.status === 'pending'
                             ? 'En attente'
-                            : 'Échoué'}
+                            : 'Ã‰chouÃ©'}
                         </BadgePremium>
                       </div>
                     </motion.div>
@@ -285,7 +285,7 @@ export const PaymentHistoryPage: React.FC = () => {
           transition={{ delay: 0.4 }}
         >
           <ButtonPremium variant="secondary" size="md" className="w-full">
-            📥 Exporter en CSV
+            ðŸ“¥ Exporter en CSV
           </ButtonPremium>
         </motion.div>
       </div>

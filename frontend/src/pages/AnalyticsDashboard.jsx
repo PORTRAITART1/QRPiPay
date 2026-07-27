@@ -1,4 +1,4 @@
-/**
+﻿/**
  * AnalyticsDashboard Component
  * Real-time analytics and metrics display
  */
@@ -173,9 +173,9 @@ export function AnalyticsDashboard() {
   return (
     <div className="analytics-dashboard">
       <div className="analytics-header">
-        <h1>📊 Tableau de Bord</h1>
+        <h1>ðŸ“Š Tableau de Bord</h1>
         <div className="analytics-controls">
-          <label>Période:</label>
+          <label>PÃ©riode:</label>
           <select value={days} onChange={(e) => setDays(parseInt(e.target.value))}>
             <option value={7}>7 jours</option>
             <option value={14}>14 jours</option>
@@ -183,7 +183,7 @@ export function AnalyticsDashboard() {
             <option value={90}>90 jours</option>
           </select>
           <button onClick={fetchDashboardData} className="btn-refresh">
-            🔄 Actualiser
+            ðŸ”„ Actualiser
           </button>
         </div>
       </div>
@@ -193,38 +193,38 @@ export function AnalyticsDashboard() {
         <MetricCard
           title="Montant Total"
           value={stats.totalAmount}
-          icon="💰"
+          icon="ðŸ’°"
           color="purple"
           unit=" Pi"
         />
         <MetricCard
           title="Total Paiements"
           value={stats.totalPayments}
-          icon="💳"
+          icon="ðŸ’³"
           color="blue"
         />
         <MetricCard
-          title="Complétés"
+          title="ComplÃ©tÃ©s"
           value={stats.completedPayments}
-          icon="✅"
+          icon="âœ…"
           color="green"
         />
         <MetricCard
-          title="Taux de Succès"
+          title="Taux de SuccÃ¨s"
           value={`${stats.successRate}%`}
-          icon="📈"
+          icon="ðŸ“ˆ"
           color="orange"
         />
         <MetricCard
           title="Clients Uniques"
           value={stats.uniqueCustomers}
-          icon="👥"
+          icon="ðŸ‘¥"
           color="pink"
         />
         <MetricCard
           title="QR Codes"
           value={stats.qrCodesGenerated}
-          icon="📱"
+          icon="ðŸ“±"
           color="cyan"
         />
       </div>
@@ -232,7 +232,7 @@ export function AnalyticsDashboard() {
       {/* Charts Section */}
       <div className="charts-section">
         <div className="chart-container">
-          <h2>📈 Tendances de Paiements</h2>
+          <h2>ðŸ“ˆ Tendances de Paiements</h2>
           <Line
             data={getTrendsChartData()}
             options={{
@@ -255,7 +255,7 @@ export function AnalyticsDashboard() {
         </div>
 
         <div className="chart-container">
-          <h2>📊 Statut des Paiements</h2>
+          <h2>ðŸ“Š Statut des Paiements</h2>
           <Doughnut
             data={getStatusChartData()}
             options={{
@@ -272,7 +272,7 @@ export function AnalyticsDashboard() {
 
       {/* Recent Trends Table */}
       <div className="trends-section">
-        <h2>📋 Historique Récent</h2>
+        <h2>ðŸ“‹ Historique RÃ©cent</h2>
         {trends.length > 0 ? (
           <table className="trends-table">
             <thead>
@@ -280,8 +280,8 @@ export function AnalyticsDashboard() {
                 <th>Date</th>
                 <th>Nombre de Paiements</th>
                 <th>Montant Total</th>
-                <th>Complétés</th>
-                <th>Taux de Succès</th>
+                <th>ComplÃ©tÃ©s</th>
+                <th>Taux de SuccÃ¨s</th>
               </tr>
             </thead>
             <tbody>
@@ -301,18 +301,18 @@ export function AnalyticsDashboard() {
             </tbody>
           </table>
         ) : (
-          <p className="no-data">Aucune donnée disponible</p>
+          <p className="no-data">Aucune donnÃ©e disponible</p>
         )}
       </div>
 
       {/* Export Section */}
       <div className="export-section">
-        <h2>📥 Exporter</h2>
+        <h2>ðŸ“¥ Exporter</h2>
         <button className="btn-export" onClick={() => exportToCSV()}>
-          📄 Exporter en CSV
+          ðŸ“„ Exporter en CSV
         </button>
         <button className="btn-export" onClick={() => exportToPDF()}>
-          📕 Exporter en PDF
+          ðŸ“• Exporter en PDF
         </button>
       </div>
     </div>
@@ -323,7 +323,7 @@ export function AnalyticsDashboard() {
  * Export data to CSV
  */
 function exportToCSV() {
-  const csv = 'Date,Paiements,Montant,Complétés\n' +
+  const csv = 'Date,Paiements,Montant,ComplÃ©tÃ©s\n' +
     // Add data rows
     '';
   

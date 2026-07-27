@@ -1,5 +1,5 @@
-/**
- * 🌐 API Client - Communication avec backend
+﻿/**
+ * ðŸŒ API Client - Communication avec backend
  */
 
 import axios, { AxiosInstance } from 'axios';

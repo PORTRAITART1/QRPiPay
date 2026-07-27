@@ -1,5 +1,5 @@
-/**
- * 🔐 Login Page - Premium Design (Navy + Cyan)
+﻿/**
+ * ðŸ” Login Page - Premium Design (Navy + Cyan)
  * Harmonious color palette with smooth animations
  */
 
@@ -102,7 +102,7 @@ export const LoginPage: React.FC = () => {
                   animate={{ scale: [1, 1.1, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
-                  🥧
+                  ðŸ¥§
                 </motion.div>
 
                 {/* Title with gradient */}
@@ -120,7 +120,7 @@ export const LoginPage: React.FC = () => {
 
                 {/* Description */}
                 <p className="text-center text-cyan-200 text-base leading-relaxed">
-                  Générez des codes QR de paiement instantanés. Acceptez des
+                  GÃ©nÃ©rez des codes QR de paiement instantanÃ©s. Acceptez des
                   paiements Pi directement depuis Pi Browser.
                 </p>
 
@@ -132,7 +132,7 @@ export const LoginPage: React.FC = () => {
                   onClick={handleLogin}
                   className="w-full font-bold"
                 >
-                  {isPiBrowser ? '🔓 Connexion avec Pi' : '⚠️ Pi Browser requis'}
+                  {isPiBrowser ? 'ðŸ”“ Connexion avec Pi' : 'âš ï¸ Pi Browser requis'}
                 </ButtonPremium>
 
                 {/* Error badge */}
@@ -155,7 +155,7 @@ export const LoginPage: React.FC = () => {
                   </p>
                   <p>
                     Cette application utilise la Pi Network API pour traiter les
-                    paiements de manière sécurisée.
+                    paiements de maniÃ¨re sÃ©curisÃ©e.
                   </p>
                 </div>
               </CardBodyPremium>
@@ -175,7 +175,7 @@ export const LoginPage: React.FC = () => {
                   <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
                     1,247
                   </div>
-                  <div className="text-xs text-cyan-200/60 mt-2">Commerçants actifs</div>
+                  <div className="text-xs text-cyan-200/60 mt-2">CommerÃ§ants actifs</div>
                 </div>
               </CardBodyPremium>
             </CardPremium>
@@ -186,7 +186,7 @@ export const LoginPage: React.FC = () => {
                   <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">
                     12,456
                   </div>
-                  <div className="text-xs text-cyan-200/60 mt-2">Pi traités</div>
+                  <div className="text-xs text-cyan-200/60 mt-2">Pi traitÃ©s</div>
                 </div>
               </CardBodyPremium>
             </CardPremium>
@@ -210,7 +210,7 @@ export const LoginPage: React.FC = () => {
       {/* Toast notification */}
       {showToast && (
         <Toast
-          message="✅ Authentification réussie!"
+          message="âœ… Authentification rÃ©ussie!"
           variant="success"
           onClose={() => setShowToast(false)}
         />

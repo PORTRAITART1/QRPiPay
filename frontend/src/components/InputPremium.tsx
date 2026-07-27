@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Premium Input Component - Navy + Cyan Harmony
  */
 

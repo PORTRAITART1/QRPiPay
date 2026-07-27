@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Theme Toggle Component
  * Button to switch between light/dark/system themes
  */
@@ -19,7 +19,7 @@ export const ThemeToggle: React.FC = () => {
         title="Light mode"
         aria-label="Switch to light mode"
       >
-        ☀️
+        â˜€ï¸
       </button>
 
       {/* Dark Mode */}
@@ -29,7 +29,7 @@ export const ThemeToggle: React.FC = () => {
         title="Dark mode"
         aria-label="Switch to dark mode"
       >
-        🌙
+        ðŸŒ™
       </button>
 
       {/* System Mode */}
@@ -39,7 +39,7 @@ export const ThemeToggle: React.FC = () => {
         title="System preference"
         aria-label="Use system theme preference"
       >
-        💻
+        ðŸ’»
       </button>
     </div>
   );

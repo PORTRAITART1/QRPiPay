@@ -1,5 +1,5 @@
-/**
- * 🧪 Beta Program Landing Page
+﻿/**
+ * ðŸ§ª Beta Program Landing Page
  * Recruit beta testers for QRPiPay v2.0
  */
 
@@ -37,7 +37,7 @@ export const BetaProgramPage: React.FC = () => {
       });
 
       if (response.ok) {
-        setToastMessage('✅ Application received! Check your email for next steps.');
+        setToastMessage('âœ… Application received! Check your email for next steps.');
         setToastVariant('success');
         setFormData({
           name: '',
@@ -48,11 +48,11 @@ export const BetaProgramPage: React.FC = () => {
           agreeTerms: false,
         });
       } else {
-        setToastMessage('❌ Error submitting application. Try again.');
+        setToastMessage('âŒ Error submitting application. Try again.');
         setToastVariant('error');
       }
     } catch (error) {
-      setToastMessage('❌ Network error. Please try again.');
+      setToastMessage('âŒ Network error. Please try again.');
       setToastVariant('error');
     } finally {
       setIsSubmitting(false);
@@ -86,20 +86,20 @@ export const BetaProgramPage: React.FC = () => {
           transition={{ duration: 0.6 }}
         >
           <h1 className="text-5xl font-black mb-4 bg-gradient-to-r from-cyan-400 via-blue-400 to-cyan-300 bg-clip-text text-transparent">
-            Join QRPiPay Beta 🧪
+            Join QRPiPay Beta ðŸ§ª
           </h1>
           <p className="text-xl text-cyan-200 mb-6">
             Help shape the future of Pi Network payments
           </p>
           <div className="flex justify-center gap-4 flex-wrap">
             <BadgePremium variant="secondary" size="lg">
-              ⭐ Early Access
+              â­ Early Access
             </BadgePremium>
             <BadgePremium variant="secondary" size="lg">
-              🎁 Exclusive Rewards
+              ðŸŽ Exclusive Rewards
             </BadgePremium>
             <BadgePremium variant="secondary" size="lg">
-              🌟 Industry Impact
+              ðŸŒŸ Industry Impact
             </BadgePremium>
           </div>
         </motion.div>
@@ -118,28 +118,28 @@ export const BetaProgramPage: React.FC = () => {
               <CardBodyPremium>
                 <ul className="space-y-4">
                   <li className="flex gap-3">
-                    <span className="text-2xl">✨</span>
+                    <span className="text-2xl">âœ¨</span>
                     <div>
                       <p className="font-semibold text-cyan-200">Early Access</p>
                       <p className="text-sm text-gray-400">Use QRPiPay before anyone else</p>
                     </div>
                   </li>
                   <li className="flex gap-3">
-                    <span className="text-2xl">🎯</span>
+                    <span className="text-2xl">ðŸŽ¯</span>
                     <div>
                       <p className="font-semibold text-cyan-200">Direct Impact</p>
                       <p className="text-sm text-gray-400">Shape the product features</p>
                     </div>
                   </li>
                   <li className="flex gap-3">
-                    <span className="text-2xl">🏆</span>
+                    <span className="text-2xl">ðŸ†</span>
                     <div>
                       <p className="font-semibold text-cyan-200">Exclusive Rewards</p>
                       <p className="text-sm text-gray-400">Special recognition & benefits</p>
                     </div>
                   </li>
                   <li className="flex gap-3">
-                    <span className="text-2xl">🚀</span>
+                    <span className="text-2xl">ðŸš€</span>
                     <div>
                       <p className="font-semibold text-cyan-200">Be Part of Growth</p>
                       <p className="text-sm text-gray-400">Launch a revolutionary product</p>
@@ -159,7 +159,7 @@ export const BetaProgramPage: React.FC = () => {
           >
             <CardPremium variant="glow">
               <CardHeaderPremium>
-                <h2 className="text-xl font-bold text-cyan-300">Apply Now 🎯</h2>
+                <h2 className="text-xl font-bold text-cyan-300">Apply Now ðŸŽ¯</h2>
               </CardHeaderPremium>
               <CardBodyPremium>
                 <form onSubmit={handleSubmit} className="space-y-4">
@@ -260,7 +260,7 @@ export const BetaProgramPage: React.FC = () => {
                     disabled={isSubmitting || !formData.agreeTerms}
                     className="w-full font-bold"
                   >
-                    {isSubmitting ? 'Applying...' : 'Apply for Beta 🚀'}
+                    {isSubmitting ? 'Applying...' : 'Apply for Beta ðŸš€'}
                   </ButtonPremium>
                 </form>
               </CardBodyPremium>
@@ -277,7 +277,7 @@ export const BetaProgramPage: React.FC = () => {
         >
           <CardPremium variant="outline">
             <CardHeaderPremium>
-              <h2 className="text-xl font-bold text-cyan-300">Timeline 📅</h2>
+              <h2 className="text-xl font-bold text-cyan-300">Timeline ðŸ“…</h2>
             </CardHeaderPremium>
             <CardBodyPremium>
               <div className="grid grid-cols-1 md:grid-cols-4 gap-4">
@@ -295,7 +295,7 @@ export const BetaProgramPage: React.FC = () => {
                 </div>
                 <div className="text-center">
                   <div className="text-2xl font-bold text-cyan-400">Week 5-6</div>
-                  <p className="text-sm text-gray-400 mt-2">Public Launch 🚀</p>
+                  <p className="text-sm text-gray-400 mt-2">Public Launch ðŸš€</p>
                 </div>
               </div>
             </CardBodyPremium>
@@ -310,7 +310,7 @@ export const BetaProgramPage: React.FC = () => {
         >
           <CardPremium variant="outline">
             <CardHeaderPremium>
-              <h2 className="text-xl font-bold text-cyan-300">FAQ ❓</h2>
+              <h2 className="text-xl font-bold text-cyan-300">FAQ â“</h2>
             </CardHeaderPremium>
             <CardBodyPremium>
               <div className="space-y-4">

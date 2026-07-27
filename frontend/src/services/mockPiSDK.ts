@@ -1,5 +1,5 @@
-/**
- * 🥧 Mock Pi SDK - Développement local
+﻿/**
+ * ðŸ¥§ Mock Pi SDK - DÃ©veloppement local
  * Simule Pi Network SDK pour tests sans Pi Browser
  */
 
@@ -45,14 +45,14 @@ class MockPiSDK {
           user: this.mockUser,
           accessToken: 'mock_token_' + Math.random().toString(36).substr(2, 20),
         };
-        console.log('[Mock Pi SDK] ✅ User authenticated:', result.user.username);
+        console.log('[Mock Pi SDK] âœ… User authenticated:', result.user.username);
         resolve(result);
       }, 1000);
     });
   }
 
   /**
-   * Mock création paiement
+   * Mock crÃ©ation paiement
    */
   async createPayment(
     amount: number,
@@ -89,7 +89,7 @@ class MockPiSDK {
 
         this.mockPayments.set(paymentId, payment);
 
-        console.log('[Mock Pi SDK] ✅ Payment created:', paymentId);
+        console.log('[Mock Pi SDK] âœ… Payment created:', paymentId);
         resolve(paymentId);
       }, 500);
     });
@@ -106,7 +106,7 @@ class MockPiSDK {
         const payment = this.mockPayments.get(paymentId);
         if (payment) {
           payment.status.developer_approved = true;
-          console.log('[Mock Pi SDK] ✅ Payment approved:', paymentId);
+          console.log('[Mock Pi SDK] âœ… Payment approved:', paymentId);
         }
         resolve();
       }, 500);
@@ -125,7 +125,7 @@ class MockPiSDK {
         if (payment) {
           payment.status.transaction_verified = true;
           payment.status.developer_completed = true;
-          console.log('[Mock Pi SDK] ✅ Payment completed:', paymentId);
+          console.log('[Mock Pi SDK] âœ… Payment completed:', paymentId);
         }
         resolve();
       }, 500);

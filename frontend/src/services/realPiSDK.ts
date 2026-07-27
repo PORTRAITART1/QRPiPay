@@ -1,5 +1,5 @@
-/**
- * 🥧 Real Pi SDK Service - Production Integration
+﻿/**
+ * ðŸ¥§ Real Pi SDK Service - Production Integration
  * Remplace Mock SDK pour production
  */
 
@@ -68,13 +68,13 @@ class RealPiSDK {
   }
 
   /**
-   * ÉTAPE 1: Authentification Pi Network
-   * Récupère l'utilisateur et le token d'accès
+   * Ã‰TAPE 1: Authentification Pi Network
+   * RÃ©cupÃ¨re l'utilisateur et le token d'accÃ¨s
    */
   async authenticate(): Promise<PiAuthResult> {
     try {
       if (!window.Pi) {
-        throw new Error('Cette application nécessite Pi Browser');
+        throw new Error('Cette application nÃ©cessite Pi Browser');
       }
 
       console.log('[Pi SDK] Starting authentication...');
@@ -88,7 +88,7 @@ class RealPiSDK {
       this.currentUser = authResult.user;
       this.accessToken = authResult.accessToken;
 
-      console.log('[Pi SDK] ✅ User authenticated:', authResult.user.username);
+      console.log('[Pi SDK] âœ… User authenticated:', authResult.user.username);
 
       // IMPORTANT: Valider le token sur le backend
       await this.verifyAccessTokenOnBackend(authResult.accessToken);
@@ -99,13 +99,13 @@ class RealPiSDK {
       };
     } catch (error) {
       console.error('[Pi SDK] Authentication error:', error);
-      throw new Error('Authentification Pi échouée');
+      throw new Error('Authentification Pi Ã©chouÃ©e');
     }
   }
 
   /**
-   * ÉTAPE 2: Créer un paiement
-   * Prépare la transaction Pi
+   * Ã‰TAPE 2: CrÃ©er un paiement
+   * PrÃ©pare la transaction Pi
    */
   async createPayment(
     amount: number,
@@ -121,7 +121,7 @@ class RealPiSDK {
 
       // Validation montant
       if (amount <= 0) {
-        throw new Error('Le montant doit être supérieur à 0');
+        throw new Error('Le montant doit Ãªtre supÃ©rieur Ã  0');
       }
 
       if (amount > 1000000) {
@@ -129,7 +129,7 @@ class RealPiSDK {
       }
 
       return new Promise((resolve, reject) => {
-        // Créer le paiement via Pi SDK
+        // CrÃ©er le paiement via Pi SDK
         const payment = window.Pi.createPayment(
           {
             amount,
@@ -150,7 +150,7 @@ class RealPiSDK {
               try {
                 // Backend approval
                 await this.approvePaymentOnBackend(paymentId);
-                console.log('[Pi SDK] ✅ Server approved payment:', paymentId);
+                console.log('[Pi SDK] âœ… Server approved payment:', paymentId);
               } catch (error) {
                 console.error('[Pi SDK] Server approval failed:', error);
                 reject(error);
@@ -164,7 +164,7 @@ class RealPiSDK {
               try {
                 // Backend completion
                 await this.completePaymentOnBackend(paymentId, txid);
-                console.log('[Pi SDK] ✅ Payment completed:', paymentId);
+                console.log('[Pi SDK] âœ… Payment completed:', paymentId);
                 resolve(paymentId);
               } catch (error) {
                 console.error('[Pi SDK] Server completion failed:', error);
@@ -175,7 +175,7 @@ class RealPiSDK {
             // CALLBACK 3: Payment cancelled
             onCancel: (paymentId: string) => {
               console.log('[Pi SDK] Payment cancelled:', paymentId);
-              reject(new Error('Paiement annulé par l\'utilisateur'));
+              reject(new Error('Paiement annulÃ© par l\'utilisateur'));
             },
 
             // CALLBACK 4: Error occurred
@@ -211,7 +211,7 @@ class RealPiSDK {
   }
 
   /**
-   * Backend: Complète le paiement
+   * Backend: ComplÃ¨te le paiement
    */
   private async completePaymentOnBackend(paymentId: string, txid: string): Promise<void> {
     const response = await fetch('/api/payments/complete', {
@@ -229,7 +229,7 @@ class RealPiSDK {
   }
 
   /**
-   * Vérifier le token d'accès sur le backend
+   * VÃ©rifier le token d'accÃ¨s sur le backend
    */
   private async verifyAccessTokenOnBackend(accessToken: string): Promise<void> {
     const response = await fetch('https://api.minepi.com/v2/me', {
@@ -250,7 +250,7 @@ class RealPiSDK {
   private onIncompletePaymentFound(payment: PiPayment): void {
     console.log('[Pi SDK] Incomplete payment found:', payment);
 
-    // Si le paiement a été approuvé mais pas complété
+    // Si le paiement a Ã©tÃ© approuvÃ© mais pas complÃ©tÃ©
     if (payment.status.developer_approved && !payment.status.developer_completed && payment.transaction?.txid) {
       this.completePaymentOnBackend(payment.identifier, payment.transaction.txid)
         .then(() => console.log('[Pi SDK] Incomplete payment recovered'))
@@ -259,14 +259,14 @@ class RealPiSDK {
   }
 
   /**
-   * Récupérer l'utilisateur actuel
+   * RÃ©cupÃ©rer l'utilisateur actuel
    */
   getCurrentUser(): PiUser | null {
     return this.currentUser;
   }
 
   /**
-   * Déconnexion
+   * DÃ©connexion
    */
   logout(): void {
     this.currentUser = null;

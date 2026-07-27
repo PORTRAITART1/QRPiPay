@@ -1,5 +1,5 @@
-/**
- * 🎨 3D Immersive Design System - QRPiPay
+﻿/**
+ * ðŸŽ¨ 3D Immersive Design System - QRPiPay
  * Inspired by Spatial Computing & Retro Futurism
  */
 
@@ -320,7 +320,7 @@ export const ImmersiveLoginPage: React.FC = () => {
               animate={{ rotateY: 360 }}
               transition={{ duration: 3, repeat: Infinity }}
             >
-              🥧
+              ðŸ¥§
             </motion.div>
 
             {/* Retro futuristic title */}
@@ -341,7 +341,7 @@ export const ImmersiveLoginPage: React.FC = () => {
             <div className="space-y-2">
               <div className="h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent" />
               <p className="text-xs text-gold/70 font-mono tracking-widest">
-                SPATIAL • IMMERSIVE • FUTURISTIC
+                SPATIAL â€¢ IMMERSIVE â€¢ FUTURISTIC
               </p>
               <div className="h-0.5 bg-gradient-to-r from-transparent via-gold to-transparent" />
             </div>
@@ -369,7 +369,7 @@ export const ImmersiveDashboard: React.FC = () => {
               Tableau de Bord Immersif
             </RetroFuturisticText>
             <p className="text-white/60 mt-4 font-serif text-lg italic">
-              Contrôlez vos paiements Pi en temps réel
+              ContrÃ´lez vos paiements Pi en temps rÃ©el
             </p>
           </div>
         </ScrollParallax>
@@ -381,9 +381,9 @@ export const ImmersiveDashboard: React.FC = () => {
           whileInView={{ opacity: 1 }}
         >
           {[
-            { icon: '📊', title: 'Revenue', value: '1,234.56 Pi' },
-            { icon: '💳', title: 'Transactions', value: '47' },
-            { icon: '📈', title: 'Growth', value: '+23%' },
+            { icon: 'ðŸ“Š', title: 'Revenue', value: '1,234.56 Pi' },
+            { icon: 'ðŸ’³', title: 'Transactions', value: '47' },
+            { icon: 'ðŸ“ˆ', title: 'Growth', value: '+23%' },
           ].map((stat, i) => (
             <Immersive3DCard key={i}>
               <motion.div
@@ -405,7 +405,7 @@ export const ImmersiveDashboard: React.FC = () => {
           <Immersive3DCard className="mb-20">
             <div className="space-y-6">
               <RetroFuturisticText size="lg" variant="display">
-                Générer QR Code
+                GÃ©nÃ©rer QR Code
               </RetroFuturisticText>
               
               <div className="space-y-4">
@@ -419,7 +419,7 @@ export const ImmersiveDashboard: React.FC = () => {
                 </motion.div>
 
                 <Interactive3DButton size="md">
-                  🔲 Générer QR
+                  ðŸ”² GÃ©nÃ©rer QR
                 </Interactive3DButton>
               </div>
             </div>

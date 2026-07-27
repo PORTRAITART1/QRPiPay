@@ -1,5 +1,5 @@
-/**
- * 📱 Mobile Header with Hamburger Menu
+﻿/**
+ * ðŸ“± Mobile Header with Hamburger Menu
  * Responsive navigation for mobile devices
  */
 

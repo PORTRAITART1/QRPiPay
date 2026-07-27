@@ -1,5 +1,5 @@
-/**
- * 🧪 Beta Admin Dashboard
+﻿/**
+ * ðŸ§ª Beta Admin Dashboard
  * Manage beta applications and testers
  */
 
@@ -83,7 +83,7 @@ export const BetaAdminDashboard: React.FC = () => {
       });
 
       if (response.ok) {
-        setToastMessage(`✅ Application ${status.toLowerCase()}`);
+        setToastMessage(`âœ… Application ${status.toLowerCase()}`);
         setShowToast(true);
         setTimeout(() => setShowToast(false), 3000);
         fetchApplications();
@@ -91,7 +91,7 @@ export const BetaAdminDashboard: React.FC = () => {
       }
     } catch (error) {
       console.error('Update error:', error);
-      setToastMessage('❌ Error updating status');
+      setToastMessage('âŒ Error updating status');
       setShowToast(true);
     }
   };
@@ -235,14 +235,14 @@ export const BetaAdminDashboard: React.FC = () => {
                                     size="sm"
                                     onClick={() => updateStatus(app.id, 'APPROVED')}
                                   >
-                                    ✅
+                                    âœ…
                                   </ButtonPremium>
                                   <ButtonPremium
                                     variant="danger"
                                     size="sm"
                                     onClick={() => updateStatus(app.id, 'REJECTED')}
                                   >
-                                    ❌
+                                    âŒ
                                   </ButtonPremium>
                                 </>
                               )}

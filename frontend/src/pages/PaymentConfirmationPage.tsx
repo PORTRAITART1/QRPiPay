@@ -1,5 +1,5 @@
-/**
- * 📱 Payment Confirmation Page - Premium Design (Navy + Cyan)
+﻿/**
+ * ðŸ“± Payment Confirmation Page - Premium Design (Navy + Cyan)
  */
 
 import React, { useEffect, useState } from 'react';
@@ -72,7 +72,7 @@ export const PaymentConfirmationPage: React.FC = () => {
                 damping: 15,
               }}
             >
-              ✓
+              âœ“
             </motion.div>
 
             {/* Title */}
@@ -83,10 +83,10 @@ export const PaymentConfirmationPage: React.FC = () => {
               transition={{ delay: 0.2 }}
             >
               <h1 className="text-3xl md:text-4xl font-black text-white mb-2">
-                Paiement Reçu! 🎉
+                Paiement ReÃ§u! ðŸŽ‰
               </h1>
               <p className="text-cyan-200 text-sm md:text-base font-semibold">
-                Transaction confirmée avec succès
+                Transaction confirmÃ©e avec succÃ¨s
               </p>
             </motion.div>
 
@@ -98,7 +98,7 @@ export const PaymentConfirmationPage: React.FC = () => {
               transition={{ delay: 0.3 }}
             >
               <p className="text-green-200 text-xs md:text-sm font-bold mb-2">
-                MONTANT REÇU
+                MONTANT REÃ‡U
               </p>
               <p className="text-4xl md:text-5xl font-black text-green-300">
                 {currentPayment.amount.toFixed(2)}
@@ -151,7 +151,7 @@ export const PaymentConfirmationPage: React.FC = () => {
               transition={{ delay: 0.45 }}
             >
               <BadgePremium variant="success" size="md">
-                ✓ Confirmé
+                âœ“ ConfirmÃ©
               </BadgePremium>
             </motion.div>
 
@@ -168,7 +168,7 @@ export const PaymentConfirmationPage: React.FC = () => {
                 onClick={() => navigate('/dashboard')}
                 className="text-xs md:text-sm font-bold"
               >
-                📋 Tableau de bord
+                ðŸ“‹ Tableau de bord
               </ButtonPremium>
               <ButtonPremium
                 variant="primary"
@@ -176,7 +176,7 @@ export const PaymentConfirmationPage: React.FC = () => {
                 onClick={() => navigate('/qr-generator')}
                 className="text-xs md:text-sm font-bold"
               >
-                Nouveau QR →
+                Nouveau QR â†’
               </ButtonPremium>
             </motion.div>
 
@@ -187,7 +187,7 @@ export const PaymentConfirmationPage: React.FC = () => {
               animate={{ opacity: 1 }}
               transition={{ delay: 0.6 }}
             >
-              ✉️ Un reçu a été envoyé à votre adresse email
+              âœ‰ï¸ Un reÃ§u a Ã©tÃ© envoyÃ© Ã  votre adresse email
             </motion.p>
           </CardBodyPremium>
         </CardPremium>

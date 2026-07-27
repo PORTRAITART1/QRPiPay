@@ -1,4 +1,4 @@
-/**
+﻿/**
  * PiService - Pi Network Authentication Service
  * Handles authentication with Pi Network SDK
  * Properly waits for SDK to load
@@ -48,13 +48,13 @@ export class PiService {
 
       const checkPi = () => {
         if (window.Pi) {
-          console.log('✅ Pi SDK found in window');
+          console.log('âœ… Pi SDK found in window');
           resolve(true);
         } else if (attempts < maxAttempts) {
           attempts++;
           setTimeout(checkPi, 100);
         } else {
-          console.warn('⚠️ Pi SDK not found after', maxAttempts * 100, 'ms');
+          console.warn('âš ï¸ Pi SDK not found after', maxAttempts * 100, 'ms');
           resolve(false);
         }
       };
@@ -69,12 +69,12 @@ export class PiService {
    */
   async initialize(): Promise<boolean> {
     if (this.isInitialized) {
-      console.log('ℹ️ Pi SDK already initialized');
+      console.log('â„¹ï¸ Pi SDK already initialized');
       return true;
     }
 
     if (this.isInitializing) {
-      console.log('ℹ️ Pi SDK initialization in progress...');
+      console.log('â„¹ï¸ Pi SDK initialization in progress...');
       // Wait for initialization to complete
       let attempts = 0;
       while (this.isInitializing && attempts < 100) {
@@ -91,27 +91,27 @@ export class PiService {
       const piAvailable = await this.waitForPiSDK();
 
       if (!piAvailable || !window.Pi) {
-        console.error('❌ Pi SDK not available in window object');
+        console.error('âŒ Pi SDK not available in window object');
         this.isInitializing = false;
         return false;
       }
 
-      console.log('🔄 Initializing Pi SDK...');
+      console.log('ðŸ”„ Initializing Pi SDK...');
 
       // Initialize Pi - Pi.init() returns a Promise
       try {
         await window.Pi.init({ version: '2.0', sandbox: false });
-        console.log('✅ Pi SDK successfully initialized');
+        console.log('âœ… Pi SDK successfully initialized');
         this.isInitialized = true;
         this.isInitializing = false;
         return true;
       } catch (initError: any) {
-        console.error('❌ Pi.init() failed:', initError?.message || initError);
+        console.error('âŒ Pi.init() failed:', initError?.message || initError);
         this.isInitializing = false;
         return false;
       }
     } catch (error) {
-      console.error('❌ Error during Pi SDK initialization:', error);
+      console.error('âŒ Error during Pi SDK initialization:', error);
       this.isInitializing = false;
       return false;
     }
@@ -123,19 +123,19 @@ export class PiService {
    */
   async authenticate(scopes: string[] = ['username']): Promise<PiAuthResult> {
     try {
-      console.log('🔐 Starting Pi authentication...');
+      console.log('ðŸ” Starting Pi authentication...');
 
       // Ensure Pi is initialized first
       const initialized = await this.initialize();
       if (!initialized) {
-        console.error('❌ Pi SDK failed to initialize');
+        console.error('âŒ Pi SDK failed to initialize');
         return {
           success: false,
           error: 'Pi SDK failed to initialize',
         };
       }
 
-      console.log('🔑 Requesting authentication...');
+      console.log('ðŸ”‘ Requesting authentication...');
 
       // Authenticate with Pi - handle incomplete payments
       const auth = await window.Pi.authenticate(
@@ -144,7 +144,7 @@ export class PiService {
       );
 
       if (!auth) {
-        console.error('❌ No auth object returned');
+        console.error('âŒ No auth object returned');
         return {
           success: false,
           error: 'No auth response from Pi',
@@ -152,7 +152,7 @@ export class PiService {
       }
 
       if (!auth.accessToken) {
-        console.error('❌ No access token in auth response');
+        console.error('âŒ No access token in auth response');
         return {
           success: false,
           error: 'No access token received from Pi',
@@ -160,7 +160,7 @@ export class PiService {
       }
 
       this.user = auth.user;
-      console.log(`✅ Authenticated successfully as: ${auth.user.username}`);
+      console.log(`âœ… Authenticated successfully as: ${auth.user.username}`);
 
       return {
         success: true,
@@ -171,7 +171,7 @@ export class PiService {
         },
       };
     } catch (error: any) {
-      console.error('❌ Authentication error:', error?.message || error);
+      console.error('âŒ Authentication error:', error?.message || error);
       return {
         success: false,
         error: error?.message || 'Authentication failed',
@@ -183,7 +183,7 @@ export class PiService {
    * Callback for incomplete payments
    */
   private onIncompletePaymentFound(payment: any) {
-    console.warn('⚠️ Incomplete payment found:', payment.identifier);
+    console.warn('âš ï¸ Incomplete payment found:', payment.identifier);
     // Handle incomplete payment logic on backend
   }
 
@@ -207,7 +207,7 @@ export class PiService {
   logout() {
     this.user = null;
     this.isInitialized = false;
-    console.log('✅ User logged out');
+    console.log('âœ… User logged out');
   }
 }
 

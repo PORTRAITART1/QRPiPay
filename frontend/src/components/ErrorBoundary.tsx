@@ -1,4 +1,4 @@
-import React, { ReactNode, ErrorInfo } from 'react';
+﻿import React, { ReactNode, ErrorInfo } from 'react';
 import Alert from './Alert';
 
 interface Props {
@@ -21,7 +21,7 @@ export default class ErrorBoundary extends React.Component<Props, State> {
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.error('❌ Error caught by boundary:', error, errorInfo);
+    console.error('âŒ Error caught by boundary:', error, errorInfo);
   }
 
   render() {

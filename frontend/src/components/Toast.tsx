@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Toast Component - Design System
  * Notification toasts with auto-dismiss
  */
@@ -49,10 +49,10 @@ export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
       >
         <div className="toast-content">
           <div className="toast-icon">
-            {variant === 'success' && '✓'}
-            {variant === 'error' && '✕'}
-            {variant === 'warning' && '⚠'}
-            {variant === 'info' && 'ℹ'}
+            {variant === 'success' && 'âœ“'}
+            {variant === 'error' && 'âœ•'}
+            {variant === 'warning' && 'âš '}
+            {variant === 'info' && 'â„¹'}
           </div>
           <div className="toast-text">
             {title && <h4 className="toast-title">{title}</h4>}
@@ -66,7 +66,7 @@ export const Toast = React.forwardRef<HTMLDivElement, ToastProps>(
             onClick={onClose}
             aria-label="Dismiss notification"
           >
-            ✕
+            âœ•
           </button>
         )}
       </div>

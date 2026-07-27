@@ -1,5 +1,5 @@
-/**
- * ✅ Test - Payment Functionality
+﻿/**
+ * âœ… Test - Payment Functionality
  */
 
 import { mockPiSDK } from '../services/mockPiSDK';

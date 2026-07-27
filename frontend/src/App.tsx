@@ -1,5 +1,5 @@
-/**
- * 🎭 App Component - Router setup with Pi Network initialization
+﻿/**
+ * ðŸŽ­ App Component - Router setup with Pi Network initialization
  * Handles Pi SDK loading with proper fallback
  */
 
@@ -37,53 +37,53 @@ function App() {
    */
   useEffect(() => {
     const initializePi = async () => {
-      console.log('🥧 QRPiPay v2.0 initializing...');
+      console.log('ðŸ¥§ QRPiPay v2.0 initializing...');
       console.log('Environment:', process.env.NODE_ENV);
 
       try {
         // Check if Pi SDK script loaded
         if (!window.Pi) {
-          console.warn('⚠️ Pi SDK script not loaded yet');
+          console.warn('âš ï¸ Pi SDK script not loaded yet');
           // Retry after a delay
           setTimeout(async () => {
             if (window.Pi) {
-              console.log('✅ Pi SDK script loaded on retry');
+              console.log('âœ… Pi SDK script loaded on retry');
               const initialized = await piService.initialize();
               setPiSDKReady(initialized);
             } else {
-              console.warn('⚠️ Pi SDK not available - running in fallback mode');
+              console.warn('âš ï¸ Pi SDK not available - running in fallback mode');
               setPiSDKReady(false);
             }
           }, 1000);
           return;
         }
 
-        console.log('✅ Pi SDK script available');
+        console.log('âœ… Pi SDK script available');
 
         // Initialize Pi Service
         const initialized = await piService.initialize();
         setPiSDKReady(initialized);
 
         if (initialized) {
-          console.log('✅ Pi SDK initialized successfully');
+          console.log('âœ… Pi SDK initialized successfully');
 
           // Attempt automatic authentication if not already authenticated
           if (!isAuthenticated) {
-            console.log('🔐 Attempting automatic Pi authentication...');
+            console.log('ðŸ” Attempting automatic Pi authentication...');
             try {
               await authenticate();
-              console.log('✅ Automatic authentication successful');
+              console.log('âœ… Automatic authentication successful');
             } catch (error) {
-              console.log('ℹ️ Automatic authentication skipped (user interaction required)');
+              console.log('â„¹ï¸ Automatic authentication skipped (user interaction required)');
             }
           }
         } else {
-          console.warn('⚠️ Pi SDK initialization failed - running in fallback mode');
-          console.log('💡 App will work with manual authentication button');
+          console.warn('âš ï¸ Pi SDK initialization failed - running in fallback mode');
+          console.log('ðŸ’¡ App will work with manual authentication button');
         }
       } catch (error) {
-        console.error('❌ Pi initialization error:', error);
-        console.warn('⚠️ Running in fallback mode');
+        console.error('âŒ Pi initialization error:', error);
+        console.warn('âš ï¸ Running in fallback mode');
         setPiSDKReady(false);
       }
     };
@@ -93,7 +93,7 @@ function App() {
   }, []);
 
   useEffect(() => {
-    console.log('🥧 QRPiPay Status:');
+    console.log('ðŸ¥§ QRPiPay Status:');
     console.log('  - Pi SDK Ready:', piSDKReady);
     console.log('  - Authenticated:', isAuthenticated);
     if (user) {

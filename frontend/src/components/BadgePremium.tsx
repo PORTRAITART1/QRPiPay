@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Premium Badge Component - Navy + Cyan
  */
 

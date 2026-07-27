@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Theme Context - Dark/Light Mode Management
  * Provides theme switching functionality to entire app
  */

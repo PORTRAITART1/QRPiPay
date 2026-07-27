@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Theme Demo Page
  * Showcase all components in light and dark modes
  */
@@ -36,7 +36,7 @@ export const ThemeDemoPage: React.FC = () => {
         >
           <div>
             <h1 className="text-4xl font-bold text-gray-900 dark:text-white mb-2">
-              🎨 Design System Demo
+              ðŸŽ¨ Design System Demo
             </h1>
             <p className="text-gray-600 dark:text-gray-400">
               Current theme: <span className="font-semibold capitalize">{effectiveTheme}</span>
@@ -127,7 +127,7 @@ export const ThemeDemoPage: React.FC = () => {
                   With Icons & Dismissible
                 </h3>
                 <div className="flex gap-3">
-                  <Badge icon="✨" variant="primary">Starred</Badge>
+                  <Badge icon="âœ¨" variant="primary">Starred</Badge>
                   <Badge dismissible variant="success">Dismissible</Badge>
                 </div>
               </div>
@@ -258,7 +258,7 @@ export const ThemeDemoPage: React.FC = () => {
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
         >
-          <p>🎨 Design system is fully responsive and supports light/dark modes</p>
+          <p>ðŸŽ¨ Design system is fully responsive and supports light/dark modes</p>
         </motion.div>
       </div>
     </div>

@@ -1,9 +1,9 @@
-/**
- * 🔐 Login Page - Premium Design (Navy + Cyan)
+﻿/**
+ * ðŸ” Login Page - Premium Design (Navy + Cyan)
  * Harmonious color palette with smooth animations
- * ✅ WCAG AA Contrast Compliant
- * ✅ PERFECTLY CENTERED
- * ✅ MOBILE OPTIMIZED - Responsive font sizes
+ * âœ… WCAG AA Contrast Compliant
+ * âœ… PERFECTLY CENTERED
+ * âœ… MOBILE OPTIMIZED - Responsive font sizes
  */
 
 import React, { useState } from 'react';
@@ -105,7 +105,7 @@ export const LoginPage: React.FC = () => {
                   animate={{ scale: [1, 1.1, 1] }}
                   transition={{ duration: 2, repeat: Infinity }}
                 >
-                  🥧
+                  ðŸ¥§
                 </motion.div>
 
                 {/* Title with gradient - RESPONSIVE SIZE */}
@@ -123,7 +123,7 @@ export const LoginPage: React.FC = () => {
 
                 {/* Description - SMALLER TEXT */}
                 <p className="text-center text-white text-xs md:text-sm leading-relaxed">
-                  Générez des codes QR de paiement. Acceptez les paiements Pi directement.
+                  GÃ©nÃ©rez des codes QR de paiement. Acceptez les paiements Pi directement.
                 </p>
 
                 {/* Login button */}
@@ -134,7 +134,7 @@ export const LoginPage: React.FC = () => {
                   onClick={handleLogin}
                   className="w-full font-bold text-sm md:text-base"
                 >
-                  {isPiBrowser ? '🔓 Connexion avec Pi' : '⚠️ Pi Browser requis'}
+                  {isPiBrowser ? 'ðŸ”“ Connexion avec Pi' : 'âš ï¸ Pi Browser requis'}
                 </ButtonPremium>
 
                 {/* Error badge */}
@@ -156,7 +156,7 @@ export const LoginPage: React.FC = () => {
                     <span className="font-bold text-white">Pi Browser</span>
                   </p>
                   <p>
-                    Paiements sécurisés via Pi Network API
+                    Paiements sÃ©curisÃ©s via Pi Network API
                   </p>
                 </div>
               </CardBodyPremium>
@@ -181,9 +181,9 @@ export const LoginPage: React.FC = () => {
                   
                   {/* Icon + Label - CLEAR and BOLD */}
                   <div className="flex flex-col items-center gap-0.5">
-                    <span className="text-lg md:text-2xl">🏪</span>
+                    <span className="text-lg md:text-2xl">ðŸª</span>
                     <p className="text-xs md:text-sm font-bold text-white leading-tight">
-                      Commerçants
+                      CommerÃ§ants
                     </p>
                     <p className="text-xs font-semibold text-cyan-300">
                       actifs
@@ -204,12 +204,12 @@ export const LoginPage: React.FC = () => {
                   
                   {/* Icon + Label - CLEAR and BOLD */}
                   <div className="flex flex-col items-center gap-0.5">
-                    <span className="text-lg md:text-2xl">💰</span>
+                    <span className="text-lg md:text-2xl">ðŸ’°</span>
                     <p className="text-xs md:text-sm font-bold text-white leading-tight">
                       Pi
                     </p>
                     <p className="text-xs font-semibold text-cyan-300">
-                      traités
+                      traitÃ©s
                     </p>
                   </div>
                 </div>
@@ -235,7 +235,7 @@ export const LoginPage: React.FC = () => {
       {/* Toast notification */}
       {showToast && (
         <Toast
-          message="✅ Authentification réussie!"
+          message="âœ… Authentification rÃ©ussie!"
           variant="success"
           onClose={() => setShowToast(false)}
         />

@@ -1,4 +1,4 @@
-import React, { createContext, useContext } from 'react';
+﻿import React, { createContext, useContext } from 'react';
 
 interface BrowserContextType {
   isPiBrowser: boolean;
@@ -12,7 +12,7 @@ export function BrowserProvider({ children }: { children: React.ReactNode }) {
   const isPiBrowser = !!(window as any).Pi !== undefined;
   const isReadOnly = !isPiBrowser;
 
-  console.log('🌐 BrowserContext initialized:');
+  console.log('ðŸŒ BrowserContext initialized:');
   console.log('  - window.Pi available:', !isReadOnly);
   console.log('  - isPiBrowser:', isPiBrowser);
 

@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Tabs Component - Design System
  * Tabbed content interface
  */

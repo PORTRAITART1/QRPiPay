@@ -1,5 +1,5 @@
-/**
- * 🏪 Auth Store - Zustand
+﻿/**
+ * ðŸª Auth Store - Zustand
  * Global state management pour authentification Pi Network
  */
 
@@ -63,10 +63,10 @@ export const useAuthStore = create<AuthState>()(
             isLoading: false,
           });
 
-          console.log(`✅ Successfully authenticated as ${piResult.user.username}`);
+          console.log(`âœ… Successfully authenticated as ${piResult.user.username}`);
         } catch (error) {
           const errorMessage = error instanceof Error ? error.message : 'Authentication failed';
-          console.error('❌ Authentication error:', errorMessage);
+          console.error('âŒ Authentication error:', errorMessage);
           set({
             error: errorMessage,
             isLoading: false,
@@ -90,15 +90,15 @@ export const useAuthStore = create<AuthState>()(
           });
 
           if (!response.ok) {
-            console.error('❌ Token validation failed:', response.statusText);
+            console.error('âŒ Token validation failed:', response.statusText);
             return false;
           }
 
           const data = await response.json();
-          console.log('✅ Token validated successfully');
+          console.log('âœ… Token validated successfully');
           return data.valid === true;
         } catch (error) {
-          console.error('❌ Token validation error:', error);
+          console.error('âŒ Token validation error:', error);
           return false;
         }
       },
@@ -114,7 +114,7 @@ export const useAuthStore = create<AuthState>()(
           isAuthenticated: false,
           error: null,
         });
-        console.log('✅ Logged out');
+        console.log('âœ… Logged out');
       },
 
       /**

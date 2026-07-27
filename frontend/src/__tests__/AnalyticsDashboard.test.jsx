@@ -1,4 +1,4 @@
-/**
+﻿/**
  * Frontend Component Tests - Analytics Dashboard
  * Jest + React Testing Library
  */
@@ -78,7 +78,7 @@ describe('AnalyticsDashboard Component', () => {
     render(<AnalyticsDashboard />);
 
     await waitFor(() => {
-      expect(screen.getByText('📊 Tableau de Bord')).toBeInTheDocument();
+      expect(screen.getByText('ðŸ“Š Tableau de Bord')).toBeInTheDocument();
     });
   });
 
@@ -88,8 +88,8 @@ describe('AnalyticsDashboard Component', () => {
     await waitFor(() => {
       expect(screen.getByText('Montant Total')).toBeInTheDocument();
       expect(screen.getByText('Total Paiements')).toBeInTheDocument();
-      expect(screen.getByText('Complétés')).toBeInTheDocument();
-      expect(screen.getByText('Taux de Succès')).toBeInTheDocument();
+      expect(screen.getByText('ComplÃ©tÃ©s')).toBeInTheDocument();
+      expect(screen.getByText('Taux de SuccÃ¨s')).toBeInTheDocument();
     });
   });
 
@@ -116,7 +116,7 @@ describe('AnalyticsDashboard Component', () => {
     render(<AnalyticsDashboard />);
 
     await waitFor(() => {
-      expect(screen.getByText('📋 Historique Récent')).toBeInTheDocument();
+      expect(screen.getByText('ðŸ“‹ Historique RÃ©cent')).toBeInTheDocument();
       expect(screen.getByText('19/01/2024')).toBeInTheDocument();
     });
   });
